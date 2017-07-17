@@ -1,8 +1,21 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "alexandre-t/gequip",
+    "description": "Gestion d'équipements routiers",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "authors": [
+        {
+            "name": "Alexandre Tranchant",
+            "email": "Alexandre.Tranchant@gmail.com",
+            "homepage": "https://github.com/Alexandre-T",
+            "role": "Full-Stack Developer"
+        }
+    ],
+    "support": {
+        "email": "Alexandre.Tranchant@gmail.com",
+        "issues": "https://github.com/Alexandre-T/simdate/issues",
+        "source": "https://github.com/Alexandre-T/simdate"
+    },
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle"
@@ -14,8 +27,9 @@
         "files": [ "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php" ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.1",
         "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-migrations-bundle": "^1.0",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
         "sensio/distribution-bundle": "^5.0.19",
@@ -27,6 +41,8 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "codeception/codeception": "^2.3",
+        "phpunit/phpunit": "6.2.3",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
@@ -48,7 +64,7 @@
     },
     "config": {
         "platform": {
-            "php": "5.5.9"
+            "php": "7.1.7"
         },
         "sort-packages": true
     },
