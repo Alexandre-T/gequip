@@ -1,0 +1,26 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}{{ parent() }}&nbsp;&bull; {{ 'Profile'|trans }}{% endblock %}
+
+{% block headline %}{{ 'Profile'|trans }}{% endblock headline %}
+
+{% block content_row %}
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% block fos_user_content %}
+                        {% include "@FOSUser/Profile/show_content.html.twig" %}
+                    {% endblock fos_user_content %}
+                    <div class="pull-right">
+                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default " title="{{ 'Edit profile' | trans }}">
+                            {{ 'Edit profile' | trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content_row %}

@@ -1,0 +1,13 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}{{ parent() }}&nbsp;&bull; {{ 'layout.login'|trans }}{% endblock %}
+
+{% block headline %}{{ 'layout.login'|trans }}{% endblock headline %}
+
+{% block content_row %}
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
+{% endblock content_row %}

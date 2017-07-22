@@ -1,0 +1,21 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}{{ parent() }}&nbsp;&bull; {{ 'Registration'|trans }}{% endblock %}
+
+{% block headline %}{{ 'Registration'|trans }}{% endblock headline %}
+
+{% block fos_user_content %}
+    {% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block content_sidebar %}
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ 'Registration information'|trans }}</h2>
+        </div>
+        <div class="panel-body">
+            {{ 'Lorem ipsum'|trans }}
+        </div>
+    </div>
+{% endblock content_sidebar %}
+

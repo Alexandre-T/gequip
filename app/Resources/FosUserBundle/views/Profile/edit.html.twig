@@ -1,0 +1,19 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+
+{% block title %}{{ parent() }}&nbsp;&bull; {{ 'edit.profile'|trans }}{% endblock %}
+
+{% block headline %}{{ 'edit.profile'|trans }}{% endblock headline %}
+
+{% block content_content %}
+    {% block fos_user_content %}
+        {% include "@FOSUser/Profile/edit_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock content_content %}
+
+{% block content_sidebar %}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h2 class="panel-title">{{ 'edit.informations' | trans }}</h2></div>
+        <div class="panel-body"><p>{{ 'edit.how-to-edit-profile' | trans }}</p></div>
+    </div>
+{% endblock content_sidebar %}
