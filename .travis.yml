@@ -16,8 +16,12 @@ cache:
 php:
   # aliased to a recent 7.0.x version
   - 7.0
+  # aliased to a recent 7.0.x version
+  - 7.1
   # aliased to a recent hhvm version
   - hhvm
+  # aliased to a nightly version
+  - nightly
 
 # Matrix to test in every php version
 matrix:
@@ -25,6 +29,7 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: hhvm
+    - php: nightly
 
 # Define an environment variable
 env:
