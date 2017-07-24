@@ -1,5 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block content_sidebar %}
-    <h2>Présentation</h2>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# This user entered their credentials THIS session #}
+    {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {# User logged in via a cookie (ie: Auth again before doing sensitive things) #}
+    {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+        {# This is a `guest` or anonymous user #}
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title"><i class="fa fa-user"></i>&nbsp;{{ 'app.homepage.login' | trans()}}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="username" class="control-label required">{{ 'security.login.username'|trans([], 'FOSUserBundle') }}</label>
+                        <input class="form-control" type="text" id="username" name="_username" required="required" autofocus tabindex="10"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="control-label required">{{ 'security.login.password'|trans([], 'FOSUserBundle')}}</label>
+                        <input class="form-control" type="password" id="password" name="_password" required="required" tabindex="20"/>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" tabindex="30"/>
+                            {{ 'security.login.remember_me'|trans([], 'FOSUserBundle') }}
+                        </label>
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans([], 'FOSUserBundle') }}"  tabindex="30"/>
+                </div>
+            </div>
+        </form>
+    {% endif %}
 {% endblock content_sidebar %}
