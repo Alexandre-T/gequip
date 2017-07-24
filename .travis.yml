@@ -49,8 +49,8 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; travis_wait 40 php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml; fi
-  - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; php vendor/phpunit/phpunit/phpunit; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then travis_wait 40 php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then php vendor/phpunit/phpunit/phpunit; fi
 
 after_success:
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
