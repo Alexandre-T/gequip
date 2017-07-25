@@ -50,7 +50,7 @@ class Main implements ContainerAwareInterface
         $isRemembered = $auth_checker->isGranted('IS_AUTHENTICATED_REMEMBERED');
         $isAnonymous = $auth_checker->isGranted('IS_AUTHENTICATED_ANONYMOUSLY');
 
-        if ($isFully || $isRemembered){
+        if ($isFully || $isRemembered) {
             $dropdownUser = $menu->addChild($user->getUsername(), array(
                 'icon' =>'user',
                 'pull-right' => true,
@@ -80,7 +80,7 @@ class Main implements ContainerAwareInterface
                 'icon' => 'sign-out',
                 'route' => 'fos_user_security_logout'
             ));
-        }elseif($isAnonymous){
+        } elseif ($isAnonymous) {
             $menu->addChild('Sign In', array(
                 'icon' => 'sign-in',
                 'route' => 'fos_user_security_login'
@@ -92,6 +92,35 @@ class Main implements ContainerAwareInterface
         }
 
         return $menu;
+    }
 
+    public function footerMenu(FactoryInterface $factory, array $options)
+    {
+        //Menu is empty
+        $menu = $factory->createItem('footer');
+
+        // Alexandre : Mise en place de la sécurité
+        // [New 3.0] Get our "authorization_checker" Object
+        $auth_checker = $this->container->get('security.authorization_checker');
+        $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
+        $isFully = $auth_checker->isGranted('IS_AUTHENTICATED_FULLY');
+
+        if ($isRoleAdmin) {
+            if ($isFully) {
+            } else {
+                //User is in a "remember me" situation. To access Admin, he must be fully authenticated
+                $dropdownUser = $menu->addChild('Admin', array(
+                    'icon' =>'cogs',
+                    'pull-right' => true,
+                    'dropdown' => true,
+                    'caret' => true,
+                ));
+                $dropdownUser->addChild('Confirm your connexion', array(
+                    'icon' => 'sign-up',
+                    'route' => 'fos_user_security_login'
+                ));
+            }
+        }
+        return $menu;
     }
 }
