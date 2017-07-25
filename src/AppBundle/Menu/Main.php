@@ -45,7 +45,6 @@ class Main implements ContainerAwareInterface
         # e.g (w/ FOSUserBundle): $user->getEmail(); $user->isSuperAdmin(); $user->hasRole();
 
         // [New 3.0] Check for Roles on the $auth_checker
-        $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
         $isFully = $auth_checker->isGranted('IS_AUTHENTICATED_FULLY');
         $isRemembered = $auth_checker->isGranted('IS_AUTHENTICATED_REMEMBERED');
         $isAnonymous = $auth_checker->isGranted('IS_AUTHENTICATED_ANONYMOUSLY');
@@ -107,15 +106,16 @@ class Main implements ContainerAwareInterface
 
         if ($isRoleAdmin) {
             if ($isFully) {
+
             } else {
                 //User is in a "remember me" situation. To access Admin, he must be fully authenticated
-                $dropdownUser = $menu->addChild('Admin', array(
+                $dropdownAdmin = $menu->addChild('Admin', array(
                     'icon' =>'cogs',
                     'pull-right' => true,
                     'dropdown' => true,
                     'caret' => true,
                 ));
-                $dropdownUser->addChild('Confirm your connexion', array(
+                $dropdownAdmin->addChild('Confirm your connexion', array(
                     'icon' => 'sign-up',
                     'route' => 'fos_user_security_login'
                 ));
