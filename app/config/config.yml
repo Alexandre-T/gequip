@@ -83,7 +83,6 @@ mopa_bootstrap:
         icon_set: fontawesome4 #Use the fontawesome4 icons
         shortcut: icon
 
-
 # AsseticBundle
 assetic:
     debug:          '%kernel.debug%'
