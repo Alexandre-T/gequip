@@ -43,7 +43,7 @@ before_script:
   - mysql -e 'create database symfony;'
   - php bin/console doctrine:migrations:migrate  --no-interaction
   # no loading for the moment
-  #- php bin/console doctrine:fixtures:load -n --env=test
+  - php bin/console doctrine:fixtures:load --fixtures ./src/AppBundle/DataFixtures -n --env=test
   #User1 created
   - php bin/console fos:user:create user1 user1@example.com p@ssword
   - mkdir -p build/logs
