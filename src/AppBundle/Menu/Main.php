@@ -1,15 +1,46 @@
 <?php
-// src/AppBundle/Menu/Builder.php
+/**
+ * This file is part of the GEquip Application.
+ *
+ * PHP version 7.1
+ *
+ * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ *
+ * @category Menu
+ *
+ * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @copyright 2017 Alexandre Tranchant
+ * @license   GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ */
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
+/**
+ * Menu Class.
+ *
+ * @category Menu
+ *
+ * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @license GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ */
 class Main implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    /**
+     * Main menu creation.
+     *
+     * @param FactoryInterface $factory
+     * @param array $options
+     * @return \Knp\Menu\ItemInterface
+     */
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
@@ -22,6 +53,13 @@ class Main implements ContainerAwareInterface
         return $menu;
     }
 
+    /**
+     * User menu creation.
+     *
+     * @param FactoryInterface $factory
+     * @param array $options
+     * @return \Knp\Menu\ItemInterface
+     */
     public function userMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('user');
@@ -93,6 +131,13 @@ class Main implements ContainerAwareInterface
         return $menu;
     }
 
+    /**
+     * Footer menu creation.
+     *
+     * @param FactoryInterface $factory
+     * @param array $options
+     * @return \Knp\Menu\ItemInterface
+     */
     public function footerMenu(FactoryInterface $factory, array $options)
     {
         //Menu is empty

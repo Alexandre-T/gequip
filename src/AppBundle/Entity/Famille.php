@@ -14,6 +14,7 @@
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -191,6 +192,8 @@ class Famille
     }
 
     /**
+     * Set name of this family.
+     *
      * @param mixed $name
      * @return Famille
      */
@@ -202,6 +205,8 @@ class Famille
     }
 
     /**
+     * Set parent of this family.
+     *
      * @param mixed $parent
      * @return Famille
      */

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>G-Equip API Documentation</title>
+    <parser>
+        <target>var/build/api</target>
+    </parser>
+    <transformer>
+        <target>docs/api</target>
+        <markers>
+            <item>TODO</item>
+            <item>FIXME</item>
+        </markers>
+    </transformer>
+    <files>
+        <directory>./src/AppBundle</directory>
+    </files>
+    <transformations>
+        <template name="responsive-twig" />
+    </transformations>
+</phpdoc>
