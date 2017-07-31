@@ -48,7 +48,8 @@ class FamilleTest extends TestCase
     /**
      * All value must be null after creation
      */
-    public function testConstructor(){
+    public function testConstructor()
+    {
         self::assertNull($this->famille->getId());
         self::assertNull($this->famille->getChildren());
         self::assertNull($this->famille->getLeft());
@@ -62,7 +63,8 @@ class FamilleTest extends TestCase
     /**
      * Test getter and setter for Name
      */
-    public function testSetName(){
+    public function testSetName()
+    {
         $expected = 'name';
 
         self::assertEquals($this->famille, $this->famille->setName($expected));
@@ -72,7 +74,8 @@ class FamilleTest extends TestCase
     /**
      * Test getter and setter for Parent
      */
-    public function testSetParent(){
+    public function testSetParent()
+    {
         $parent = new Famille();
         $parent->setName('parent');
 

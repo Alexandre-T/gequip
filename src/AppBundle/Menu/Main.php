@@ -106,7 +106,6 @@ class Main implements ContainerAwareInterface
 
         if ($isRoleAdmin) {
             if ($isFully) {
-
             } else {
                 //User is in a "remember me" situation. To access Admin, he must be fully authenticated
                 $dropdownAdmin = $menu->addChild('Admin', array(
