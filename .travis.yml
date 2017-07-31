@@ -44,14 +44,17 @@ before_script:
   - php bin/console doctrine:migrations:migrate  --no-interaction
   # no loading for the moment
   - php bin/console doctrine:fixtures:load --fixtures ./src/AppBundle/DataFixtures -n --env=test
-  #User1 created
+  # User1 creation for codeconcept tests
   - php bin/console fos:user:create user1 user1@example.com p@ssword
   - mkdir -p build/logs
 
 script:
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then travis_wait 40 php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml; fi
   - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then php vendor/phpunit/phpunit/phpunit; fi
+  # Server must be started for codeconcept tests.
+  - php bin/console server:run
   - php vendor/bin/codecept run
+  - php bin/console server:stop
 
 after_success:
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
