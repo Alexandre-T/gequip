@@ -54,6 +54,14 @@ class LoadFamilleData implements FixtureInterface, OrderedFixtureInterface
         $pmv->setName('Panneaux à messages variables');
         $pmv->setParent($equipement);
 
+        $portique = new Famille();
+        $portique->setName('PMV sur portique');
+        $portique->setParent($pmv);
+
+        $simple = new Famille();
+        $simple->setName('PMV à simple mat');
+        $simple->setParent($pmv);
+
         $comptage = new Famille();
         $comptage->setName('Stations de comptage');
         $comptage->setParent($equipement);
@@ -61,6 +69,8 @@ class LoadFamilleData implements FixtureInterface, OrderedFixtureInterface
         $manager->persist($equipement);
         $manager->persist($camera);
         $manager->persist($pmv);
+        $manager->persist($portique);
+        $manager->persist($simple);
         $manager->persist($comptage);
         $manager->flush();
     }
