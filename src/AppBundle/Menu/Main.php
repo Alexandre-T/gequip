@@ -51,29 +51,34 @@ class Main implements ContainerAwareInterface
             'route' => 'homepage'
         ));
 
-        $dropdownSettings = $menu->addChild('Settings', array(
-            'icon' =>'cogs',
-            'pull-right' => true,
-            'dropdown' => true,
-            'caret' => true,
-        ));
+        // [New 3.0] Get our "authorization_checker" Object
+        $auth_checker = $this->container->get('security.authorization_checker');
 
-        $dropdownSettings->addChild('Useful settings', array(
-            'dropdown-header' => true
-        ));
+        if ($auth_checker->isGranted('ROLE_ADMIN')){
+            $dropdownSettings = $menu->addChild('Settings', array(
+                'icon' =>'cogs',
+                'pull-right' => true,
+                'dropdown' => true,
+                'caret' => true,
+            ));
 
-        $dropdownSettings->addChild('Families', array(
-            'icon' => 'list',
-            'route' => 'settings_families_list'
-        ));
+            $dropdownSettings->addChild('Useful settings', array(
+                'dropdown-header' => true
+            ));
 
-        //Adding a nice divider
-        $dropdownSettings->addChild('divider_1', array('divider' => true));
+            $dropdownSettings->addChild('Families', array(
+                'icon' => 'list',
+                'route' => 'settings_families_list'
+            ));
 
-        $dropdownSettings->addChild('All settings', array(
-            'icon' => 'cog',
-            'route' => 'settings'
-        ));
+            //Adding a nice divider
+            $dropdownSettings->addChild('divider_1', array('divider' => true));
+
+            $dropdownSettings->addChild('All settings', array(
+                'icon' => 'cog',
+                'route' => 'settings'
+            ));
+        }
 
         return $menu;
     }
@@ -98,7 +103,6 @@ class Main implements ContainerAwareInterface
         // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
         /* @var TokenInterface $token */
         $token = $this->container->get('security.token_storage')->getToken();
-        dump($token);
 
         # e.g: $token->getUser();
         # e.g: $token->isAuthenticated();
@@ -173,10 +177,10 @@ class Main implements ContainerAwareInterface
         // Alexandre : Mise en place de la sécurité
         // [New 3.0] Get our "authorization_checker" Object
         $auth_checker = $this->container->get('security.authorization_checker');
-        $isRoleAdmin = $auth_checker->isGranted('ROLE_ADMIN');
+        $isRoleSuperAdmin = $auth_checker->isGranted('ROLE_SUPER_ADMIN');
         $isFully = $auth_checker->isGranted('IS_AUTHENTICATED_FULLY');
 
-        if ($isRoleAdmin) {
+        if ($isRoleSuperAdmin) {
             if ($isFully) {
             } else {
                 //User is in a "remember me" situation. To access Admin, he must be fully authenticated
@@ -186,7 +190,7 @@ class Main implements ContainerAwareInterface
                     'dropdown' => true,
                     'caret' => true,
                 ));
-                $dropdownAdmin->addChild('Confirm your connexion', array(
+                $dropdownAdmin->addChild('Confirm your connection', array(
                     'icon' => 'sign-up',
                     'route' => 'fos_user_security_login'
                 ));
