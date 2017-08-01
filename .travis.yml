@@ -46,6 +46,10 @@ before_script:
   - php bin/console doctrine:fixtures:load --fixtures ./src/AppBundle/DataFixtures -n --env=test
   # User1 creation for codeconcept tests
   - php bin/console fos:user:create user1 user1@example.com p@ssword
+  # Admin1 creation for codeconcept tests
+  - php bin/console fos:user:create admin1 admin1@example.com p@$$word
+  - php bin/console fos:user:promote admin1 ROLE_ADMIN
+  # Directory used by codecoverage
   - mkdir -p build/logs
 
 script:

@@ -19,6 +19,7 @@ namespace AppBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Menu Class.
@@ -50,6 +51,30 @@ class Main implements ContainerAwareInterface
             'route' => 'homepage'
         ));
 
+        $dropdownSettings = $menu->addChild('Settings', array(
+            'icon' =>'cogs',
+            'pull-right' => true,
+            'dropdown' => true,
+            'caret' => true,
+        ));
+
+        $dropdownSettings->addChild('Useful settings', array(
+            'dropdown-header' => true
+        ));
+
+        $dropdownSettings->addChild('Families', array(
+            'icon' => 'list',
+            'route' => 'settings_families_list'
+        ));
+
+        //Adding a nice divider
+        $dropdownSettings->addChild('divider_1', array('divider' => true));
+
+        $dropdownSettings->addChild('All settings', array(
+            'icon' => 'cog',
+            'route' => 'settings'
+        ));
+
         return $menu;
     }
 
@@ -71,7 +96,9 @@ class Main implements ContainerAwareInterface
 
         // Get our Token (representing the currently logged in user)
         // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
+        /* @var TokenInterface $token */
         $token = $this->container->get('security.token_storage')->getToken();
+        dump($token);
 
         # e.g: $token->getUser();
         # e.g: $token->isAuthenticated();

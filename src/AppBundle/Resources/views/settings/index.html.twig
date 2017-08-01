@@ -1,0 +1,26 @@
+{% extends '@App/base.html.twig' %}
+
+{% block title %}{{ 'settings.index.title' | trans }}{% endblock title %}
+
+{% block headline %}{{ 'settings.index.title' | trans }}{% endblock headline %}
+
+{% block content_row %}
+<div class="panel panel-default">
+    <div class="panel-heading"><h2 class="panel-title">{{ 'settings.panel.title' | trans }}</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <div>
+                <span class="fa-stack fa-5x">
+                    <i class="fa fa-square-o fa-stack-2x"></i>
+                    <i class="fa fa-list fa-stack-1x"></i>
+                </span>
+                </div>
+                <a class="lead" href="{{ path('settings_families_list') }}" title="{{ 'settings.families.link'| trans }}">
+                    {{ 'settings.families'| trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_row %}
