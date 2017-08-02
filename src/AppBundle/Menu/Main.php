@@ -46,7 +46,7 @@ class Main implements ContainerAwareInterface
     {
         $menu = $factory->createItem('root');
 
-        $menu->addChild('Home', array(
+        $menu->addChild('menu.main.home', array(
             'icon' => 'home',
             'route' => 'homepage'
         ));
@@ -55,26 +55,27 @@ class Main implements ContainerAwareInterface
         $auth_checker = $this->container->get('security.authorization_checker');
 
         if ($auth_checker->isGranted('ROLE_ADMIN')){
-            $dropdownSettings = $menu->addChild('Settings', array(
+            $dropdownSettings = $menu->addChild('menu.main.settings', array(
                 'icon' =>'cogs',
                 'pull-right' => true,
                 'dropdown' => true,
                 'caret' => true,
             ));
 
-            $dropdownSettings->addChild('Useful settings', array(
+            $dropdownSettings->addChild('menu.main.usefull-settings', array(
                 'dropdown-header' => true
             ));
 
-            $dropdownSettings->addChild('Families', array(
+            $dropdownSettings->addChild('menu.main.families', array(
                 'icon' => 'list',
                 'route' => 'settings_families_list'
             ));
 
             //Adding a nice divider
-            $dropdownSettings->addChild('divider_1', array('divider' => true));
+            $dropdownSettings->addChild('divider_1', array('divider' => true))
+                ->setExtra('translation_domain', false);
 
-            $dropdownSettings->addChild('All settings', array(
+            $dropdownSettings->addChild('menu.main.all-settings', array(
                 'icon' => 'cog',
                 'route' => 'settings'
             ));
@@ -124,36 +125,37 @@ class Main implements ContainerAwareInterface
                 'pull-right' => true,
                 'dropdown' => true,
                 'caret' => true,
-            ));
-            $dropdownUser->addChild('Your profile', array(
+            ))->setExtra('translation_domain', false);
+            $dropdownUser->addChild('menu.user.your-profile', array(
                 'dropdown-header' => true
             ));
-            $dropdownUser->addChild('Show profile', array(
+            $dropdownUser->addChild('menu.user.show-profile', array(
                 'icon' => 'eye',
                 'route' => 'fos_user_profile_show'
             ));
-            $dropdownUser->addChild('Edit profile', array(
+            $dropdownUser->addChild('menu.user.edit-profile', array(
                 'icon' => 'pencil',
                 'route' => 'fos_user_profile_edit'
             ));
-            $dropdownUser->addChild('Change password', array(
+            $dropdownUser->addChild('menu.user.change-password', array(
                 'icon' => 'pencil',
                 'route' => 'fos_user_change_password'
             ));
             //Adding a nice divider
-            $dropdownUser->addChild('divider_1', array('divider' => true));
+            $dropdownUser->addChild('divider_1', array('divider' => true))
+                ->setExtra('translation_domain', false);
 
             //Adding LOGOUT
-            $dropdownUser->addChild('Logout', array(
+            $dropdownUser->addChild('menu.user.logout', array(
                 'icon' => 'sign-out',
                 'route' => 'fos_user_security_logout'
             ));
         } elseif ($isAnonymous) {
-            $menu->addChild('Sign In', array(
+            $menu->addChild('menu.user.sign-in', array(
                 'icon' => 'sign-in',
                 'route' => 'fos_user_security_login'
             ));
-            $menu->addChild('Sign Up', array(
+            $menu->addChild('menu.user.sign-up', array(
                 'icon' => 'pencil-square-o',
                 'route' => 'fos_user_registration_register'
             ));
@@ -184,13 +186,13 @@ class Main implements ContainerAwareInterface
             if ($isFully) {
             } else {
                 //User is in a "remember me" situation. To access Admin, he must be fully authenticated
-                $dropdownAdmin = $menu->addChild('Admin', array(
+                $dropdownAdmin = $menu->addChild('menu.user.admin', array(
                     'icon' =>'cogs',
                     'pull-right' => true,
                     'dropdown' => true,
                     'caret' => true,
                 ));
-                $dropdownAdmin->addChild('Confirm your connection', array(
+                $dropdownAdmin->addChild('menu.user.confirm-your-credentials', array(
                     'icon' => 'sign-up',
                     'route' => 'fos_user_security_login'
                 ));

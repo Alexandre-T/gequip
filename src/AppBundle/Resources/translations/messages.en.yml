@@ -1,0 +1,33 @@
+#Application title
+app.title: G-Equip
+
+app.homepage.login: 'Log in'
+
+#Settings
+settings.index.title: 'Settings'
+settings.panel.title: 'Select settings to update'
+
+settings.families.link: 'Family listing'
+settings.families: 'Families'
+setting.family.name: 'Libellé'
+
+setting.family.show.title %name%: 'Family information: %name%'
+setting.information: 'Information'
+setting.created.by: 'Created by:'
+setting.created.at: 'Created at:'
+setting.global-information: 'Global information'
+setting.log: 'Last updates'
+
+#Menu translation
+menu.main.home: 'Home'
+menu.main.settings: 'Settings'
+menu.main.usefull-settings: 'Usefull Settings'
+menu.main.families: 'Families'
+menu.main.all-settings: 'All settings'
+menu.user.your-profile: 'Your profile'
+menu.user.show-profile: 'Show your profile'
+menu.user.edit-profile: 'Edit your profile'
+menu.user.change-password: 'Change your password'
+menu.user.sign-in: 'Sign In'
+menu.user.sign-up: 'Sign Up'
+menu.user.logout: 'Logout'

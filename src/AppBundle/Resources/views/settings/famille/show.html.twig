@@ -1,7 +1,48 @@
 {% extends '@App/base.html.twig' %}
 
-{% block title %}setting.family.show.title : {{ famille.name }}{% endblock title %}
+{% block title %}{{ 'setting.family.show.title %name%'|trans({'%name%': famille.name})}}{% endblock title %}
 
-{% block content_row %}
-    {{ famille.name }}
-{% endblock content_row %}
+{% block headline %}{{ 'setting.family.show.title %name%'|trans({'%name%': famille.name})}}{% endblock %}
+
+{% block content_content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'setting.global-information' | trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>{{ 'setting.family.name'| trans }}</dt>
+                <dd>{{ famille.name }}</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'setting.log' | trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li>
+                    {# @TODO add log data #}@TODO
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock content_content %}
+
+{% block content_sidebar %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'setting.information' | trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>{{ 'setting.created.by' | trans}}</dt>
+                <dd>{# @TODO add creator #} @TODO @TODO</dd>
+                <dt>{{ 'setting.created.at' | trans}}</dt>
+                <dd>{# @TODO add creation time #} @TODO</dd>
+            </dl>
+        </div>
+    </div>
+{% endblock %}
