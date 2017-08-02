@@ -58,6 +58,7 @@ class FamilleTest extends TestCase
         self::assertNull($this->famille->getParent());
         self::assertNull($this->famille->getRight());
         self::assertNull($this->famille->getRoot());
+        self::assertNull($this->famille->getCreated());
     }
 
     /**

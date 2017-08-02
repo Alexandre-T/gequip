@@ -41,13 +41,28 @@ services:
         tags:
             - { name: twig.extension }
 
+    #localizeddate, localizednumber, localizedcurrency
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
     # Doctrine Extension listeners to handle behaviors
+    # Tree for Family
     gedmo.listener.tree:
         class: Gedmo\Tree\TreeListener
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    #Timestampable
+    gedmo.listener.timestampable:
+            class: Gedmo\Timestampable\TimestampableListener
+            tags:
+                - { name: doctrine.event_subscriber, connection: default }
+            calls:
+                - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

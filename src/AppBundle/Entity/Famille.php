@@ -19,6 +19,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use \Datetime as Datetime;
 
 /**
  * Famille Class
@@ -80,6 +81,16 @@ class Famille
     private $name;
 
     /**
+     * Date time of creation of this object.
+     *
+     * @var Datetime
+     *
+     * @ORM\Column(type="datetime", nullable=false, options={"comment":"Date de création automatique"})
+     * @Gedmo\Timestampable(on="create", field="created")
+     */
+    private $created;
+
+    /**
      * Children of this family.
      *
      * @var array
@@ -129,6 +140,16 @@ class Famille
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Get creation date.
+     *
+     * @return DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 
     /**
