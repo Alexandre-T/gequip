@@ -18,17 +18,17 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         //Good status code :)
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
         //Only one good title
-        $this->assertEquals(1, $crawler->filter('h1')->count());
+        self::assertEquals(1, $crawler->filter('h1')->count());
         //Title of application
-        $this->assertContains('G-Equip', $crawler->filter('h1')->text());
+        self::assertContains('G-Equip', $crawler->filter('h1')->text());
 
         //Menu verification
-        $this->assertContains('Home', $crawler->filter('#navbar-top li.active')->text());
+        self::assertContains('Home', $crawler->filter('#navbar-top li.active')->text());
 
         //User menu verification
-        $this->assertContains('Sign In', $crawler->filter('#navbar-top ul.navbar-right li.first')->text());
-        $this->assertContains('Sign Up', $crawler->filter('#navbar-top ul.navbar-right li.last')->text());
+        self::assertContains('Sign In', $crawler->filter('#navbar-top ul.navbar-right li.first')->text());
+        self::assertContains('Sign Up', $crawler->filter('#navbar-top ul.navbar-right li.last')->text());
     }
 }
