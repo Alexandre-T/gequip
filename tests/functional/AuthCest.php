@@ -8,12 +8,11 @@ class AuthCest
     /**
      * @param FunctionalTester $I
      */
-    function _before(FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/login');
         //Menu verification
         $I->see('Sign In', '#navbar-top li.active');
-
     }
     /**
      * @group user

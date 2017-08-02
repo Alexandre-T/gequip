@@ -54,7 +54,7 @@ class Main implements ContainerAwareInterface
         // [New 3.0] Get our "authorization_checker" Object
         $auth_checker = $this->container->get('security.authorization_checker');
 
-        if ($auth_checker->isGranted('ROLE_ADMIN')){
+        if ($auth_checker->isGranted('ROLE_ADMIN')) {
             $dropdownSettings = $menu->addChild('menu.main.settings', array(
                 'icon' =>'cogs',
                 'pull-right' => true,

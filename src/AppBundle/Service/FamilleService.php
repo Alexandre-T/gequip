@@ -76,9 +76,9 @@ class FamilleService
     public function getById(int $id):Famille
     {
         $famille = $this->repository->findOneBy(['id' => $id]);
-        if ($famille instanceof Famille){
+        if ($famille instanceof Famille) {
             return $famille;
-        }else{
+        } else {
             //@TODO Translate this message.
             throw new EntityNotFoundException("Family with ID $id not found");
         }

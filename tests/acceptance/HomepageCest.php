@@ -42,6 +42,5 @@ class HomepageCest
 
         //Menu verification
         $I->see('Home', '#navbar-top li.active');
-
     }
 }

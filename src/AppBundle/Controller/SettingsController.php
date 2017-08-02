@@ -66,9 +66,9 @@ class SettingsController extends Controller
             'decorate' => true,
             'representationField' => 'slug',
             'html' => true,
-            'nodeDecorator' => function($node) use ($controller) {
+            'nodeDecorator' => function ($node) use ($controller) {
                 //@TODO replace id by slug (and add Gedmo sluggable)
-                $url = $controller->generateUrl("setting_families_show",array("id"=>$node['id']));
+                $url = $controller->generateUrl("setting_families_show", array("id"=>$node['id']));
                 $title = htmlentities($node['name']);
                 return "<a href=\"$url\" title=\"$title\">{$node['name']}</a>";
             }

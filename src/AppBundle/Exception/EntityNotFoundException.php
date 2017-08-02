@@ -17,6 +17,7 @@
 
 
 namespace AppBundle\Exception;
+
 use Throwable;
 
 /**
@@ -45,10 +46,9 @@ class EntityNotFoundException extends AppException
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        if (empty($message)){
+        if (empty($message)) {
             $message = "Entity not found.";
         }
         parent::__construct($message, $code, $previous);
     }
-
 }
