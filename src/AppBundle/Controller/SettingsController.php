@@ -68,7 +68,7 @@ class SettingsController extends Controller
             'html' => true,
             'nodeDecorator' => function ($node) use ($controller) {
                 //@TODO replace id by slug (and add Gedmo sluggable)
-                $url = $controller->generateUrl("setting_families_show", array("id"=>$node['id']));
+                $url = $controller->generateUrl("settings_families_show", array("id"=>$node['id']));
                 $title = htmlentities($node['name']);
                 return "<a href=\"$url\" title=\"$title\">{$node['name']}</a>";
             }
@@ -85,7 +85,7 @@ class SettingsController extends Controller
     /**
      * Show a Family.
      *
-     * @Route("/settings/families/show/{id}", name="setting_families_show", methods="get")
+     * @Route("/settings/families/show/{id}", name="settings_families_show", methods="get")
      *
      * @param int $id
      * @return Response
@@ -94,11 +94,12 @@ class SettingsController extends Controller
     {
         $familyService = $this->get('app.family-service');
         $family = $familyService->getById($id);
+        $path = $familyService->retrievePath($family);
 
         //Return the view
         return $this->render('@App/settings/family/show.html.twig', [
             'family' => $family,
-            'base_dir'   => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'path' => $path,
         ]);
     }
 }

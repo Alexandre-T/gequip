@@ -98,4 +98,15 @@ class FamilyService
             $options
         );
     }
+
+    /**
+     * Retrieve path of the tree.
+     *
+     * @param Family $family
+     * @return array
+     */
+    public function retrievePath(Family $family):array
+    {
+        return $this->repository->getPath($family);
+    }
 }

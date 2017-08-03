@@ -36,7 +36,7 @@ class Family
      * @var integer
      *
      * @ORM\Id
-     * @ORM\Column(type="integer", options={"comment":"Identifiant de la family"})
+     * @ORM\Column(type="integer", options={"comment":"Identifiant de la famille"})
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -76,7 +76,8 @@ class Family
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Nom de la family"})
+     * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Family path"})
+     * 
      */
     private $name;
 
@@ -160,6 +161,16 @@ class Family
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Get creator.
+     *
+     * @return User
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 
     /**
@@ -260,15 +271,5 @@ class Family
         $this->creator = $creator;
     
         return $this;
-    }
-
-    /**
-     * Get creator.
-     *
-     * @return User
-     */
-    public function getCreator()
-    {
-        return $this->creator;
     }
 }

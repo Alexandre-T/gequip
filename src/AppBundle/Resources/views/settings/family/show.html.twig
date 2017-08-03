@@ -5,6 +5,12 @@
 {% block headline %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock %}
 
 {% block content_content %}
+    <ol class="breadcrumb">
+        {%  for node in path %}
+        <li><a href="{{ path('settings_families_show', {'id': node.id}) }}" title="{{ node.name }}">{{ node.name }}</a></li>
+        {% endfor %}
+    </ol>
+
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">{{ 'setting.global-information' | trans }}</h3>
