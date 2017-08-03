@@ -1,5 +1,5 @@
 #Application title
-app.title: G-Equip
+app.title: 'G-Equip'
 
 app.homepage.login: 'Log in'
 
@@ -13,6 +13,7 @@ setting.family.name: 'Label'
 setting.family.parent: 'Parent'
 setting.family.root: 'Root'
 
+setting.family.list.title: 'Family tree'
 setting.family.show.title %name%: 'Family information: %name%'
 setting.information: 'Information'
 setting.created.by: 'Created by:'
