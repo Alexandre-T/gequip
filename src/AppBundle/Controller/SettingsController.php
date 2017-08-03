@@ -68,7 +68,7 @@ class SettingsController extends Controller
             'html' => true,
             'nodeDecorator' => function ($node) use ($controller) {
                 //@TODO replace id by slug (and add Gedmo sluggable)
-                $url = $controller->generateUrl("settings_families_show", array("id"=>$node['id']));
+                $url = $controller->generateUrl("settings_families_show", array("slug"=>$node['slug']));
                 $title = htmlentities($node['name']);
                 return "<a href=\"$url\" title=\"$title\">{$node['name']}</a>";
             }
@@ -85,15 +85,15 @@ class SettingsController extends Controller
     /**
      * Show a Family.
      *
-     * @Route("/settings/families/show/{id}", name="settings_families_show", methods="get")
+     * @Route("/settings/families/show/{slug}", name="settings_families_show", methods="get")
      *
-     * @param int $id
+     * @param int $slug
      * @return Response
      */
-    public function showFamilyAction($id)
+    public function showFamilyAction($slug)
     {
         $familyService = $this->get('app.family-service');
-        $family = $familyService->getById($id);
+        $family = $familyService->getBySlug($slug);
         $path = $familyService->retrievePath($family);
 
         //Return the view

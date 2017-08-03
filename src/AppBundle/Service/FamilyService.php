@@ -79,8 +79,28 @@ class FamilyService
         if ($family instanceof Family) {
             return $family;
         } else {
-            //@TODO Translate this message.
+            //@TODO Translate this exception message.
             throw new EntityNotFoundException("Family with ID $id not found");
+        }
+    }
+
+    /**
+     * Retrieve a family by its slug (urlized name).
+     *
+     * If family with specified slug does not exist, a EntityNotFoundException is thrown.
+     *
+     * @param string $slug
+     * @return Family
+     * @throws EntityNotFoundException
+     */
+    public function getBySlug(string $slug):Family
+    {
+        $family = $this->repository->findOneBy(['slug' => $slug]);
+        if ($family instanceof Family) {
+            return $family;
+        } else {
+            //@TODO Translate this exception message.
+            throw new EntityNotFoundException("Family with slug $slug not found");
         }
     }
 

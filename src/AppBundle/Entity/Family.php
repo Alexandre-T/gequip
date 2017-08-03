@@ -82,6 +82,12 @@ class Family
     private $name;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Gedmo\Slug(updatable=true, unique=true, fields={"name"})
+     */
+    private $slug;
+
+    /**
      * Date time of creation of this object.
      *
      * @var Datetime
@@ -234,6 +240,18 @@ class Family
     }
 
     /**
+     * Get slug (urlized name).
+     *
+     * The name is urlized by Gedmo:Slugable service.
+     *
+     * @return string urlized name
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Set name of this family.
      *
      * @param mixed $name
@@ -272,4 +290,5 @@ class Family
     
         return $this;
     }
+
 }
