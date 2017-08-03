@@ -123,6 +123,16 @@ class Famille
     private $root;
 
     /**
+     * Creator of this family.
+     *
+     * @var Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", fetch="EAGER")
+     * @ORM\JoinColumn(name="creator", referencedColumnName="id", nullable=false)
+     */
+    private $creator;
+
+    /**
      * Get ID.
      *
      * @return integer
@@ -236,5 +246,29 @@ class Famille
         $this->parent = $parent;
 
         return $this;
+    }
+
+    /**
+     * Set creator.
+     *
+     * @param Utilisateur $creator
+     *
+     * @return Famille
+     */
+    public function setCreator(Utilisateur $creator)
+    {
+        $this->creator = $creator;
+    
+        return $this;
+    }
+
+    /**
+     * Get creator.
+     *
+     * @return Utilisateur
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }

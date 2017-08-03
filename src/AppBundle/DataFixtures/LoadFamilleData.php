@@ -18,12 +18,14 @@
 namespace AppBundle\DataFixtures;
 
 use AppBundle\Entity\Famille;
+use AppBundle\Entity\Utilisateur;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Load Families test data in the database.
+ * Load Families initial production data in the database.
  *
  * @category LoadDataFixture
  *
@@ -34,7 +36,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @codeCoverageIgnore
  */
-class LoadFamilleData implements FixtureInterface, OrderedFixtureInterface
+class LoadFamilleData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * Load Families to database.
@@ -43,28 +45,37 @@ class LoadFamilleData implements FixtureInterface, OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        /** @var Utilisateur $dawny */
+        $dawny = $this->getReference('user-dawny');
+
         $equipement = new Famille();
         $equipement->setName('Équipements dynamiques');
+        $equipement->setCreator($dawny);
 
         $camera = new Famille();
         $camera->setName('Caméras');
         $camera->setParent($equipement);
+        $camera->setCreator($dawny);
 
         $pmv = new Famille();
         $pmv->setName('Panneaux à messages variables');
         $pmv->setParent($equipement);
+        $pmv->setCreator($dawny);
 
         $portique = new Famille();
         $portique->setName('PMV sur portique');
         $portique->setParent($pmv);
+        $portique->setCreator($dawny);
 
         $simple = new Famille();
         $simple->setName('PMV à simple mat');
         $simple->setParent($pmv);
+        $simple->setCreator($dawny);
 
         $comptage = new Famille();
         $comptage->setName('Stations de comptage');
         $comptage->setParent($equipement);
+        $comptage->setCreator($dawny);
 
         $manager->persist($equipement);
         $manager->persist($camera);
@@ -82,6 +93,6 @@ class LoadFamilleData implements FixtureInterface, OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 10;
+        return 20;
     }
 }

@@ -9,7 +9,9 @@ settings.panel.title: 'Select settings to update'
 
 settings.families.link: 'Family listing'
 settings.families: 'Families'
-setting.family.name: 'Libellé'
+setting.family.name: 'Label'
+setting.family.parent: 'Parent'
+setting.family.root: 'Root'
 
 setting.family.show.title %name%: 'Family information: %name%'
 setting.information: 'Information'
