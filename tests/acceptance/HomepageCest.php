@@ -16,7 +16,7 @@
  */
 
 /**
- * Homepage Acceptance Test.
+ * Homepage Acceptance Codeception Test.
  *
  * @category Testing
  *

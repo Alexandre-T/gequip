@@ -3,9 +3,21 @@ namespace Test\AppBundle\Functional;
 
 use \FunctionalTester as FunctionalTester;
 
+/**
+ * Settings Functional Codeception Test.
+ *
+ * @category Testing
+ *
+ * @author   Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @license  GNU General Public License, version 3
+ *
+ * @link     http://opensource.org/licenses/GPL-3.0
+ */
 class AuthCest
 {
     /**
+     * Before each test!
+     *
      * @param FunctionalTester $I
      */
     public function _before(FunctionalTester $I)
