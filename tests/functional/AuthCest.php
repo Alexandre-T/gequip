@@ -22,7 +22,7 @@ class AuthCest
     {
         //I fill form
         $I->fillField('Username', 'user1');
-        $I->fillField('Password', 'p@ssword');
+        $I->fillField('Password', 'password');
         $I->click('Log in');
 
         $I->wantTo('verify that the admin menu is hidden');
@@ -45,7 +45,7 @@ class AuthCest
     {
         $I->wantTo('fill login form with admin credentials');
         $I->fillField('Username', 'admin1');
-        $I->fillField('Password', 'p@$$word');
+        $I->fillField('Password', 'password');
         $I->click('Log in');
 
         $I->wantTo('go to settings index');

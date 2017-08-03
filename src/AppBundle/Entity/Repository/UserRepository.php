@@ -17,10 +17,10 @@
 
 namespace AppBundle\Entity\Repository;
 
-use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Class ActivityRepository.
+ * Class User Repository.
  *
  * @category Repository
  *
@@ -29,6 +29,6 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class FamilleRepository extends NestedTreeRepository
+class UserRepository extends EntityRepository
 {
 }

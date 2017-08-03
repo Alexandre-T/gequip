@@ -17,7 +17,7 @@
 
 namespace AppBundle\DataFixtures;
 
-use AppBundle\Entity\Utilisateur;
+use AppBundle\Entity\User;
 use AppBundle\Exception\EntityNotFoundException;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Load Utilisateur production data in the database.
+ * Load User production data in the database.
  *
  * @category LoadDataFixture
  *
@@ -38,7 +38,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @codeCoverageIgnore
  */
-class LoadUtilisateurData extends AbstractFixture implements ContainerAwareInterface, FixtureInterface, OrderedFixtureInterface
+class LoadUserData extends AbstractFixture implements ContainerAwareInterface, FixtureInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -63,7 +63,7 @@ class LoadUtilisateurData extends AbstractFixture implements ContainerAwareInter
     {
         $userManager = $this->container->get('fos_user.user_manager');
 
-        /** @var Utilisateur $dawny */
+        /** @var User $dawny */
         $dawny = $userManager->createUser();
         $dawny->setUsername('Dawny');
         $dawny->setEmail('no-reply@example.org');
@@ -74,10 +74,42 @@ class LoadUtilisateurData extends AbstractFixture implements ContainerAwareInter
             '*Dawny* is our bot. She creates some entities during installation process,
              like first family like "dynamic equipments".'
         );
+        $userManager->updateUser($dawny);
 
+        //We add this data if we are in test, dev environments
+        if (in_array($this->container->get('kernel')->getEnvironment(), array('test', 'dev'))) {
+            $user1 = $userManager->createUser();
+            $user1->setUsername('User1');
+            $user1->setEmail('user1@example.org');
+            $user1->setPlainPassword('password');
+            $user1->setEnabled(true);
+            $user1->setPresentation('*User1* is a test user with role ROLE_USER');
+            $userManager->updateUser($user1);
+            $this->addReference('user-user1', $user1);
 
-        $userManager->updateUser($dawny, true);
+            $admin1 = $userManager->createUser();
+            $admin1->setUsername('Admin1');
+            $admin1->setEmail('admin1@example.org');
+            $admin1->setPlainPassword('password');
+            $admin1->setEnabled(true);
+            $admin1->setPresentation('*Admin1* is a test user with role ROLE_ADMIN');
+            $admin1->setRoles(['ROLE_ADMIN']);
+            $userManager->updateUser($admin1);
+            $this->addReference('user-admin1', $admin1);
 
+            $superAdmin1 = $userManager->createUser();
+            $superAdmin1->setUsername('Super Admin1');
+            $superAdmin1->setEmail('superAdmin1@example.org');
+            $superAdmin1->setPlainPassword('password');
+            $superAdmin1->setEnabled(true);
+            $superAdmin1->setPresentation('*SuperAdmin1* is a test user with role ROLE_SUPER_ADMIN');
+            $superAdmin1->setRoles(['ROLE_SUPER_ADMIN']);
+            $userManager->updateUser($superAdmin1);
+            $this->addReference('user-superAdmin1', $superAdmin1);
+
+        }
+
+        $manager->flush();
         $this->addReference('user-dawny', $dawny);
     }
 

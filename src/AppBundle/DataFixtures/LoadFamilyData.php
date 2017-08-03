@@ -17,8 +17,8 @@
 
 namespace AppBundle\DataFixtures;
 
-use AppBundle\Entity\Famille;
-use AppBundle\Entity\Utilisateur;
+use AppBundle\Entity\Family;
+use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -36,7 +36,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @codeCoverageIgnore
  */
-class LoadFamilleData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadFamilyData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * Load Families to database.
@@ -45,34 +45,35 @@ class LoadFamilleData extends AbstractFixture implements FixtureInterface, Order
      */
     public function load(ObjectManager $manager)
     {
-        /** @var Utilisateur $dawny */
+        /** @var User $dawny */
         $dawny = $this->getReference('user-dawny');
 
-        $equipement = new Famille();
+        $equipement = new Family();
+        //@TODO Translatable name
         $equipement->setName('Équipements dynamiques');
         $equipement->setCreator($dawny);
 
-        $camera = new Famille();
+        $camera = new Family();
         $camera->setName('Caméras');
         $camera->setParent($equipement);
         $camera->setCreator($dawny);
 
-        $pmv = new Famille();
+        $pmv = new Family();
         $pmv->setName('Panneaux à messages variables');
         $pmv->setParent($equipement);
         $pmv->setCreator($dawny);
 
-        $portique = new Famille();
+        $portique = new Family();
         $portique->setName('PMV sur portique');
         $portique->setParent($pmv);
         $portique->setCreator($dawny);
 
-        $simple = new Famille();
+        $simple = new Family();
         $simple->setName('PMV à simple mat');
         $simple->setParent($pmv);
         $simple->setCreator($dawny);
 
-        $comptage = new Famille();
+        $comptage = new Family();
         $comptage->setName('Stations de comptage');
         $comptage->setParent($equipement);
         $comptage->setCreator($dawny);

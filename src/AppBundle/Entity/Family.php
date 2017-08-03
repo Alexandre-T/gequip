@@ -22,13 +22,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use \Datetime as Datetime;
 
 /**
- * Famille Class
+ * Family Class
  *
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FamilleRepository")
- * @ORM\Table(name="te_famille", options={"comment":"Famille d'équipements routiers"})
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FamilyRepository")
+ * @ORM\Table(name="te_family", options={"comment":"Famille d'équipements routiers"})
  * @Gedmo\Tree(type="nested")
  */
-class Famille
+class Family
 {
     /**
      * ID.
@@ -36,7 +36,7 @@ class Famille
      * @var integer
      *
      * @ORM\Id
-     * @ORM\Column(type="integer", options={"comment":"Identifiant de la famille"})
+     * @ORM\Column(type="integer", options={"comment":"Identifiant de la family"})
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -76,7 +76,7 @@ class Famille
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Nom de la famille"})
+     * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Nom de la family"})
      */
     private $name;
 
@@ -95,7 +95,7 @@ class Famille
      *
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Famille", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Family", mappedBy="parent")
      * @ORM\OrderBy({"left":"ASC"})
      */
     private $children;
@@ -103,9 +103,9 @@ class Famille
     /**
      * Parent of this family.
      *
-     * @var Famille
+     * @var Family
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Famille", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Family", inversedBy="children")
      * @ORM\JoinColumn(name="parent_tree", referencedColumnName="id", onDelete="CASCADE")
      * @Gedmo\TreeParent
      */
@@ -114,9 +114,9 @@ class Famille
     /**
      * Root of this family.
      *
-     * @var Famille
+     * @var Family
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Famille")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Family")
      * @ORM\JoinColumn(name="root_tree", referencedColumnName="id", onDelete="CASCADE")
      * @Gedmo\TreeRoot
      */
@@ -125,9 +125,9 @@ class Famille
     /**
      * Creator of this family.
      *
-     * @var Utilisateur
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(name="creator", referencedColumnName="id", nullable=false)
      */
     private $creator;
@@ -195,7 +195,7 @@ class Famille
     /**
      * Get family parent of this family.
      *
-     * @return Famille
+     * @return Family
      */
     public function getParent()
     {
@@ -215,7 +215,7 @@ class Famille
     /**
      * Get family root.
      *
-     * @return Famille
+     * @return Family
      */
     public function getRoot()
     {
@@ -226,7 +226,7 @@ class Famille
      * Set name of this family.
      *
      * @param mixed $name
-     * @return Famille
+     * @return Family
      */
     public function setName($name)
     {
@@ -239,7 +239,7 @@ class Famille
      * Set parent of this family.
      *
      * @param mixed $parent
-     * @return Famille
+     * @return Family
      */
     public function setParent($parent)
     {
@@ -251,11 +251,11 @@ class Famille
     /**
      * Set creator.
      *
-     * @param Utilisateur $creator
+     * @param User $creator
      *
-     * @return Famille
+     * @return Family
      */
-    public function setCreator(Utilisateur $creator)
+    public function setCreator(User $creator)
     {
         $this->creator = $creator;
     
@@ -265,7 +265,7 @@ class Famille
     /**
      * Get creator.
      *
-     * @return Utilisateur
+     * @return User
      */
     public function getCreator()
     {

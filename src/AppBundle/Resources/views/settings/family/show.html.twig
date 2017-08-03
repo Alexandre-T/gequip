@@ -1,8 +1,8 @@
 {% extends '@App/base.html.twig' %}
 
-{% block title %}{{ 'setting.family.show.title %name%'|trans({'%name%': famille.name})}}{% endblock title %}
+{% block title %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock title %}
 
-{% block headline %}{{ 'setting.family.show.title %name%'|trans({'%name%': famille.name})}}{% endblock %}
+{% block headline %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock %}
 
 {% block content_content %}
     <div class="panel panel-primary">
@@ -12,11 +12,15 @@
         <div class="panel-body">
             <dl class="dl-horizontal">
                 <dt class="lead">{{ 'setting.family.name'| trans }}</dt>
-                <dd class="lead">{{ famille.name }}</dd>
+                <dd class="lead">{{ family.name }}</dd>
                 <dt>{{ 'setting.family.root'| trans }}</dt>
-                <dd>{{ famille.root.name }}</dd>
+                <dd>{{ family.root.name }}</dd>
                 <dt>{{ 'setting.family.parent'| trans }}</dt>
-                <dd>{{ famille.parent.name }}</dd>
+                    {% if family.parent is null %}
+                        <dd><em>{{ 'setting.none' | trans }}</em></dd>
+                    {% else %}
+                        <dd>{{ family.parent.name }}</dd>
+                    {% endif %}
             </dl>
         </div>
     </div>
@@ -43,9 +47,9 @@
         <div class="panel-body">
             <dl class="dl-horizontal">
                 <dt>{{ 'setting.created.by' | trans}}</dt>
-                <dd>{{ famille.creator.username }}</dd>
+                <dd>{{ family.creator.username }}</dd>
                 <dt>{{ 'setting.created.at' | trans}}</dt>
-                <dd>{{ famille.created | localizeddate('short', 'short') }}</dd>
+                <dd>{{ family.created | localizeddate('short', 'short') }}</dd>
             </dl>
         </div>
     </div>

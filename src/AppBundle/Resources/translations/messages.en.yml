@@ -19,6 +19,7 @@ setting.created.by: 'Created by:'
 setting.created.at: 'Created at:'
 setting.global-information: 'Global information'
 setting.log: 'Last updates'
+setting.none: 'None'
 
 #Menu translation
 menu.main.home: 'Home'

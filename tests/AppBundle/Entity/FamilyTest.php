@@ -17,11 +17,11 @@
 
 namespace Tests\AppBundle\Entity;
 
-use AppBundle\Entity\Famille;
+use AppBundle\Entity\Family;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Famille Entity test case.
+ * Family Entity test case.
  *
  * @category Testing
  *
@@ -30,19 +30,19 @@ use PHPUnit\Framework\TestCase;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class FamilleTest extends TestCase
+class FamilyTest extends TestCase
 {
     /**
-     * @var Famille
+     * @var Family
      */
-    private $famille;
+    private $family;
 
     /**
      * Prepares the environment before running a test.
      */
     public function setUp()
     {
-        $this->famille = new Famille();
+        $this->family = new Family();
     }
 
     /**
@@ -50,15 +50,15 @@ class FamilleTest extends TestCase
      */
     public function testConstructor()
     {
-        self::assertNull($this->famille->getId());
-        self::assertNull($this->famille->getChildren());
-        self::assertNull($this->famille->getLeft());
-        self::assertNull($this->famille->getLevel());
-        self::assertNull($this->famille->getName());
-        self::assertNull($this->famille->getParent());
-        self::assertNull($this->famille->getRight());
-        self::assertNull($this->famille->getRoot());
-        self::assertNull($this->famille->getCreated());
+        self::assertNull($this->family->getId());
+        self::assertNull($this->family->getChildren());
+        self::assertNull($this->family->getLeft());
+        self::assertNull($this->family->getLevel());
+        self::assertNull($this->family->getName());
+        self::assertNull($this->family->getParent());
+        self::assertNull($this->family->getRight());
+        self::assertNull($this->family->getRoot());
+        self::assertNull($this->family->getCreated());
     }
 
     /**
@@ -68,8 +68,8 @@ class FamilleTest extends TestCase
     {
         $expected = 'name';
 
-        self::assertEquals($this->famille, $this->famille->setName($expected));
-        self::assertEquals($expected, $this->famille->getName());
+        self::assertEquals($this->family, $this->family->setName($expected));
+        self::assertEquals($expected, $this->family->getName());
     }
 
     /**
@@ -77,10 +77,10 @@ class FamilleTest extends TestCase
      */
     public function testSetParent()
     {
-        $parent = new Famille();
+        $parent = new Family();
         $parent->setName('parent');
 
-        self::assertEquals($this->famille, $this->famille->setParent($parent));
-        self::assertEquals($parent, $this->famille->getParent());
+        self::assertEquals($this->family, $this->family->setParent($parent));
+        self::assertEquals($parent, $this->family->getParent());
     }
 }

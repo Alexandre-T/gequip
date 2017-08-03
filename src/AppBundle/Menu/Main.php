@@ -110,7 +110,7 @@ class Main implements ContainerAwareInterface
         # [Careful]            ^ "Anonymous users are technically authenticated"
 
         // Get our user from that token
-        /* @var \AppBundle\Entity\Utilisateur $user */
+        /* @var \AppBundle\Entity\User $user */
         $user = $token->getUser();
         # e.g (w/ FOSUserBundle): $user->getEmail(); $user->isSuperAdmin(); $user->hasRole();
 

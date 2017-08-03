@@ -17,7 +17,7 @@
 
 namespace Tests\AppBundle\Entity;
 
-use AppBundle\Entity\Utilisateur;
+use AppBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,19 +30,19 @@ use PHPUnit\Framework\TestCase;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class UtilisateurTest extends TestCase
+class UserTest extends TestCase
 {
     /**
-     * @var Utilisateur
+     * @var User
      */
-    private $utilisateur;
+    private $user;
 
     /**
      * Prepares the environment before running a test.
      */
     public function setUp()
     {
-        $this->utilisateur = new Utilisateur();
+        $this->user = new User();
     }
 
     /**
@@ -50,6 +50,6 @@ class UtilisateurTest extends TestCase
      */
     public function testConstructor()
     {
-        self::assertNull($this->utilisateur->getId());
+        self::assertNull($this->user->getId());
     }
 }

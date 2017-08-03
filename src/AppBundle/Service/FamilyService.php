@@ -17,14 +17,14 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Famille;
-use AppBundle\Entity\Repository\FamilleRepository;
+use AppBundle\Entity\Family;
+use AppBundle\Entity\Repository\FamilyRepository;
 use AppBundle\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class FamilleService.
+ * Class FamilyService.
  *
  * This service return some data as an html tree of the family.
  *
@@ -35,7 +35,7 @@ use Doctrine\ORM\EntityManagerInterface;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class FamilleService
+class FamilyService
 {
     /**
      * Entity Manager.
@@ -45,14 +45,14 @@ class FamilleService
     protected $em;
 
     /**
-     * Famille repository inherited from Gedmo Tree Repository.
+     * Family repository inherited from Gedmo Tree Repository.
      *
-     * @var FamilleRepository
+     * @var FamilyRepository
      */
     protected $repository;
 
     /**
-     * FamilleService constructor.
+     * FamilyService constructor.
      *
      * Constructor initialize entity manager and repository.
      *
@@ -61,7 +61,7 @@ class FamilleService
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
-        $this->repository = $this->em->getRepository('AppBundle:Famille');
+        $this->repository = $this->em->getRepository('AppBundle:Family');
     }
 
     /**
@@ -70,14 +70,14 @@ class FamilleService
      * If family with specified ID does not exist, a EntityNotFoundException is thrown.
      *
      * @param int $id
-     * @return Famille
+     * @return Family
      * @throws EntityNotFoundException
      */
-    public function getById(int $id):Famille
+    public function getById(int $id):Family
     {
-        $famille = $this->repository->findOneBy(['id' => $id]);
-        if ($famille instanceof Famille) {
-            return $famille;
+        $family = $this->repository->findOneBy(['id' => $id]);
+        if ($family instanceof Family) {
+            return $family;
         } else {
             //@TODO Translate this message.
             throw new EntityNotFoundException("Family with ID $id not found");

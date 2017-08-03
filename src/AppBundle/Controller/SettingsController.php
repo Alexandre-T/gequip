@@ -58,7 +58,7 @@ class SettingsController extends Controller
     public function listFamilyAction()
     {
         $controller = $this;
-        $familleService = $this->get('app.famille-service');
+        $familyService = $this->get('app.family-service');
 
         // More information on Github
         // https://github.com/Atlantic18/DoctrineExtensions/blob/v2.4.x/doc/tree.md#retrieving-as-html-tree
@@ -73,10 +73,10 @@ class SettingsController extends Controller
                 return "<a href=\"$url\" title=\"$title\">{$node['name']}</a>";
             }
         );
-        $htmlTree = $familleService->retrieveHtmlTree($options);
+        $htmlTree = $familyService->retrieveHtmlTree($options);
 
         //Return the view
-        return $this->render('@App/settings/famille/list.html.twig', [
+        return $this->render('@App/settings/family/list.html.twig', [
             'family_tree' => $htmlTree,
             'base_dir'   => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
@@ -92,12 +92,12 @@ class SettingsController extends Controller
      */
     public function showFamilyAction($id)
     {
-        $familleService = $this->get('app.famille-service');
-        $famille = $familleService->getById($id);
+        $familyService = $this->get('app.family-service');
+        $family = $familyService->getById($id);
 
         //Return the view
-        return $this->render('@App/settings/famille/show.html.twig', [
-            'famille' => $famille,
+        return $this->render('@App/settings/family/show.html.twig', [
+            'family' => $family,
             'base_dir'   => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }

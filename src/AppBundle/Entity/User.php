@@ -18,13 +18,17 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Gedmo\Mapping\Annotation as Gedmo;
+use \DateTime as DateTime;
 
 /**
- * Entity Class Utilisateur.
+ * Entity Class User.
  *
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\UtilisateurRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\UserRepository")
+ * @ORM\Table(name="te_user", options={"comment":"Utilisateur métier"})
+ *
  */
-class Utilisateur extends BaseUser
+class User extends BaseUser
 {
     /**
      * User Id.
@@ -47,6 +51,12 @@ class Utilisateur extends BaseUser
     private $presentation;
 
     /**
+     * @ORM\Column(type="datetime", nullable=false, options={"comment":"Date de création automatique"})
+     * @Gedmo\Timestampable(on="create", field="created")
+     */
+    private $created;
+
+    /**
      * Getter of Id property.
      *
      * @return integer
@@ -57,11 +67,21 @@ class Utilisateur extends BaseUser
     }
 
     /**
+     * Get created
+     *
+     * @return DateTime
+     */
+    public function getCreated():DateTime
+    {
+        return $this->created;
+    }
+
+    /**
      * Set presentation
      *
      * @param string $presentation
      *
-     * @return Utilisateur
+     * @return User
      */
     public function setPresentation(string $presentation)
     {
