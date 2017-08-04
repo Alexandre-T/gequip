@@ -95,9 +95,11 @@ class SettingsController extends Controller
         $familyService = $this->get('app.family-service');
         $family = $familyService->getBySlug($slug);
         $path = $familyService->retrievePath($family);
+        $logs = $familyService->retrieveLogs($family);
 
         //Return the view
         return $this->render('@App/settings/family/show.html.twig', [
+            'logs' => $logs,
             'family' => $family,
             'path' => $path,
         ]);

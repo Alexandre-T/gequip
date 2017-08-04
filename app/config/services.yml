@@ -72,6 +72,14 @@ services:
             calls:
                 - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
+    #Loggable
+    gedmo.listener.loggable:
+            class: Gedmo\Loggable\LoggableListener
+            tags:
+                - { name: doctrine.eve  nt_subscriber, connection: default }
+            calls:
+                - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

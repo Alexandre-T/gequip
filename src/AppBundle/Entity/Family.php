@@ -27,6 +27,7 @@ use \Datetime as Datetime;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FamilyRepository")
  * @ORM\Table(name="te_family", options={"comment":"Famille d'équipements routiers"})
  * @Gedmo\Tree(type="nested")
+ * @Gedmo\Loggable
  */
 class Family
 {
@@ -77,6 +78,7 @@ class Family
      * @var string
      *
      * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Family path"})
+     * @Gedmo\Versioned
      * 
      */
     private $name;
@@ -115,6 +117,7 @@ class Family
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Family", inversedBy="children")
      * @ORM\JoinColumn(name="parent_tree", referencedColumnName="id", onDelete="CASCADE")
      * @Gedmo\TreeParent
+     * @Gedmo\Versioned
      */
     private $parent;
 

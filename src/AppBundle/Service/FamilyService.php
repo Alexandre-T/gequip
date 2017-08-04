@@ -129,4 +129,17 @@ class FamilyService
     {
         return $this->repository->getPath($family);
     }
+
+    /**
+     * Retrieve logs of the tree.
+     *
+     * @param Family $family
+     * @return array
+     */
+    public function retrieveLogs(Family $family):array
+    {
+        // first check our log entries
+        $logRepository = $this->em->getRepository('\Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        return $logRepository->getLogEntries($family);
+    }
 }
