@@ -68,7 +68,7 @@ class Main implements ContainerAwareInterface
 
             $dropdownSettings->addChild('menu.main.families', array(
                 'icon' => 'list',
-                'route' => 'settings_families_list'
+                'route' => 'settings_family_index'
             ));
 
             //Adding a nice divider

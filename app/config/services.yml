@@ -76,7 +76,7 @@ services:
     gedmo.listener.loggable:
             class: Gedmo\Loggable\LoggableListener
             tags:
-                - { name: doctrine.eve  nt_subscriber, connection: default }
+                - { name: doctrine.event_subscriber, connection: default }
             calls:
                 - [ setAnnotationReader, [ "@annotation_reader" ] ]
 

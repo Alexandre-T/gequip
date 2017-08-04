@@ -48,6 +48,30 @@
     {% endembed %}
 {% endblock footer %}
 
+{% block body_end_before_js %}
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'settings.delete.confirm.close' | trans }}"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{ 'settings.delete.confirm.title' | trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'settings.delete.confirm.core' | trans }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="fa fa-reply"></span>&nbsp;{{ 'settings.delete.confirm.cancel' | trans }}
+                    </button>
+                    <button type="button" class="btn btn-primary btn-ok">
+                        <span class="fa fa-remove"></span>&nbsp;{{ 'settings.delete.confirm.delete' | trans }}
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock body_end_before_js %}
+
 {% block foot_script %}
     {% block foot_script_assetic %}
         {% javascripts
@@ -61,6 +85,16 @@
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="popover"]').popover();
+            $('#confirm-delete')
+                .on('click', '.btn-ok', function() {
+                    var formName = 'form[name="'+ $(this).data('form') +'"]';
+                    $(formName).submit();
+                })
+                // Bind to modal opening to set necessary data properties to be used to make request
+                .on('show.bs.modal', function(e) {
+                    var data = $(e.relatedTarget).data();
+                    $('.btn-ok', this).data('form', data.form);
+                });
         });
     </script>
 {% endblock foot_script %}

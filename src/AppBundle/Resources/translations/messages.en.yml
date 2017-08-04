@@ -6,21 +6,41 @@ app.homepage.login: 'Log in'
 #Settings
 settings.index.title: 'Settings'
 settings.panel.title: 'Select settings to update'
+settings.actions: 'Actions'
+settings.actions.edit: 'Edit'
+settings.actions.delete: 'Delete'
+settings.actions.back: 'Back to the list'
+settings.actions.back.tree: 'Back to the tree'
+settings.actions.back.show: 'Back to the details'
+
+settings.delete.confirm.title: 'Confirmation'
+settings.delete.confirm.core: 'Please confirm that you want to delete these data'
+settings.delete.confirm.cancel: 'No, don''t delete it'
+settings.delete.confirm.delete: 'Yes, delete it'
+settings.delete.confirm.close: 'Close'
 
 settings.families.link: 'Family listing'
 settings.families: 'Families'
 setting.family.name: 'Label'
 setting.family.parent: 'Parent'
 setting.family.root: 'Root'
+setting.family.field.name: 'Name'
+setting.family.field.parent: 'Parent'
+
 
 setting.family.list.title: 'Family tree'
+setting.family.create.title: 'Family creation'
 setting.family.show.title %name%: 'Family information: %name%'
+setting.family.edit.title %name%: 'Editing family: %name%'
 setting.information: 'Information'
 setting.created.by: 'Created by:'
 setting.created.at: 'Created at:'
 setting.global-information: 'Global information'
 setting.log: 'Last updates'
 setting.none: 'None'
+
+#settings - Family
+settings.family.create: 'Create a new family'
 
 #Menu translation
 menu.main.home: 'Home'
