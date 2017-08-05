@@ -1,7 +1,19 @@
 #Application title
 app.title: 'G-Equip'
-
 app.homepage.login: 'Log in'
+
+#FosUserBundle add-ons
+profile.show.presentation: 'Presentation'
+profile.show.title: 'Profile'
+profile.show.edit: 'Edit your profile'
+
+profile.edit.title: 'Edit your profile'
+profile.edit.information: 'Information'
+profile.edit.how-to-edit: 'To edit your profile, change information then enter your current password before clicking update button.'
+
+profile.password.title: 'Change your password'
+profile.password.information: 'Information'
+profile.password.how-to-edit: 'To change your password, enter your current password in the first field, then enter your new password and confirm it in the third field.'
 
 #Settings
 settings.index.title: 'Settings'

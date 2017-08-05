@@ -123,8 +123,8 @@ class FamilyController extends Controller
 
         //Return the view
         return $this->render('@App/settings/family/show.html.twig', [
-
-            'isDeletable' => true, //@TODO use a good method insteadof false
+            //@TODO use a good method insteadof true
+            'isDeletable' => true,
             'logs' => $logs,
             'family' => $family,
             'path' => $path,

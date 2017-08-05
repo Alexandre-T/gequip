@@ -62,6 +62,10 @@
                 <a class="btn btn-danger btn-mini confirm-delete" data-toggle="modal" data-target="#confirm-delete" data-form="form" href="#">
                     <span class="fa fa-remove"></span>&nbsp;{{ 'settings.actions.delete' | trans }}
                 </a>
+            {% else %}
+                <span class="btn btn-danger disabled">
+                    <span class="fa fa-remove"></span>&nbsp;{{ 'settings.actions.delete' | trans }}
+                </span>
             {% endif %}
         </div>
     </div>

@@ -1,10 +1,8 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}{{ parent() }}&nbsp;&bull; {{ 'profile.show.title'|trans }}{% endblock %}
 
-{% block title %}{{ parent() }}&nbsp;&bull; {{ 'Profile'|trans }}{% endblock %}
-
-{% block headline %}{{ 'Profile'|trans }}{% endblock headline %}
+{% block headline %}{{ 'profile.show.title'|trans }}{% endblock headline %}
 
 {% block content_row %}
     <div class="row">
@@ -15,8 +13,8 @@
                         {% include "@FOSUser/Profile/show_content.html.twig" %}
                     {% endblock fos_user_content %}
                     <div class="pull-right">
-                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default " title="{{ 'Edit profile' | trans }}">
-                            {{ 'Edit profile' | trans }}
+                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-default " title="{{ 'profile.show.edit' | trans }}">
+                            {{ 'profile.show.edit' | trans }}
                         </a>
                     </div>
                 </div>
