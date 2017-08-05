@@ -43,8 +43,6 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@App/settings/index.html.twig', [
-            'base_dir'   => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('@App/settings/index.html.twig');
     }
 }
