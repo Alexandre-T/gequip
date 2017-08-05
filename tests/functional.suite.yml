@@ -11,7 +11,6 @@ modules:
         - Symfony:
               app_path: 'app'
               var_path: 'var'
-              environment: 'codeception'
         - Doctrine2:
             depends: Symfony # connect to Symfony
         - \Helper\Functional
