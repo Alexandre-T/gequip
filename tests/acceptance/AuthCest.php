@@ -15,10 +15,6 @@
  * @link      http://opensource.org/licenses/GPL-3.0
  */
 
-namespace Test\AppBundle\Acceptance;
-
-use \AcceptanceTester as AcceptanceTester;
-
 /**
  * Homepage Acceptance Codeception Test.
  *
