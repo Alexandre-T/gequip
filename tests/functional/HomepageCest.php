@@ -16,7 +16,7 @@
  */
 
 /**
- * Homepage Acceptance Codeception Test.
+ * Homepage Functional Codeception Test.
  *
  * @category Testing
  *
@@ -30,9 +30,9 @@ class HomepageCest
     /**
      * Test Homepage and connexion with user "user1".
      *
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function tryToTest(AcceptanceTester $I)
+    public function tryToTest(FunctionalTester $I)
     {
         //Home Page
         $I->amOnPage('/');

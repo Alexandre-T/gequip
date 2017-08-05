@@ -16,7 +16,7 @@
  */
 
 /**
- * Homepage Acceptance Codeception Test.
+ * Homepage Functional Codeception Test.
  *
  * @category Testing
  *
@@ -30,9 +30,9 @@ class AuthCest
     /**
      * Before each test!
      *
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function _before(AcceptanceTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/login');
         //Menu verification
@@ -40,9 +40,9 @@ class AuthCest
     }
     /**
      * @group user
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function authAsUser(AcceptanceTester $I)
+    public function authAsUser(FunctionalTester $I)
     {
         //I fill form
         $I->fillField('Username', 'user1');
@@ -62,9 +62,9 @@ class AuthCest
         $I->seeResponseCodeIs(403);
     }
     /**
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function authAsAdmin(AcceptanceTester $I)
+    public function authAsAdmin(FunctionalTester $I)
     {
         $I->wantTo('fill login form with admin credentials');
         $I->fillField('Username', 'admin1');
@@ -84,9 +84,9 @@ class AuthCest
         $I->see('Families', 'a.lead');
     }
     /**
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function invalidAuth(AcceptanceTester $I)
+    public function invalidAuth(FunctionalTester $I)
     {
         $I->wantTo('fill login form with invalid credentials');
         $I->fillField('Username', 'notauser');

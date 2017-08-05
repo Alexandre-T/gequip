@@ -14,9 +14,9 @@
  *
  * @link      http://opensource.org/licenses/GPL-3.0
  */
-namespace Test\AppBundle\Acceptance;
+namespace Test\AppBundle\Functional;
 
-use \AcceptanceTester as AcceptanceTester;
+use \FunctionalTester as FunctionalTester;
 
 /**
  * Settings Functional Codeception Test.
@@ -33,9 +33,9 @@ class SettingsCest
     /**
      * Before each test!
      *
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function _before(AcceptanceTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/login');
         $I->fillField('Username','admin1');
@@ -47,9 +47,9 @@ class SettingsCest
     /**
      * Executed tests.
      *
-     * @param AcceptanceTester $I
+     * @param FunctionalTester $I
      */
-    public function roleAdminTest(AcceptanceTester $I)
+    public function roleAdminTest(FunctionalTester $I)
     {
 
         $I->wantToTest('Firewall for ROLE_ADMIN');
