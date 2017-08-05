@@ -16,7 +16,7 @@
  */
 
 namespace AppBundle;
-use AppBundle\FunctionalTester;
+
 
 /**
  * Settings Functional Codeception Test.
@@ -42,8 +42,7 @@ class SettingsCest
         $I->fillField('Username','admin1');
         $I->fillField('Password', 'password');
         $I->click('Log in');
-        $I->amOnPage('/');
-        $I->see('admin1');
+        $I->am('ROLE_ADMIN');
     }
 
     /**
@@ -57,6 +56,7 @@ class SettingsCest
         $I->wantToTest('Firewall for ROLE_ADMIN');
         $I->amOnPage('/settings');
         $I->seeInTitle('Settings');
+        $I->see('Families','a.lead');
         $I->seeCurrentUrlEquals('/settings');
         $I->seeResponseCodeIs(200);
     }
