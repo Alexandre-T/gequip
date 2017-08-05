@@ -17,6 +17,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            // @TODO Low priority : Remove FOSUserBundle ?
+            // https://jolicode.github.io/fosuserbundle-conf/
             new FOS\UserBundle\FOSUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),

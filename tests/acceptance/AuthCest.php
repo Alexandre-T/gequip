@@ -1,10 +1,26 @@
 <?php
-namespace Test\AppBundle\Functional;
+/**
+ * This file is part of the G-Equip Application.
+ *
+ * PHP version 7.1
+ *
+ * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ *
+ * @category  Testing
+ *
+ * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @copyright 2017 Alexandre Tranchant
+ * @license   GNU General Public License, version 3
+ *
+ * @link      http://opensource.org/licenses/GPL-3.0
+ */
 
-use \FunctionalTester as FunctionalTester;
+namespace Test\AppBundle\Acceptance;
+
+use \AcceptanceTester as AcceptanceTester;
 
 /**
- * Settings Functional Codeception Test.
+ * Homepage Acceptance Codeception Test.
  *
  * @category Testing
  *
@@ -18,9 +34,9 @@ class AuthCest
     /**
      * Before each test!
      *
-     * @param FunctionalTester $I
+     * @param AcceptanceTester $I
      */
-    public function _before(FunctionalTester $I)
+    public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('/login');
         //Menu verification
@@ -28,9 +44,9 @@ class AuthCest
     }
     /**
      * @group user
-     * @param FunctionalTester $I
+     * @param AcceptanceTester $I
      */
-    public function authAsUser(FunctionalTester $I)
+    public function authAsUser(AcceptanceTester $I)
     {
         //I fill form
         $I->fillField('Username', 'user1');
@@ -51,9 +67,9 @@ class AuthCest
         $I->seeResponseCodeIs(403);
     }
     /**
-     * @param FunctionalTester $I
+     * @param AcceptanceTester $I
      */
-    public function authAsAdmin(FunctionalTester $I)
+    public function authAsAdmin(AcceptanceTester $I)
     {
         $I->wantTo('fill login form with admin credentials');
         $I->fillField('Username', 'admin1');
@@ -74,9 +90,9 @@ class AuthCest
         $I->see('Families', 'a.lead');
     }
     /**
-     * @param FunctionalTester $I
+     * @param AcceptanceTester $I
      */
-    public function invalidAuth(FunctionalTester $I)
+    public function invalidAuth(AcceptanceTester $I)
     {
         $I->wantTo('fill login form with invalid credentials');
         $I->fillField('Username', 'notauser');
