@@ -37,10 +37,12 @@ class SettingsCest
      */
     public function _before(FunctionalTester $I)
     {
+        $I->wantTo('Be an admin');
         $I->amOnPage('/login');
         $I->fillField('Username','admin1');
         $I->fillField('Password', 'password');
         $I->click('Log in');
+        $I->amOnPage('/');
         $I->see('admin1');
     }
 
