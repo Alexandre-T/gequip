@@ -54,6 +54,7 @@ script:
   - php bin/console server:start
   - php vendor/bin/codecept run
   - php bin/console server:stop
+  - cat tests/_output/*
 
 after_success:
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
