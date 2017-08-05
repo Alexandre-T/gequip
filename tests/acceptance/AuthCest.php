@@ -40,7 +40,7 @@ class AuthCest
     {
         $I->amOnPage('/login');
         //Menu verification
-        $I->see('Sign In', '#navbar-top li.active');
+        $I->seeInTitle('Log in');
     }
     /**
      * @group user
@@ -55,13 +55,12 @@ class AuthCest
 
         $I->wantTo('verify that the admin menu is hidden');
         $I->seeCurrentUrlEquals('/');
-        $I->see('Home', '#navbar-top li.active');
         $I->seeLink('Logout');
         $I->dontSeeLink('All settings');
+        $I->dontSeeLink('Sign In');
+        $I->dontSeeLink('Sign in');
 
         $I->wantTo('verify that a direct access to settings page will be denied by firewall');
-        $I->seeCurrentUrlEquals('/');
-        $I->seeLink('Logout');
         $I->expect("Standard users can't access settings area");
         $I->amOnPage('/settings/');
         $I->seeResponseCodeIs(403);
@@ -78,7 +77,6 @@ class AuthCest
 
         $I->wantTo('go to settings index');
         $I->seeCurrentUrlEquals('/');
-        $I->see('Home', '#navbar-top li.active');
         $I->seeLink('Logout');
         $I->click('All settings');
 

@@ -41,7 +41,7 @@ class SettingsCest
         $I->fillField('Username','admin1');
         $I->fillField('Password', 'password');
         $I->click('Log in');
-        $I->am('ROLE_ADMIN');
+        $I->see('admin1');
     }
 
     /**
@@ -53,8 +53,8 @@ class SettingsCest
     {
 
         $I->wantToTest('Firewall for ROLE_ADMIN');
-        $I->am('ROLE_ADMIN');
         $I->amOnPage('/settings');
+        $I->seeInTitle('Settings');
         $I->seeCurrentUrlEquals('/settings');
         $I->seeResponseCodeIs(200);
     }
