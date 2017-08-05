@@ -15,8 +15,11 @@
  * @link      http://opensource.org/licenses/GPL-3.0
  */
 
+namespace AppBundle;
+use AppBundle\FunctionalTester;
+
 /**
- * Homepage Functional Codeception Test.
+ * Firewall Functional Codeception Test.
  *
  * @category Testing
  *
@@ -98,4 +101,5 @@ class AuthCest
         $I->seeLink('Sign In');
         $I->dontSeeLink('Logout');
     }
+
 }

@@ -15,6 +15,9 @@
  * @link      http://opensource.org/licenses/GPL-3.0
  */
 
+namespace AppBundle;
+use AppBundle\FunctionalTester;
+
 /**
  * Homepage Functional Codeception Test.
  *
@@ -25,13 +28,17 @@
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class HomepageCest
+class HomeCest
 {
-    /**
-     * Test Homepage and connexion with user "user1".
-     *
-     * @param FunctionalTester $I
-     */
+    public function _before(FunctionalTester $I)
+    {
+    }
+
+    public function _after(FunctionalTester $I)
+    {
+    }
+
+    // tests
     public function tryToTest(FunctionalTester $I)
     {
         //Home Page

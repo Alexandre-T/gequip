@@ -14,9 +14,9 @@
  *
  * @link      http://opensource.org/licenses/GPL-3.0
  */
-namespace Test\AppBundle\Functional;
 
-use \FunctionalTester as FunctionalTester;
+namespace AppBundle;
+use AppBundle\FunctionalTester;
 
 /**
  * Settings Functional Codeception Test.

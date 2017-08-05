@@ -1,5 +1,5 @@
 <?php
-
+namespace AppBundle;
 
 /**
  * Inherited Methods
@@ -16,11 +16,11 @@
  *
  * @SuppressWarnings(PHPMD)
 */
-class AcceptanceTester extends \Codeception\Actor
+class FunctionalTester extends \Codeception\Actor
 {
-    use _generated\AcceptanceTesterActions;
+    use _generated\FunctionalTesterActions;
 
-    /**
-     * Define custom actions here
-     */
+   /**
+    * Define custom actions here
+    */
 }

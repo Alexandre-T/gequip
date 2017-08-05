@@ -15,7 +15,7 @@
  * @link      http://opensource.org/licenses/GPL-3.0
  */
 
-namespace Tests\AppBundle\Menu;
+namespace AppBundle\Tests\Menu;
 
 use AppBundle\Menu\Main;
 use PHPUnit\Framework\TestCase;

@@ -15,7 +15,7 @@
  * @link      http://opensource.org/licenses/GPL-3.0
  */
 
-namespace Tests\AppBundle\Entity;
+namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Family;
 use PHPUnit\Framework\TestCase;

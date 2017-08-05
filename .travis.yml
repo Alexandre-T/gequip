@@ -52,9 +52,9 @@ script:
   - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then php vendor/phpunit/phpunit/phpunit; fi
   # Server must be started for codeconcept tests.
   - php bin/console server:start
-  - php vendor/bin/codecept run -c codeception.yml
+  - php vendor/bin/codecept run -c src/AppBundle/codeception.yml
   - php bin/console server:stop
-  - cat tests/_output/*
+  - cat src/AppBundle/Tests/_output/*
 
 after_success:
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
