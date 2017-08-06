@@ -80,6 +80,19 @@ services:
             calls:
                 - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
+    # KernelRequest listener
+    app.listener.loggable:
+        class: AppBundle\Listener\LoggerListener
+        tags:
+            # translatable sets locale after router processing
+            #- { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
+            # loggable hooks user username if one is in security context
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest}
+        arguments:
+            - '@gedmo.listener.loggable'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
