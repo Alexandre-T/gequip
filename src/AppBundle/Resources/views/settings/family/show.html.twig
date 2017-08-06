@@ -31,17 +31,45 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'setting.log' | trans }}</h3>
+    {% if logs | length > 0 %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'setting.log' | trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <p></p>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th id="logs-version">{{ 'settings.log.version' | trans }}</th>
+                    <th id="logs-action">{{ 'settings.log.action' | trans }}</th>
+                    <th id="logs-date">{{ 'settings.log.date' | trans }}</th>
+                    <th id="logs-user">{{ 'settings.log.user' | trans }}</th>
+                    <th id="logs-value">{{ 'settings.log.old-value' | trans }}</th>
+                </tr>
+                </thead>
+                {% for log in logs %}
+                    <tr>
+                    <td rowspan="{{ log.data | length }}" headers="logs-version">{{ log.version }}</td>
+                    <td rowspan="{{ log.data | length }}" headers="logs-action">{{ log.action }}</td>
+                    <td rowspan="{{ log.data | length }}" headers="logs-date">{{ log.loggedAt | localizeddate('short','short')}}</td>
+                    <td rowspan="{{ log.data | length }}" headers="logs-user">{{ log.username }}</td>
+                    {% for key, row in log.data %}
+                        <td headers="logs-value">
+                            {% if key == 'name' %}
+                                {{ 'setting.family.name'| trans }}: {{ row }}
+                            {% elseif key == 'parent' %}
+                                {{ 'setting.family.parent'| trans }}: {{ row.id }}
+                            {% endif %}
+                        </td>
+                        {% if not loop.last %}</tr><tr>{% endif %}
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
-        <div class="panel-body">
-            <ul>
-                {# TODO Change it after show edit create #}
-                {{ dump(logs) }}
-            </ul>
-        </div>
-    </div>
+    {% endif %}
 {% endblock content_content %}
 
 {% block content_sidebar %}
