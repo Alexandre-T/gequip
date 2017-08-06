@@ -43,4 +43,4 @@ security:
         #ROLE ADMIN can set application
         - { path: ^/settings, role: ROLE_ADMIN }
         #ROLE SUPER_ADMIN can change access
-        - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, role: ROLE_SUPER_ADMIN }

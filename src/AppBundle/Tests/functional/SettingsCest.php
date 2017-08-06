@@ -17,7 +17,6 @@
 
 namespace AppBundle;
 
-
 /**
  * Settings Functional Codeception Test.
  *

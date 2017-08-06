@@ -21,7 +21,8 @@
 {% endblock content_sidebar %}
 
 {% block foot_script %}
-<script id="activation">
-    $('#contenu_html').html('{% autoescape 'js' %}{{ family_tree | htmlMessage }}{% endautoescape %}');
-</script>
+    {{ parent() }}
+    <script  type="text/javascript" id="activation">
+        $('#contenu_html').html('{% autoescape 'js' %}{{ family_tree | htmlMessage }}{% endautoescape %}');
+    </script>
 {% endblock %}
