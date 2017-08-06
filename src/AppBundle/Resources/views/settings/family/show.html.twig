@@ -11,7 +11,7 @@
         {% endfor %}
     </ol>
 
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" id="settings-family-global-information">
         <div class="panel-heading">
             <h3 class="panel-title">{{ 'setting.global-information' | trans }}</h3>
         </div>
@@ -32,7 +32,7 @@
     </div>
 
     {% if logs | length > 0 %}
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="settings-family-logs">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ 'setting.log' | trans }}</h3>
             </div>
@@ -86,7 +86,7 @@
     {{ form_start(delete_form) }}
     {{ form_widget(delete_form) }}
     {% endif %}
-    <div class="text-center">
+    <div class="text-center" id="settings-family-actions">
         <div class="btn-group-vertical">
             <a class="btn-mini btn btn-default" href="{{ path('settings_family_index') }}">
                 <span class="fa fa-reply"></span>&nbsp;{{ 'settings.actions.back.tree' | trans }}
@@ -109,7 +109,7 @@
     {{ form_end(delete_form) }}
     {% endif %}
     <hr/>
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="settings-family-creator-information">
         <div class="panel-heading">
             <h3 class="panel-title">{{ 'setting.information' | trans }}</h3>
         </div>
