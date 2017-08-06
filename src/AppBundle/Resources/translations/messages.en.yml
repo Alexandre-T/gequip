@@ -40,8 +40,11 @@ settings.log.date: 'Date'
 settings.log.user: 'Username'
 settings.log.old-value: 'Old value'
 
+
 setting.family.name: 'Label'
 setting.family.parent: 'Parent'
+setting.family.parent.none: 'None'
+setting.family.parent.no-more-existing %id%: 'Parent with Id id does no more exist.'
 setting.family.root: 'Root'
 setting.family.field.name: 'Name'
 setting.family.field.parent: 'Parent'

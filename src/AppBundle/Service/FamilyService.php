@@ -140,6 +140,39 @@ class FamilyService
     {
         // first check our log entries
         $logRepository = $this->em->getRepository('\Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
-        return $logRepository->getLogEntries($family);
+        $logs = $logRepository->getLogEntries($family);
+        $ids = [];
+
+        foreach($logs as $key => $log){
+            /* @var \Gedmo\Loggable\Entity\LogEntry $log */
+            $data = $log->getData();
+
+            if(isset($data['parent']['id'])){
+                $ids[]=$data['parent']['id'];
+            }
+        }
+        //Si on a un élément dans $ids
+        if (count($ids)){
+            //On execute une SEULE requete pour récupérer tous les noms...
+            $families = $this->repository->findBy(['id' => $ids]);
+
+            //On boucle à nouveau
+            foreach($logs as $key => $log){
+                /* @var \Gedmo\Loggable\Entity\LogEntry $log */
+                $data = $log->getData();
+
+                if(isset($data['parent']['id'])){
+                    foreach($families as $family){
+                        if ($family->getId() == $data['parent']['id']){
+                            $data['parent']['object'] = $family->getName();
+                            $log->setData($data);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $logs;
+
     }
 }

@@ -23,7 +23,7 @@
                 <dd>{{ family.root.name }}</dd>
                 <dt>{{ 'setting.family.parent'| trans }}</dt>
                     {% if family.parent is null %}
-                        <dd><em>{{ 'setting.none' | trans }}</em></dd>
+                        <dd><em>{{ 'setting.family.parent.none' | trans }}</em></dd>
                     {% else %}
                         <dd>{{ family.parent.name }}</dd>
                     {% endif %}
@@ -57,10 +57,18 @@
                     <td rowspan="{{ log.data | length }}" headers="logs-user">{{ log.username }}</td>
                     {% for key, row in log.data %}
                         <td headers="logs-value">
+                            {# replace by a view helper #}
                             {% if key == 'name' %}
                                 {{ 'setting.family.name'| trans }}: {{ row }}
                             {% elseif key == 'parent' %}
-                                {{ 'setting.family.parent'| trans }}: {{ row.id }}
+                                {{ 'setting.family.parent'| trans }}:
+                                {% if row is null %}
+                                    {{ 'setting.family.parent.none' | trans }}
+                                {% elseif row.object is defined %}
+                                    {{ row.object }}
+                                {% else %}
+                                    {{ 'setting.family.parent.no-more-existing %id%' | trans({'id': row.id}) }}
+                                {% endif %}
                             {% endif %}
                         </td>
                         {% if not loop.last %}</tr><tr>{% endif %}
