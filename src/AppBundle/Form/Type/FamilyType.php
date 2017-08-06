@@ -15,7 +15,7 @@
  * @link http://opensource.org/licenses/GPL-3.0
  */
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Family;
 use Doctrine\ORM\EntityRepository;

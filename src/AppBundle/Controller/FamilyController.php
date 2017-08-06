@@ -83,7 +83,7 @@ class FamilyController extends Controller
     public function newAction(Request $request)
     {
         $family = new Family();
-        $form = $this->createForm('AppBundle\Form\FamilyType', $family);
+        $form = $this->createForm('AppBundle\Form\Type\FamilyType', $family);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -150,7 +150,7 @@ class FamilyController extends Controller
     public function editAction(Request $request, Family $family)
     {
         $deleteForm = $this->createDeleteForm($family);
-        $editForm = $this->createForm('AppBundle\Form\FamilyType', $family);
+        $editForm = $this->createForm('AppBundle\Form\Type\FamilyType', $family);
         $editForm->handleRequest($request);
 
         //Flash message
