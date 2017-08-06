@@ -16,7 +16,6 @@
  */
 
 namespace AppBundle;
-use AppBundle\FunctionalTester;
 
 /**
  * Homepage Functional Codeception Test.
@@ -70,6 +69,7 @@ class FamilyCest
 
         //Show
         $I->seeCurrentUrlEquals('/settings/family/show/codeception-test-new-family');
+        $I->see('Family "Codeception Test New Family" has been successfully created!', '.alert');
 
         $I->seeLink('Équipements dynamiques');
         $I->seeLink('Codeception Test New Family');
@@ -94,6 +94,7 @@ class FamilyCest
         $I->click('Edit', 'form');
 
         $I->seeCurrentUrlEquals('/settings/family/show/codeception-test-edit-family');
+        $I->see('Family "Codeception Test Edit Family" has been successfully updated!', '.alert');
         //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
         $I->see('Parent: Équipements dynamiques','#settings-family-logs');
         $I->see('Label: Codeception Test New Family','#settings-family-logs');

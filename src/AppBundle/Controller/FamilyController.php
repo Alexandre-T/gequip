@@ -88,12 +88,16 @@ class FamilyController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //@TODO add a flash message !
-
             $family->setCreator($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($family);
             $em->flush();
+
+            //Flash message
+            $session = $this->get('session');
+            $trans = $this->get('translator.default');
+            $message = $trans->trans('settings.family.created _name_',['name' => $family->getName()]);
+            $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('settings_family_show', array('slug' => $family->getSlug()));
         }
@@ -149,7 +153,12 @@ class FamilyController extends Controller
         $editForm = $this->createForm('AppBundle\Form\FamilyType', $family);
         $editForm->handleRequest($request);
 
-        //@TODO add a flash message !
+        //Flash message
+        $session = $this->get('session');
+        $trans = $this->get('translator.default');
+        $message = $trans->trans('settings.family.updated _name_',['name' => $family->getName()]);
+        $session->getFlashBag()->add('success', $message);
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
@@ -182,6 +191,12 @@ class FamilyController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($family);
             $em->flush();
+
+            //Flash message
+            $session = $this->get('session');
+            $trans = $this->get('translator.default');
+            $message = $trans->trans('settings.family.deleted _name_',['name' => $family->getName()]);
+            $session->getFlashBag()->add('success', $message);
         }
 
         return $this->redirectToRoute('settings_family_index');

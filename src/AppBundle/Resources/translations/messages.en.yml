@@ -31,6 +31,9 @@ settings.delete.confirm.cancel: 'No, don''t delete it'
 settings.delete.confirm.delete: 'Yes, delete it'
 settings.delete.confirm.close: 'Close'
 
+settings.family.created _name_: 'Family "name" has been successfully created!'
+settings.family.updated _name_: 'Family "name" has been successfully updated!'
+settings.family.deleted _name_: 'Family "name" has been successfully deleted!'
 settings.families.link: 'Family listing'
 settings.families: 'Families'
 
