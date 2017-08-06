@@ -9,5 +9,5 @@ namespace AppBundle\Listener;
  */
 interface LoggableListenerInterface
 {
-   public function setUsername($username);
+    public function setUsername($username);
 }

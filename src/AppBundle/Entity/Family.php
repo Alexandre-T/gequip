@@ -79,7 +79,7 @@ class Family
      *
      * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Family path"})
      * @Gedmo\Versioned
-     * 
+     *
      */
     private $name;
 
@@ -293,5 +293,4 @@ class Family
     
         return $this;
     }
-
 }

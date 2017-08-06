@@ -87,7 +87,6 @@ class FamilyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $family->setCreator($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($family);
@@ -96,7 +95,7 @@ class FamilyController extends Controller
             //Flash message
             $session = $this->get('session');
             $trans = $this->get('translator.default');
-            $message = $trans->trans('settings.family.created _name_',['name' => $family->getName()]);
+            $message = $trans->trans('settings.family.created _name_', ['name' => $family->getName()]);
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('settings_family_show', array('slug' => $family->getSlug()));
@@ -134,7 +133,6 @@ class FamilyController extends Controller
             'path' => $path,
             'delete_form' => $deleteForm->createView(),
         ]);
-
     }
 
     /**
@@ -156,7 +154,7 @@ class FamilyController extends Controller
         //Flash message
         $session = $this->get('session');
         $trans = $this->get('translator.default');
-        $message = $trans->trans('settings.family.updated _name_',['name' => $family->getName()]);
+        $message = $trans->trans('settings.family.updated _name_', ['name' => $family->getName()]);
         $session->getFlashBag()->add('success', $message);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -195,7 +193,7 @@ class FamilyController extends Controller
             //Flash message
             $session = $this->get('session');
             $trans = $this->get('translator.default');
-            $message = $trans->trans('settings.family.deleted _name_',['name' => $family->getName()]);
+            $message = $trans->trans('settings.family.deleted _name_', ['name' => $family->getName()]);
             $session->getFlashBag()->add('success', $message);
         }
 

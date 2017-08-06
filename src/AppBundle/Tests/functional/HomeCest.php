@@ -16,6 +16,7 @@
  */
 
 namespace AppBundle;
+
 use AppBundle\FunctionalTester;
 
 /**

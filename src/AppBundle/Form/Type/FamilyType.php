@@ -58,19 +58,19 @@ class FamilyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('parent',EntityType::class,[
+            ->add('parent', EntityType::class, [
                 'class' => 'AppBundle:Family',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('f')
                         ->orderBy('f.left', 'ASC');
                 },
                 'label' => 'setting.family.field.parent',
-                'choice_label' => function($family) {
+                'choice_label' => function ($family) {
                     /** @var Family $family */
-                    return (str_repeat(' ',$family->getLevel() * self::SPACES) . $family->getName());
+                    return (str_repeat(' ', $family->getLevel() * self::SPACES) . $family->getName());
                 },
             ])
-            ->add('name',TextType::class,[
+            ->add('name', TextType::class, [
                 'label' => 'setting.family.field.name',
             ]);
     }
@@ -99,6 +99,4 @@ class FamilyType extends AbstractType
     {
         return 'appbundle_family';
     }
-
-
 }

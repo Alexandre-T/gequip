@@ -106,7 +106,6 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, F
             $superAdmin1->setRoles(['ROLE_SUPER_ADMIN']);
             $userManager->updateUser($superAdmin1);
             $this->addReference('user-superAdmin1', $superAdmin1);
-
         }
 
         $manager->flush();

@@ -3,6 +3,7 @@
 namespace AppBundle\Listener;
 
 use \Gedmo\Loggable\LoggableListener as GedmoLoggableListener;
+
 /**
  * LoggableListener
  *

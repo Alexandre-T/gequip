@@ -38,7 +38,7 @@ class SettingsCest
     {
         $I->wantTo('Be an admin');
         $I->amOnPage('/login');
-        $I->fillField('Username','admin1');
+        $I->fillField('Username', 'admin1');
         $I->fillField('Password', 'password');
         $I->click('Log in');
         //$I->am('ROLE_ADMIN');
@@ -53,10 +53,9 @@ class SettingsCest
      */
     public function roleAdminTest(FunctionalTester $I)
     {
-
         $I->wantToTest('Firewall for ROLE_ADMIN');
         $I->seeInTitle('Settings');
-        $I->see('Families','a.lead');
+        $I->see('Families', 'a.lead');
         $I->seeCurrentUrlEquals('/settings');
         $I->seeResponseCodeIs(200);
     }

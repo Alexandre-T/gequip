@@ -6,5 +6,4 @@ namespace AppBundle\Helper;
 
 class Functional extends \Codeception\Module
 {
-
 }
