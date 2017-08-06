@@ -2,7 +2,6 @@
 
 namespace AppBundle\Listener;
 
-use Gedmo\Loggable\LoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -27,18 +26,18 @@ class LoggerListener implements EventSubscriberInterface
      */
     private $tokenStorage;
     /**
-     * @var LoggableListener
+     * @var LoggableListenerInterface
      */
     private $loggableListener;
 
     /**
      * LoggerListener constructor.
      *
-     * @param LoggableListener $loggableListener
+     * @param LoggableListenerInterface $loggableListener
      * @param TokenStorageInterface|null $tokenStorage
      * @param AuthorizationCheckerInterface|null $authorizationChecker
      */
-    public function __construct(LoggableListener $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
+    public function __construct(LoggableListenerInterface $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
     {
         $this->loggableListener = $loggableListener;
         $this->tokenStorage = $tokenStorage;

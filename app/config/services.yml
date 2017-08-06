@@ -73,15 +73,17 @@ services:
                 - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
     #Loggable
-    gedmo.listener.loggable:
-            class: Gedmo\Loggable\LoggableListener
+    app.listener.loggable:
+            class: AppBundle\Listener\LoggableListener
             tags:
                 - { name: doctrine.event_subscriber, connection: default }
             calls:
                 - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
+    AppBundle\Listener\LoggableListenerInterface: '@app.listener.loggable'
+
     # KernelRequest listener
-    app.listener.loggable:
+    app.listener.logger:
         class: AppBundle\Listener\LoggerListener
         tags:
             # translatable sets locale after router processing
@@ -89,7 +91,7 @@ services:
             # loggable hooks user username if one is in security context
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest}
         arguments:
-            - '@gedmo.listener.loggable'
+            - '@app.listener.loggable'
             - '@security.token_storage'
             - '@security.authorization_checker'
 
