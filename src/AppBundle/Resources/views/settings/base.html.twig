@@ -24,37 +24,35 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th id="logs-version">{{ 'settings.log.version' | trans }}</th>
-                        <th id="logs-action">{{ 'settings.log.action' | trans }}</th>
-                        <th id="logs-date">{{ 'settings.log.date' | trans }}</th>
-                        <th id="logs-user">{{ 'settings.log.user' | trans }}</th>
-                        <th id="logs-value">{{ 'settings.log.old-value' | trans }}</th>
+                        <th class="text-center" id="logs-version">{{ 'settings.log.version' | trans }}</th>
+                        <th class="text-center" id="logs-action">{{ 'settings.log.action' | trans }}</th>
+                        <th class="text-center" id="logs-date">{{ 'settings.log.date' | trans }}</th>
+                        <th class="text-center" id="logs-user">{{ 'settings.log.user' | trans }}</th>
+                        <th class="text-center" id="logs-value">{{ 'settings.log.new-value' | trans }}</th>
                     </tr>
                     </thead>
                     {% for log in logs %}
                         <tr>
-                        <td rowspan="{{ log.data | length }}" headers="logs-version">{{ log.version }}</td>
-                        <td rowspan="{{ log.data | length }}" headers="logs-action">{{ log.action }}</td>
-                        <td rowspan="{{ log.data | length }}" headers="logs-date">{{ log.loggedAt | localizeddate('short','short')}}</td>
-                        <td rowspan="{{ log.data | length }}" headers="logs-user">{{ log.username }}</td>
-                        {% for key, row in log.data %}
-                            <td headers="logs-value">
-                                {# TODO replace by a view helper #}
-                                {% if key == 'name' %}
-                                    {{ 'setting.family.name'| trans }}: {{ row }}
-                                {% elseif key == 'parent' %}
-                                    {{ 'setting.family.parent'| trans }}:
-                                    {% if row is null %}
-                                        {{ 'setting.family.parent.none' | trans }}
-                                    {% elseif row.object is defined %}
-                                        {{ row.object }}
-                                    {% else %}
-                                        {{ 'setting.family.parent.no-more-existing %id%' | trans({'id': row.id}) }}
-                                    {% endif %}
-                                {% endif %}
+                            <td headers="logs-version" class="text-center">{{ log.version }}</td>
+                            <td headers="logs-action" class="text-center">
+                                <span class="label label-default">{{ log.action | trans }}</span>
                             </td>
-                            {% if not loop.last %}</tr><tr>{% endif %}
-                        {% endfor %}
+                            <td headers="logs-date" class="text-center">{{ log.logged | localizeddate('medium','medium')}}</td>
+                            <td headers="logs-user" class="text-center">{{ log.username }}</td>
+                            <td headers="logs-value">
+                                <dl class="dl-horizontal">
+                                    {% for row in log.data %}
+                                        <dt>{{ row.label | trans }}</dt>
+                                        {% if row.none %}
+                                            <dd>{{ 'setting.none' | trans }}</dd>
+                                        {% elseif row.noMore %}
+                                            <dd>{{ 'setting.no-more %entity% %id%' | trans({'id': row.id, 'entity':row.entity}) }}</dd>
+                                        {% else %}
+                                            <dd>{{ row.name }}</dd>
+                                        {% endif %}
+                                    {% endfor %}
+                                </dl>
+                            </td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -66,12 +64,10 @@
 
 {% block content_sidebar %}
     {% block content_action %}
-
+        {# TODO factorize it! #}
     {% endblock content_action %}
     <hr>
     {% block content_information %}
-        {# @Todo Ajouter un template qui affiche cela. Un affecteur, un dessinateur, j'ai plus le terme en tête. #}
-        {# @FIXME remove calls to family #}
         {% if informations is defined %}
             <div class="panel panel-default" id="settings-creator-information">
                 <div class="panel-heading">

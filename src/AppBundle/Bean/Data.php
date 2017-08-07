@@ -1,0 +1,215 @@
+<?php
+/**
+ * This file is part of the GEquip Application.
+ *
+ * PHP version 7.1
+ *
+ * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ *
+ * @category Controller
+ *
+ * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @copyright 2017 Alexandre Tranchant
+ * @license   GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ */
+
+namespace AppBundle\Bean;
+
+/**
+ * Data bean to give some information about the data before an updated (Gedmo).
+ *
+ * @category Bean
+ *
+ * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @license GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ *
+ */
+class Data
+{
+    /**
+     * @var int Data Id
+     */
+    private $id = 0;
+
+    /**
+     * @var string entity name
+     */
+    private $entity = '';
+
+    /**
+     * @var string label code to be translated
+     */
+    private $label = 'settings.label';
+
+    /**
+     * @var string data name
+     */
+    private $name = '';
+
+    /**
+     * @var bool The dependency no more exists
+     */
+    private $noMore = false;
+
+    /**
+     * @var bool This data has no dependency (0::1 or 0::n relation)
+     */
+    private $none = false;
+
+    /**
+     * Getter of Id.
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Setter of Id.
+     *
+     * @param int $id
+     * @return Data
+     */
+    public function setId(int $id): Data
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * Getter of entity.
+     *
+     * @return string
+     */
+    public function getEntity(): string
+    {
+        return $this->entity;
+    }
+
+    /**
+     * Setter of entity.
+     *
+     * @param string $entity
+     * @return Data
+     */
+    public function setEntity(string $entity): Data
+    {
+        $this->entity = $entity;
+        return $this;
+    }
+
+    /**
+     * Getter of label.
+     *
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * Setter of label.
+     *
+     * @param string $label
+     * @return Data
+     */
+    public function setLabel(string $label): Data
+    {
+        $this->label = $label;
+        return $this;
+    }
+
+    /**
+     * Getter of name.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Setter of name.
+     *
+     * @param string $name
+     * @return Data
+     */
+    public function setName(string $name): Data
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Dependency exists or is no more existing?
+     *
+     * @return bool True when dependency does no more exists.
+     */
+    public function isNoMore(): bool
+    {
+        return $this->noMore;
+    }
+
+    /**
+     * Setter of no-more existing dependency.
+     *
+     * @param bool $noMore
+     * @return Data
+     */
+    public function setNoMore(bool $noMore): Data
+    {
+        $this->noMore = $noMore;
+        return $this;
+    }
+
+    /**
+     * No dependency.
+     *
+     * @return bool
+     */
+    public function isNone(): bool
+    {
+        return $this->none;
+    }
+
+    /**
+     * Setter of dependency.
+     *
+     * @param bool $none
+     * @return Data
+     */
+    public function setNone(bool $none): Data
+    {
+        $this->none = $none;
+        return $this;
+    }
+
+    /**
+     * This data had an id.
+     * 
+     * @return bool
+     */
+    public function hasId()
+    {
+        return !empty($id);
+    }
+
+    /**
+     * This data has a name.
+     *
+     * @return bool
+     */
+    public function hasName()
+    {
+        return !empty($name);
+    }
+    
+}

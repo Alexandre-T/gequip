@@ -83,8 +83,10 @@ class FamilyCest
         $I->see('Admin1', '#settings-creator-information');
 
         //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
-        $I->see('Parent: Équipements dynamiques', '#settings-logs');
-        $I->see('Label: Codeception Test New Family', '#settings-logs');
+        $I->see('Parent', '#settings-logs dl');
+        $I->see('Équipements dynamiques', '#settings-logs dd');
+        $I->see('Name', '#settings-logs dl');
+        $I->see('Codeception Test New Family', '#settings-logs dd');
 
         $I->click(' Edit', '#settings-actions');
 
@@ -97,9 +99,9 @@ class FamilyCest
         $I->seeCurrentUrlEquals('/settings/family/show/codeception-test-edit-family');
         $I->see('Family "Codeception Test Edit Family" has been successfully updated!', '.alert');
         //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
-        $I->see('Parent: Équipements dynamiques', '#settings-logs');
-        $I->see('Label: Codeception Test New Family', '#settings-logs');
-        $I->see('Label: Codeception Test Edit Family', '#settings-logs');
+        $I->see('Équipements dynamiques', '#settings-logs dd');
+        $I->see('Codeception Test New Family', '#settings-logs dd');
+        $I->see('Codeception Test Edit Family', '#settings-logs dd');
 
         //@TODO Test the Delete button
         //$I->click(' Delete', 'form');

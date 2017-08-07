@@ -17,6 +17,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Bean\Factory\LogFactory;
 use AppBundle\Entity\Family;
 use AppBundle\Entity\Repository\FamilyRepository;
 use AppBundle\Exception\EntityNotFoundException;
@@ -142,6 +143,7 @@ class FamilyService
         $logRepository = $this->em->getRepository('\Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
         $logs = $logRepository->getLogEntries($family);
         $ids = [];
+        $families = [];
 
         foreach ($logs as $key => $log) {
             /* @var \Gedmo\Loggable\Entity\LogEntry $log */
@@ -155,23 +157,8 @@ class FamilyService
         if (count($ids)) {
             //On execute une SEULE requete pour récupérer tous les noms...
             $families = $this->repository->findBy(['id' => $ids]);
-
-            //On boucle à nouveau
-            foreach ($logs as $key => $log) {
-                /* @var \Gedmo\Loggable\Entity\LogEntry $log */
-                $data = $log->getData();
-
-                if (isset($data['parent']['id'])) {
-                    foreach ($families as $family) {
-                        if ($family->getId() == $data['parent']['id']) {
-                            $data['parent']['object'] = $family->getName();
-                            $log->setData($data);
-                        }
-                    }
-                }
-            }
         }
 
-        return $logs;
+        return LogFactory::createFamilyLogs($logs, $families);
     }
 }

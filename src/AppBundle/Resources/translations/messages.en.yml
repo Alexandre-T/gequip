@@ -37,11 +37,18 @@ settings.family.deleted _name_: 'Family "name" has been successfully deleted!'
 settings.families.link: 'Family listing'
 settings.families: 'Families'
 
+settings.label: 'Label'
+settings.label.name: 'Name'
+settings.label.parent: 'Parent'
+
 settings.log.version: 'Version'
 settings.log.action: 'Action'
+settings.log.action.create: 'Creation'
+settings.log.action.update: 'Update'
+settings.log.action.delete: 'Delete'
 settings.log.date: 'Date'
 settings.log.user: 'Username'
-settings.log.old-value: 'Old value'
+settings.log.new-value: 'New value'
 
 
 setting.family.name: 'Label'
@@ -65,7 +72,7 @@ setting.updated.at: 'Updated at:'
 setting.global-information: 'Global information'
 setting.log: 'Last updates'
 setting.none: 'None'
-
+setting.no-more %entity% %id%: "The %entity% with Id '%id%' no more exists."
 #settings - Family
 settings.family.create: 'Create a new family'
 
