@@ -199,7 +199,7 @@ class Data
      */
     public function hasId()
     {
-        return !empty($id);
+        return !empty($this->id);
     }
 
     /**
@@ -209,7 +209,7 @@ class Data
      */
     public function hasName()
     {
-        return !empty($name);
+        return !empty($this->name);
     }
     
 }

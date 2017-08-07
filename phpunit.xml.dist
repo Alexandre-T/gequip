@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="AppBundle Project Test Suite">
-            <directory>src/AppBundle/Tests</directory>
+            <directory>src/AppBundle/Tests/unit</directory>
         </testsuite>
     </testsuites>
 
@@ -23,8 +23,7 @@
             <directory>src</directory>
             <exclude>
                 <directory>src/*Bundle/Resources</directory>
-                <directory>src/*/*Bundle/Resources</directory>
-                <directory>src/*/Bundle/*Bundle/Resources</directory>
+                <directory>src/*Bundle/Tests</directory>
             </exclude>
         </whitelist>
     </filter>
