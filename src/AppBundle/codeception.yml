@@ -4,8 +4,8 @@ paths:
     output: Tests/_output
     support: Tests/_support
     #envs: Tests/_env
-    log: ../../app/logs
-    data: ../../app/data
+    log: ../../var/logs
+    data: ../../var/data
     support: Test/_supports
 settings:
     bootstrap: _bootstrap.php

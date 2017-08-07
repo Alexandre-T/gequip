@@ -50,14 +50,18 @@ before_script:
   - mkdir -p build/logs
 
 script:
+  # Phpunit and codecoveralls
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then travis_wait 40 php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml; fi
   - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then php vendor/phpunit/phpunit/phpunit; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
   # Server must be started for codeconcept tests.
   - php bin/console server:start
   - php vendor/bin/codecept run -c src/AppBundle/codeception.yml
   - php bin/console server:stop
   - cat src/AppBundle/Tests/_output/*
-  - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
+  - ls var/data/
+  - ls var/logs/
+
 
 notifications:
   email:
