@@ -1,10 +1,10 @@
-{% extends '@App/base.html.twig' %}
+{% extends '@App/settings/base.html.twig' %}
 
-{% block title %}{{ 'setting.family.edit.title %name%'|trans({'%name%': family.name})}}{% endblock title %}
+{% block title %}{{ 'setting.family.edit.title %name%'|trans({'%name%': family.name})}} · {{ parent() }}{% endblock title %}
 
 {% block headline %}{% endblock %}
 
-{% block content_content %}
+{% block content_settings %}
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h1 class="panel-title">{{ 'setting.family.edit.title %name%'|trans({'%name%': family.name})}}</h1>
@@ -20,9 +20,9 @@
             {{ form_end(edit_form) }}
         </div>
     </div>
-{% endblock content_content %}
+{% endblock content_settings %}
 
-{% block content_sidebar %}
+{% block content_action %}
     <h3>{{ 'settings.actions' | trans }}</h3>
     <div class="text-center">
         <div class="btn-group-vertical">
@@ -34,18 +34,4 @@
             </a>
         </div>
     </div>
-    <hr/>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'setting.information' | trans }}</h3>
-        </div>
-        <div class="panel-body">
-            <dl class="dl-horizontal">
-                <dt>{{ 'setting.created.by' | trans}}</dt>
-                <dd>{{ family.creator.username }}</dd>
-                <dt>{{ 'setting.created.at' | trans}}</dt>
-                <dd>{{ family.created | localizeddate('short', 'short') }}</dd>
-            </dl>
-        </div>
-    </div>
-{% endblock content_sidebar %}
+{% endblock content_action %}

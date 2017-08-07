@@ -55,6 +55,7 @@ class FamilyCest
     {
         $I->wantToTest('The complete scenario for functional family');
         $I->seeInTitle('Family tree');
+        $I->dontSee('', 'ol#content-breadcrumb');
 
         //Listing
         $I->seeLink(' Create a new family');
@@ -64,6 +65,7 @@ class FamilyCest
         $I->seeCurrentUrlEquals('/settings/family/new');
         $I->seeResponseCodeIs(200);
         $I->fillField('Name', 'Codeception Test New Family');
+        $I->dontSee('', 'ol#content-breadcrumb');
         $I->click('Edit', 'form');
 
         //Show
@@ -78,13 +80,13 @@ class FamilyCest
         $I->see('Parent', '.panel-primary');
         $I->see('Équipements dynamiques', '.panel-primary');
 
-        $I->see('Admin1', '#settings-family-creator-information');
+        $I->see('Admin1', '#settings-creator-information');
 
         //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
-        $I->see('Parent: Équipements dynamiques', '#settings-family-logs');
-        $I->see('Label: Codeception Test New Family', '#settings-family-logs');
+        $I->see('Parent: Équipements dynamiques', '#settings-logs');
+        $I->see('Label: Codeception Test New Family', '#settings-logs');
 
-        $I->click(' Edit', '#settings-family-actions');
+        $I->click(' Edit', '#settings-actions');
 
         $I->canSeeCurrentUrlMatches('/\/settings\/family\/(?P<digit>\d+)\/edit/');
 
@@ -95,9 +97,9 @@ class FamilyCest
         $I->seeCurrentUrlEquals('/settings/family/show/codeception-test-edit-family');
         $I->see('Family "Codeception Test Edit Family" has been successfully updated!', '.alert');
         //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
-        $I->see('Parent: Équipements dynamiques', '#settings-family-logs');
-        $I->see('Label: Codeception Test New Family', '#settings-family-logs');
-        $I->see('Label: Codeception Test Edit Family', '#settings-family-logs');
+        $I->see('Parent: Équipements dynamiques', '#settings-logs');
+        $I->see('Label: Codeception Test New Family', '#settings-logs');
+        $I->see('Label: Codeception Test Edit Family', '#settings-logs');
 
         //@TODO Test the Delete button
         //$I->click(' Delete', 'form');

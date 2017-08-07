@@ -1,15 +1,10 @@
-{% extends '@App/base.html.twig' %}
+{% extends '@App/settings/base.html.twig' %}
 
-{% block title %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock title %}
+{% block title %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}} · {{ parent() }}{% endblock title %}
 
 {% block headline %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock %}
 
-{% block content_content %}
-    <ol class="breadcrumb">
-        {%  for node in path %}
-        <li><a href="{{ path('settings_family_show', {'slug': node.slug}) }}" title="{{ node.name }}">{{ node.name }}</a></li>
-        {% endfor %}
-    </ol>
+{% block content_settings %}
 
     <div class="panel panel-primary" id="settings-family-global-information">
         <div class="panel-heading">
@@ -30,63 +25,15 @@
             </dl>
         </div>
     </div>
+{% endblock content_settings %}
 
-    {% if logs | length > 0 %}
-        <div class="panel panel-default" id="settings-family-logs">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ 'setting.log' | trans }}</h3>
-            </div>
-            <div class="panel-body">
-                <p></p>
-            </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th id="logs-version">{{ 'settings.log.version' | trans }}</th>
-                    <th id="logs-action">{{ 'settings.log.action' | trans }}</th>
-                    <th id="logs-date">{{ 'settings.log.date' | trans }}</th>
-                    <th id="logs-user">{{ 'settings.log.user' | trans }}</th>
-                    <th id="logs-value">{{ 'settings.log.old-value' | trans }}</th>
-                </tr>
-                </thead>
-                {% for log in logs %}
-                    <tr>
-                    <td rowspan="{{ log.data | length }}" headers="logs-version">{{ log.version }}</td>
-                    <td rowspan="{{ log.data | length }}" headers="logs-action">{{ log.action }}</td>
-                    <td rowspan="{{ log.data | length }}" headers="logs-date">{{ log.loggedAt | localizeddate('short','short')}}</td>
-                    <td rowspan="{{ log.data | length }}" headers="logs-user">{{ log.username }}</td>
-                    {% for key, row in log.data %}
-                        <td headers="logs-value">
-                            {# replace by a view helper #}
-                            {% if key == 'name' %}
-                                {{ 'setting.family.name'| trans }}: {{ row }}
-                            {% elseif key == 'parent' %}
-                                {{ 'setting.family.parent'| trans }}:
-                                {% if row is null %}
-                                    {{ 'setting.family.parent.none' | trans }}
-                                {% elseif row.object is defined %}
-                                    {{ row.object }}
-                                {% else %}
-                                    {{ 'setting.family.parent.no-more-existing %id%' | trans({'id': row.id}) }}
-                                {% endif %}
-                            {% endif %}
-                        </td>
-                        {% if not loop.last %}</tr><tr>{% endif %}
-                    {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    {% endif %}
-{% endblock content_content %}
-
-{% block content_sidebar %}
+{% block content_action %}
     <h3>{{ 'settings.actions' | trans }}</h3>
     {% if isDeletable %}
     {{ form_start(delete_form) }}
     {{ form_widget(delete_form) }}
     {% endif %}
-    <div class="text-center" id="settings-family-actions">
+    <div class="text-center" id="settings-actions">
         <div class="btn-group-vertical">
             <a class="btn-mini btn btn-default" href="{{ path('settings_family_index') }}">
                 <span class="fa fa-reply"></span>&nbsp;{{ 'settings.actions.back.tree' | trans }}
@@ -108,18 +55,4 @@
     {% if isDeletable %}
     {{ form_end(delete_form) }}
     {% endif %}
-    <hr/>
-    <div class="panel panel-default" id="settings-family-creator-information">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'setting.information' | trans }}</h3>
-        </div>
-        <div class="panel-body">
-            <dl class="dl-horizontal">
-                <dt>{{ 'setting.created.by' | trans}}</dt>
-                <dd>{{ family.creator.username }}</dd>
-                <dt>{{ 'setting.created.at' | trans}}</dt>
-                <dd>{{ family.created | localizeddate('short', 'short') }}</dd>
-            </dl>
-        </div>
-    </div>
-{% endblock %}
+{% endblock content_action %}

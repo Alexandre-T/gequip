@@ -17,6 +17,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Bean\Factory\InformationFactory;
 use AppBundle\Entity\Family;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -120,6 +121,7 @@ class FamilyController extends Controller
     {
         $familyService = $this->get('app.family-service');
         $family = $familyService->getBySlug($slug);
+        $informations = InformationFactory::createInformation($family);
         $path = $familyService->retrievePath($family);
         $logs = $familyService->retrieveLogs($family);
         $deleteForm = $this->createDeleteForm($family);
@@ -130,7 +132,9 @@ class FamilyController extends Controller
             'isDeletable' => true,
             'logs' => $logs,
             'family' => $family,
+            'informations' => $informations,
             'path' => $path,
+            'settings_entity_show' => 'settings_family_show',
             'delete_form' => $deleteForm->createView(),
         ]);
     }
@@ -147,6 +151,11 @@ class FamilyController extends Controller
      */
     public function editAction(Request $request, Family $family)
     {
+        $familyService = $this->get('app.family-service');
+        $path = $familyService->retrievePath($family);
+        $logs = $familyService->retrieveLogs($family);
+        $informations = InformationFactory::createInformation($family);
+
         $deleteForm = $this->createDeleteForm($family);
         $editForm = $this->createForm('AppBundle\Form\Type\FamilyType', $family);
         $editForm->handleRequest($request);
@@ -164,8 +173,12 @@ class FamilyController extends Controller
         }
 
         return $this->render('@App/settings/family/edit.html.twig', array(
+            'path' => $path,
+            'logs' => $logs,
+            'informations' => $informations,
             'family' => $family,
             'edit_form' => $editForm->createView(),
+            'settings_entity_show' => 'settings_family_show',
             'delete_form' => $deleteForm->createView(),
         ));
     }

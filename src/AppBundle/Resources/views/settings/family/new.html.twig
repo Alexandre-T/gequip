@@ -1,6 +1,6 @@
-{% extends '@App/base.html.twig' %}
+{% extends '@App/settings/base.html.twig' %}
 
-{% block title %}{{ 'setting.family.create.title'|trans }}{% endblock title %}
+{% block title %}{{ 'setting.family.create.title'|trans }} · {{ parent() }}{% endblock title %}
 
 {% block headline %}{% endblock %}
 
@@ -22,7 +22,7 @@
 </div>
 {% endblock content_content %}
 
-{% block content_sidebar %}
+{% block content_action %}
     <h3>{{ 'settings.actions' | trans }}</h3>
     <div class="text-center">
         <div class="btn-group-vertical">
@@ -32,4 +32,4 @@
         </div>
     </div>
     <hr/>
-{% endblock content_sidebar %}
+{% endblock content_action %}

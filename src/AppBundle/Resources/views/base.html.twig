@@ -1,8 +1,8 @@
 {% extends 'MopaBootstrapBundle::base.html.twig' %}
 
-{% block title %}G-Equip{% endblock %}
+{% block title %}{{ 'app.title' | trans }}{% endblock %}
 
-{% block headline %}G-Equip{% endblock headline %}
+{% block headline %}{{ 'app.title' | trans }}{% endblock headline %}
 
 {% block head_style %}
     {% stylesheets filter='cssrewrite'
