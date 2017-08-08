@@ -99,7 +99,7 @@ class Family
      * @var Datetime
      *
      * @ORM\Column(type="datetime", nullable=false, options={"comment":"Creation date"})
-     * @Gedmo\Timestampable(on="create", field="created")
+     * @Gedmo\Timestampable(on="create")
      */
     private $created;
 
@@ -109,6 +109,7 @@ class Family
      * @var Datetime
      *
      * @ORM\Column(type="datetime", nullable=true, options={"comment":"Last update datetime"})
+     * @Gedmo\Timestampable(on="update")
      */
     private $updated;
 

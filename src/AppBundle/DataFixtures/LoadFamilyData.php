@@ -52,31 +52,37 @@ class LoadFamilyData extends AbstractFixture implements FixtureInterface, Ordere
         //@TODO Translatable name
         $equipement->setName('Équipements dynamiques');
         $equipement->setCreator($dawny);
+        $equipement->setUpdater($dawny);
 
         $camera = new Family();
         $camera->setName('Caméras');
         $camera->setParent($equipement);
         $camera->setCreator($dawny);
+        $camera->setUpdater($dawny);
 
         $pmv = new Family();
         $pmv->setName('Panneaux à messages variables');
         $pmv->setParent($equipement);
         $pmv->setCreator($dawny);
+        $pmv->setUpdater($dawny);
 
         $portique = new Family();
         $portique->setName('PMV sur portique');
         $portique->setParent($pmv);
         $portique->setCreator($dawny);
+        $portique->setUpdater($dawny);
 
         $simple = new Family();
         $simple->setName('PMV à simple mat');
         $simple->setParent($pmv);
         $simple->setCreator($dawny);
+        $simple->setUpdater($dawny);
 
         $comptage = new Family();
         $comptage->setName('Stations de comptage');
         $comptage->setParent($equipement);
         $comptage->setCreator($dawny);
+        $comptage->setUpdater($dawny);
 
         $manager->persist($equipement);
         $manager->persist($camera);

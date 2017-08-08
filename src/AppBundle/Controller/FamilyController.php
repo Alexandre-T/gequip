@@ -88,10 +88,8 @@ class FamilyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $family->setCreator($this->getUser());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($family);
-            $em->flush();
+            $familyService = $this->get('app.family-service');
+            $familyService->create($family, $this->getUser());
 
             //Flash message
             $session = $this->get('session');

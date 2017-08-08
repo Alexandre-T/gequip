@@ -163,9 +163,31 @@ class FamilyService
         return LogFactory::createFamilyLogs($logs, $families);
     }
 
-    public function update(Family $family, User $username)
+    /**
+     * Persist a new Family.
+     *
+     * Set the creator and the updater before saving.
+     *
+     * @param Family $family
+     * @param User $user
+     */
+    public function create(Family $family, User $user)
     {
-        $family->setUpdater($username);
+        $family->setCreator($user);
+        $this->update($family, $user);
+    }
+
+    /**
+     * Persist an existing Family.
+     *
+     * Set the updater before saving.
+     *
+     * @param Family $family
+     * @param User $user
+     */
+    public function update(Family $family, User $user)
+    {
+        $family->setUpdater($user);
         $this->em->persist($family);
         $this->em->flush();
     }

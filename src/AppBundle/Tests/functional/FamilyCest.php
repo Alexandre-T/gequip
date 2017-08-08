@@ -93,6 +93,10 @@ class FamilyCest
         $I->see('Équipements dynamiques', '.panel-primary');
 
         $I->see('Admin1', '#settings-creator-information');
+        $I->see('Created by', '#settings-creator-information');
+        $I->see('Created at', '#settings-creator-information');
+        $I->see('Updated by', '#settings-creator-information');
+        $I->see('Updated at', '#settings-creator-information');
 
         //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
         $I->see('Parent', '#settings-logs dl');
@@ -114,6 +118,11 @@ class FamilyCest
         $I->see('Équipements dynamiques', '#settings-logs dd');
         $I->see('Codeception Test New Family', '#settings-logs dd');
         $I->see('Codeception Test Edit Family', '#settings-logs dd');
+
+        $I->see('Created by', '#settings-creator-information');
+        $I->see('Created at', '#settings-creator-information');
+        $I->see('Updated by', '#settings-creator-information');
+        $I->see('Updated at', '#settings-creator-information');
 
         //@TODO Test the Delete button
         //$I->click(' Delete', 'form');
