@@ -1,5 +1,7 @@
 {% extends '@App/settings/base.html.twig' %}
 
+{% set settings_entity_show = 'settings_family_show' %}
+
 {% block title %}{{ 'setting.family.edit.title %name%'|trans({'%name%': family.name})}} · {{ parent() }}{% endblock title %}
 
 {% block headline %}{% endblock %}

@@ -8,13 +8,13 @@ class FamilyControllerTest extends WebTestCase
 {
     public function testCompleteScenario()
     {
-        // Create a new client to browse the application
-        $client = static::createClient();
-
         // @TODO We must be ROLE_ADMIN
         // https://stackoverflow.com/questions/27927454/how-to-simulate-authentication-via-hwioauth-in-a-symfony2-functional-test
         // http://gitnacho.github.io/symfony-docs-es/cookbook/testing/simulating_authentication.html
         $this->markTestSkipped('We must find a solution to be ROLE_ADMIN');
+
+        // Create a new client to browse the application
+        $client = static::createClient();
 
         // Create a new entry in the database
         $crawler = $client->request('GET', '/settings/family/');

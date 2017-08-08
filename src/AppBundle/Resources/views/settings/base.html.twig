@@ -63,9 +63,7 @@
 {% endblock content_content %}
 
 {% block content_sidebar %}
-    {% block content_action %}
-        {# TODO factorize it! #}
-    {% endblock content_action %}
+    {% block content_action %}{% endblock content_action %}
     <hr>
     {% block content_information %}
         {% if informations is defined %}

@@ -134,7 +134,6 @@ class FamilyController extends Controller
             'family' => $family,
             'informations' => $informations,
             'path' => $path,
-            'settings_entity_show' => 'settings_family_show',
             'delete_form' => $deleteForm->createView(),
         ]);
     }
@@ -178,7 +177,6 @@ class FamilyController extends Controller
             'informations' => $informations,
             'family' => $family,
             'edit_form' => $editForm->createView(),
-            'settings_entity_show' => 'settings_family_show',
             'delete_form' => $deleteForm->createView(),
         ));
     }
