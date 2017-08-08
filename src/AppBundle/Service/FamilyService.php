@@ -20,6 +20,7 @@ namespace AppBundle\Service;
 use AppBundle\Bean\Factory\LogFactory;
 use AppBundle\Entity\Family;
 use AppBundle\Entity\Repository\FamilyRepository;
+use AppBundle\Entity\User;
 use AppBundle\Exception\EntityNotFoundException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -160,5 +161,12 @@ class FamilyService
         }
 
         return LogFactory::createFamilyLogs($logs, $families);
+    }
+
+    public function update(Family $family, User $username)
+    {
+        $family->setUpdater($username);
+        $this->em->persist($family);
+        $this->em->flush();
     }
 }

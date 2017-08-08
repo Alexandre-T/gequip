@@ -160,7 +160,7 @@ class FamilyController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $familyService->update($family, $this->getUser());
 
             //Flash message
             $session = $this->get('session');

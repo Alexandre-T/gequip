@@ -25,7 +25,7 @@ use \DateTime as DateTime;
  * Entity Class User.
  *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\UserRepository")
- * @ORM\Table(name="te_user", options={"comment":"Utilisateur métier"})
+ * @ORM\Table(name="te_user", options={"comment":"User entity"})
  *
  */
 class User extends BaseUser
@@ -46,12 +46,13 @@ class User extends BaseUser
      *
      * TODO Markdown could be used.
      *
-     * @ORM\Column(type="text", nullable=true, options={"comment":"Description Markdown de l'utilisateur"})
+     * @ORM\Column(type="text", nullable=true, options={"comment":"User presentation (markdown format)"})
+     * 
      */
     private $presentation;
 
     /**
-     * @ORM\Column(type="datetime", nullable=false, options={"comment":"Date de création automatique"})
+     * @ORM\Column(type="datetime", nullable=false, options={"comment":"Creation time of user"})
      * @Gedmo\Timestampable(on="create", field="created")
      */
     private $created;
@@ -77,20 +78,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set presentation
-     *
-     * @param string $presentation
-     *
-     * @return User
-     */
-    public function setPresentation(string $presentation)
-    {
-        $this->presentation = $presentation;
-    
-        return $this;
-    }
-
-    /**
      * Get presentation
      *
      * @return string
@@ -98,5 +85,19 @@ class User extends BaseUser
     public function getPresentation():string
     {
         return $this->presentation;
+    }
+
+    /**
+     * Set presentation
+     *
+     * @param string $presentation
+     *
+     * @return User
+     */
+    public function setPresentation(string $presentation):User
+    {
+        $this->presentation = $presentation;
+
+        return $this;
     }
 }

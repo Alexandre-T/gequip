@@ -18,6 +18,7 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\Family;
+use AppBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,13 +53,15 @@ class FamilyTest extends TestCase
     {
         self::assertNull($this->family->getId());
         self::assertNull($this->family->getChildren());
+        self::assertNull($this->family->getCreated());
         self::assertNull($this->family->getLeft());
         self::assertNull($this->family->getLevel());
         self::assertNull($this->family->getName());
         self::assertNull($this->family->getParent());
         self::assertNull($this->family->getRight());
         self::assertNull($this->family->getRoot());
-        self::assertNull($this->family->getCreated());
+        self::assertNull($this->family->getUpdated());
+        self::assertNull($this->family->getUpdater());
     }
 
     /**
@@ -82,5 +85,17 @@ class FamilyTest extends TestCase
 
         self::assertEquals($this->family, $this->family->setParent($parent));
         self::assertEquals($parent, $this->family->getParent());
+    }
+
+    /**
+     * Test getter and setter for Parent
+     */
+    public function testSetUpdater()
+    {
+        $user = new User();
+        $user->setUsername('user');
+
+        self::assertEquals($this->family, $this->family->setUpdater($user));
+        self::assertEquals($user, $this->family->getUpdater());
     }
 }

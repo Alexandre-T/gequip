@@ -19,13 +19,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use \Datetime as Datetime;
 
 /**
  * Family Class
  *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FamilyRepository")
- * @ORM\Table(name="te_family", options={"comment":"Famille d'équipements routiers"})
+ * @ORM\Table(name="te_family", options={"comment":"Families of road equipments"})
  * @Gedmo\Tree(type="nested")
  * @Gedmo\Loggable
  */
@@ -37,7 +38,7 @@ class Family
      * @var integer
      *
      * @ORM\Id
-     * @ORM\Column(type="integer", options={"comment":"Identifiant de la famille"})
+     * @ORM\Column(type="integer", options={"comment":"Family ID"})
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -47,7 +48,7 @@ class Family
      *
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false, name="left_tree", options={"comment":"Borne gauche de l'arbre"})
+     * @ORM\Column(type="integer", nullable=false, name="left_tree", options={"comment":"Left born of the tree"})
      * @Gedmo\TreeLeft
      */
     private $left;
@@ -57,7 +58,7 @@ class Family
      *
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false, name="right_tree", options={"comment":"Borne droite de l'arbre"})
+     * @ORM\Column(type="integer", nullable=false, name="right_tree", options={"comment":"Right born of the tree"})
      * @Gedmo\TreeRight
      */
     private $right;
@@ -67,7 +68,7 @@ class Family
      *
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false, name="level_tree", options={"comment":"Niveau de l'arbre"})
+     * @ORM\Column(type="integer", nullable=false, name="level_tree", options={"comment":"Level on the tree"})
      * @Gedmo\TreeLevel
      */
     private $level;
@@ -77,14 +78,17 @@ class Family
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Family path"})
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 2, max = 32)
+     *
+     * @ORM\Column(type="string", length=32, nullable=false, options={"comment":"Family name"})
      * @Gedmo\Versioned
      *
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=false, options={"comment":"Name sluggified"})
      * @Gedmo\Slug(updatable=true, unique=true, fields={"name"})
      */
     private $slug;
@@ -94,10 +98,19 @@ class Family
      *
      * @var Datetime
      *
-     * @ORM\Column(type="datetime", nullable=false, options={"comment":"Date de création automatique"})
+     * @ORM\Column(type="datetime", nullable=false, options={"comment":"Creation date"})
      * @Gedmo\Timestampable(on="create", field="created")
      */
     private $created;
+
+    /**
+     * Date time of last update of this object.
+     *
+     * @var Datetime
+     *
+     * @ORM\Column(type="datetime", nullable=true, options={"comment":"Last update datetime"})
+     */
+    private $updated;
 
     /**
      * Children of this family.
@@ -143,6 +156,16 @@ class Family
     private $creator;
 
     /**
+     * Last updater of this family.
+     *
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", fetch="EAGER")
+     * @ORM\JoinColumn(name="updater", referencedColumnName="id")
+     */
+    private $updater;
+
+    /**
      * Get ID.
      *
      * @return integer
@@ -171,7 +194,7 @@ class Family
     {
         return $this->created;
     }
-
+    
     /**
      * Get creator.
      *
@@ -255,6 +278,26 @@ class Family
     }
 
     /**
+     * Get last updater.
+     *
+     * @return User
+     */
+    public function getUpdater()
+    {
+        return $this->updater;
+    }
+
+    /**
+     * Get update date.
+     *
+     * @return DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
      * Set name of this family.
      *
      * @param mixed $name
@@ -293,4 +336,19 @@ class Family
     
         return $this;
     }
+
+    /**
+     * Set creator.
+     *
+     * @param User $updater
+     *
+     * @return Family
+     */
+    public function setUpdater(User $updater)
+    {
+        $this->updater = $updater;
+
+        return $this;
+    }
+
 }

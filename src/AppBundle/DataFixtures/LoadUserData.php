@@ -78,6 +78,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, F
 
         //We add this data if we are in test, dev environments
         if (in_array($this->container->get('kernel')->getEnvironment(), array('test', 'dev'))) {
+            /** @var User $user1 */
             $user1 = $userManager->createUser();
             $user1->setUsername('User1');
             $user1->setEmail('user1@example.org');
