@@ -47,31 +47,26 @@ class DataFactory
         $resultat = [];
         self::unverified($rowdata);
 
-        if (!empty($rowdata['name']))
-        {
+        if (!empty($rowdata['name'])) {
             $data = new Data();
             $data->setName($rowdata['name']);
             $data->setLabel('settings.label.name');
             $resultat[] = $data;
         }
-        if (!empty($rowdata['parent']))
-        {
+        if (!empty($rowdata['parent'])) {
             //ajoute le tet si id est vide, ça ira plus vite!!!!
             $data = new Data();
             $find = false;
-            foreach($families as $family)
-            {
+            foreach ($families as $family) {
                 /** @var Family $family */
-                if ($rowdata['parent']['id'] == $family->getId()){
+                if ($rowdata['parent']['id'] == $family->getId()) {
                     $data->setName($family->getName());
                     $find = true;
                     break;
                 }
-
             }
             //No more parent
-            if ($find)
-            {
+            if ($find) {
                 $data->setId($rowdata['parent']['id']);
                 $data->setNoMore(!$find);
                 $data->setLabel('settings.label.parent');
@@ -80,7 +75,6 @@ class DataFactory
         }
 
         return $resultat;
-
     }
 
     /**
@@ -89,16 +83,13 @@ class DataFactory
      */
     private static function unverified(array $rowdata)
     {
-        if (0 == count($rowdata))
-        {
+        if (0 == count($rowdata)) {
             throw new InvalidLogException('Log array must have a parent or a name key. There is no key in this one.');
         }
-        if (1 == count($rowdata) and (!key_exists('parent', $rowdata) and !key_exists('name', $rowdata)))
-        {
+        if (1 == count($rowdata) and (!key_exists('parent', $rowdata) and !key_exists('name', $rowdata))) {
             throw new InvalidLogException('Log array must have a parent or a name key. The key is not valid.');
         }
-        if (2 == count($rowdata) and (!key_exists('parent', $rowdata) or !key_exists('name', $rowdata)))
-        {
+        if (2 == count($rowdata) and (!key_exists('parent', $rowdata) or !key_exists('name', $rowdata))) {
             throw new InvalidLogException('Log array must have a parent or a name key. One of the two keys is not valid.');
         }
     }

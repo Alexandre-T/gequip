@@ -44,8 +44,7 @@ class LogFactory
     {
         $logs = [];
 
-        foreach ($logEntries as $logEntry)
-        {
+        foreach ($logEntries as $logEntry) {
             /** @var AbstractLogEntry $logEntry */
             $logBean = new Log();
             $logBean->setAction('settings.log.action.'.$logEntry->getAction());

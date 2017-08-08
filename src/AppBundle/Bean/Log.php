@@ -161,9 +161,9 @@ class Log
      */
     public function setUsername(string $username = null)
     {
-        if (is_null($username)){
+        if (is_null($username)) {
             $this->username = '';
-        }else{
+        } else {
             $this->username = $username;
         }
         return $this;
@@ -190,5 +190,4 @@ class Log
         $this->data = $data;
         return $this;
     }
-
 }

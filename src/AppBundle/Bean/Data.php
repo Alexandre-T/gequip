@@ -194,7 +194,7 @@ class Data
 
     /**
      * This data had an id.
-     * 
+     *
      * @return bool
      */
     public function hasId()
@@ -211,5 +211,4 @@ class Data
     {
         return !empty($this->name);
     }
-    
 }

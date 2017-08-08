@@ -70,10 +70,10 @@ class Information
      */
     public function setCreator(string $creator = null):Information
     {
-        if (is_null($creator)){
+        if (is_null($creator)) {
             $this->creator = '';
         } else {
-            $this->creator = $creator;    
+            $this->creator = $creator;
         }
         
         return $this;
@@ -114,13 +114,13 @@ class Information
 
     /**
      * Setter of the updater.
-     * 
+     *
      * @param string $updater
      * @return Information
      */
     public function setUpdater(string $updater = null):Information
     {
-        if (is_null($updater)){
+        if (is_null($updater)) {
             $this->updater = '';
         } else {
             $this->updater = $updater;
@@ -131,7 +131,7 @@ class Information
 
     /**
      * Getter of update time.
-     * 
+     *
      * @return DateTime | null
      */
     public function getUpdated()
@@ -141,7 +141,7 @@ class Information
 
     /**
      * Setter of update time.
-     * 
+     *
      * @param DateTime $updated
      * @return Information
      */
