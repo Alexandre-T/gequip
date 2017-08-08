@@ -35,7 +35,7 @@ class Information
     /**
      * @var string Creator of the entity
      */
-    private $creator;
+    private $creator = '';
     
     /**
      * @var DateTime Date and time creation of the entity
@@ -45,7 +45,7 @@ class Information
     /**
      * @var string Creator of the entity
      */
-    private $updater;
+    private $updater = '';
     
     /**
      * @var DateTime Date and time creation of the entity
@@ -66,10 +66,17 @@ class Information
      * Setter of the creator.
      *
      * @param string $creator
+     * @return Information
      */
-    public function setCreator(string $creator)
+    public function setCreator(string $creator = null):Information
     {
-        $this->creator = $creator;
+        if (is_null($creator)){
+            $this->creator = '';
+        } else {
+            $this->creator = $creator;    
+        }
+        
+        return $this;
     }
 
     /**
@@ -86,18 +93,21 @@ class Information
      * Setter of the creation date time.
      *
      * @param DateTime $created
+     * @return Information
      */
     public function setCreated(DateTime $created)
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
      * Getter of the updater.
      *
-     * @return string | null
+     * @return string
      */
-    public function getUpdater()
+    public function getUpdater():string
     {
         return $this->updater;
     }
@@ -106,10 +116,17 @@ class Information
      * Setter of the updater.
      * 
      * @param string $updater
+     * @return Information
      */
-    public function setUpdater(string $updater)
+    public function setUpdater(string $updater = null):Information
     {
-        $this->updater = $updater;
+        if (is_null($updater)){
+            $this->updater = '';
+        } else {
+            $this->updater = $updater;
+        }
+
+        return $this;
     }
 
     /**
@@ -126,10 +143,13 @@ class Information
      * Setter of update time.
      * 
      * @param DateTime $updated
+     * @return Information
      */
     public function setUpdated(DateTime $updated)
     {
         $this->updated = $updated;
+
+        return $this;
     }
 
     /**
@@ -137,9 +157,9 @@ class Information
      *
      * @return bool
      */
-    public function hasCreater(): bool
+    public function hasCreator(): bool
     {
-        return !empty($this->creater);
+        return !empty($this->creator);
     }
     
     /**
@@ -157,7 +177,7 @@ class Information
      *
      * @return bool
      */
-    public function hasCreated(): bool
+    public function isCreated(): bool
     {
         return !empty($this->created);
     }
@@ -167,7 +187,7 @@ class Information
      *
      * @return bool
      */
-    public function hasUpdated(): bool
+    public function isUpdated(): bool
     {
         return !empty($this->updated);
     }

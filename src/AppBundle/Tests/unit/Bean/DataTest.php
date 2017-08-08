@@ -80,7 +80,6 @@ class DataTest extends TestCase
         self::assertEquals($this->data, $this->data->setId($expected));
         self::assertEquals($expected, $this->data->getId());
         self::assertFalse($this->data->hasId());
-
     }
 
     /**
@@ -135,5 +134,4 @@ class DataTest extends TestCase
         self::assertEquals($this->data, $this->data->setNone($expected));
         self::assertEquals($expected, $this->data->isNone());
     }
-
 }

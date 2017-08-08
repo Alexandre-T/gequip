@@ -115,5 +115,4 @@ class LogTest extends TestCase
         self::assertEquals($expected, $this->log->getLogged());
         self::asserttrue($this->log->isLogged());
     }
-
 }
