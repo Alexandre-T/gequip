@@ -45,7 +45,7 @@ class DataFactory
     public static function createFamilyData(array $rowdata, array $families = []):array
     {
         $resultat = [];
-        self::unverified($rowdata);
+        self::unverifiedFamily($rowdata);
 
         if (!empty($rowdata['name'])) {
             $data = new Data();
@@ -54,22 +54,28 @@ class DataFactory
             $resultat[] = $data;
         }
         if (!empty($rowdata['parent'])) {
-            //ajoute le tet si id est vide, ça ira plus vite!!!!
             $data = new Data();
-            $find = false;
-            foreach ($families as $family) {
-                /** @var Family $family */
-                if ($rowdata['parent']['id'] == $family->getId()) {
-                    $data->setName($family->getName());
-                    $find = true;
-                    break;
-                }
-            }
-            //No more parent
-            if ($find) {
-                $data->setId($rowdata['parent']['id']);
-                $data->setNoMore(!$find);
+            if (is_null($rowdata['parent']['id'])) {
+                $data->setNone(true);
                 $data->setLabel('settings.label.parent');
+            } else {
+                $find = false;
+                foreach ($families as $family) {
+                    /** @var Family $family */
+                    if ($rowdata['parent']['id'] == $family->getId()) {
+                        $data->setName($family->getName());
+                        $data->setLabel('settings.label.parent');
+                        $find = true;
+                        break;
+                    }
+                }
+                //No more parent
+                if (!$find) {
+                    $data->setId($rowdata['parent']['id']);
+                    $data->setNoMore(!$find);
+                    $data->setLabel('settings.label.parent');
+                    $data->setEntity('Family');
+                }
             }
             $resultat[] = $data;
         }
@@ -78,19 +84,24 @@ class DataFactory
     }
 
     /**
+     * This function throw an Invalid Log Exception when parameter does not contain valid keys.
+     *
+     * Valid keys are only : 'parent' and/or 'name'
+     * Array must contain one or two of these keys
+     *
      * @param array $rowdata
      * @throws InvalidLogException
      */
-    private static function unverified(array $rowdata)
+    private static function unverifiedFamily(array $rowdata)
     {
         if (0 == count($rowdata)) {
             throw new InvalidLogException('Log array must have a parent or a name key. There is no key in this one.');
         }
-        if (1 == count($rowdata) and (!key_exists('parent', $rowdata) and !key_exists('name', $rowdata))) {
+        if (1 == count($rowdata) && (!key_exists('parent', $rowdata) && !key_exists('name', $rowdata))) {
             throw new InvalidLogException('Log array must have a parent or a name key. The key is not valid.');
         }
-        if (2 == count($rowdata) and (!key_exists('parent', $rowdata) or !key_exists('name', $rowdata))) {
-            throw new InvalidLogException('Log array must have a parent or a name key. One of the two keys is not valid.');
+        if (2 == count($rowdata) && (!key_exists('parent', $rowdata) || !key_exists('name', $rowdata))) {
+            throw new InvalidLogException('Log array must have a parent or a name key. At least, one of the two keys is not valid.');
         }
     }
 }
