@@ -14,8 +14,13 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
+    #Service for entities
     app.family-service:
         class: AppBundle\Service\FamilyService
+        public: true
+        arguments: ['@doctrine.orm.entity_manager']
+    app.status-service:
+        class: AppBundle\Service\StatusService
         public: true
         arguments: ['@doctrine.orm.entity_manager']
 

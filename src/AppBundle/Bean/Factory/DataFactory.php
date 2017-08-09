@@ -34,6 +34,17 @@ use AppBundle\Exception\InvalidLogException;
  */
 class DataFactory
 {
+
+    /**
+     * Valid columns of family entity.
+     */
+    const VALID_FAMILY = ['name', 'parent'];
+
+    /**
+     * Valid columns of status.
+     */
+    const VALID_STATUS = ['name', 'presentation', 'initial', 'discarded', 'managed'];
+
     /**
      * Create Data from a serialized data?
      *
@@ -84,6 +95,34 @@ class DataFactory
     }
 
     /**
+     * Create Data from a serialized data.
+     *
+     * @param array $rowdata
+     * @return array of Data
+     * @throws InvalidLogException
+     */
+    public static function createStatusData(array $rowdata):array
+    {
+        self::unverifiedStatus($rowdata);
+
+        //Initialization
+        $resultat = [];
+        $data = new Data();
+
+        foreach (self::VALID_STATUS as $column) {
+            $data->setLabel("settings.label.status.$column");
+            if (empty($rowdata[$column])) {
+                $data->setNone(true);
+            } else {
+                $data->setName($rowdata[$column]);
+            }
+            $resultat[] = $data;
+        }
+
+        return $resultat;
+    }
+
+    /**
      * This function throw an Invalid Log Exception when parameter does not contain valid keys.
      *
      * Valid keys are only : 'parent' and/or 'name'
@@ -94,14 +133,50 @@ class DataFactory
      */
     private static function unverifiedFamily(array $rowdata)
     {
-        if (0 == count($rowdata)) {
-            throw new InvalidLogException('Log array must have a parent or a name key. There is no key in this one.');
+        if (!static::unverifiedLog($rowdata, self::VALID_FAMILY)) {
+            $validKeyString = implode(', ', self::VALID_FAMILY);
+            //@TODO Translate this message
+            throw new InvalidLogException("Family log array must have at least one of theses keys: $validKeyString. All other keys are forbidden.");
         }
-        if (1 == count($rowdata) && (!key_exists('parent', $rowdata) && !key_exists('name', $rowdata))) {
-            throw new InvalidLogException('Log array must have a parent or a name key. The key is not valid.');
+    }
+
+    /**
+     * This function throw an Invalid Log Exception when parameter does not contain valid keys.
+     *
+     * Valid keys are only : 'presentation', 'name', '', '', '', ''
+     * Array must contain one or two of these keys
+     *
+     * @param array $rowdata
+     * @throws InvalidLogException
+     */
+    private static function unverifiedStatus(array $rowdata)
+    {
+        if (!static::unverifiedLog($rowdata, self::VALID_STATUS)) {
+            $validKeyString = implode(', ', self::VALID_STATUS);
+            //@TODO Translate this message
+            throw new InvalidLogException("Status log array must have at least one of these keys: $validKeyString. All other keys are forbidden.");
         }
-        if (2 == count($rowdata) && (!key_exists('parent', $rowdata) || !key_exists('name', $rowdata))) {
-            throw new InvalidLogException('Log array must have a parent or a name key. At least, one of the two keys is not valid.');
+    }
+
+    /**
+     * Verify that all keys in $rowdata are valid keys.
+     *
+     * @param array $rowdata array to verify
+     * @param array $validKeys array of authorized keys
+     * @return bool
+     */
+    private static function unverifiedLog(array $rowdata, array $validKeys)
+    {
+        if (0 === count($rowdata)) {
+            return false;
         }
+
+        foreach ($rowdata as $key => $data) {
+            if (!in_array($key, $validKeys)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

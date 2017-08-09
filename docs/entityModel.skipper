@@ -75,7 +75,7 @@
         </attribute>
       </orm-attributes>
     </association>
-    <association from="\AppBundle\Entity\Equipement" to="\AppBundle\Entity\User" caption="Utilisateur Equipement" inverse-alias="createur" many-owner="true" many-inverse="false" parent-required="true" uuid="430a4d5b-a61a-4508-b2e6-61fac5b77d7c">
+    <association from="\AppBundle\Entity\Equipement" to="\AppBundle\Entity\User" caption="Creator" inverse-alias="createur" many-owner="true" many-inverse="false" parent-required="true" uuid="430a4d5b-a61a-4508-b2e6-61fac5b77d7c">
       <association-field from="createur" to="id"/>
       <orm-attributes>
         <attribute name="side-owning">
@@ -202,6 +202,7 @@
             </attribute>
           </attribute>
         </attribute>
+        <attribute name="repository-class">AppBundle\Entity\Repository\StatusRepository</attribute>
       </orm-attributes>
     </entity>
     <association from="\AppBundle\Entity\Status" to="\AppBundle\Entity\User" caption="Creator" inverse-alias="creator" many-owner="true" many-inverse="false" parent-required="true" uuid="3f2adbf8-0b97-43d5-a1ae-268184be060d">
@@ -318,7 +319,11 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="parent" type="integer" uuid="64b24ae4-1c74-4ca2-97c1-55fef23674f2"/>
+      <field name="parent" type="integer" uuid="64b24ae4-1c74-4ca2-97c1-55fef23674f2">
+        <orm-attributes>
+          <attribute name="column">parent_tree</attribute>
+        </orm-attributes>
+      </field>
       <field name="root" description="Racine du noeud" type="integer" uuid="4d658e11-2829-4fd8-bad5-02128e653899">
         <orm-attributes>
           <attribute name="options">
@@ -487,16 +492,16 @@
   </module>
   <visual-data>
     <association uuid="1f4dc07a-a9ef-4420-aeca-2cb66ddb40af" caption1-position-x="-37" caption1-position-y="2" center-position-x="9" center-position-y="1" color="#969696"/>
-    <association uuid="31ddf312-f3f6-4f9e-93fb-271a357efc36" caption1-position-x="5" caption1-position-y="45" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="31ddf312-f3f6-4f9e-93fb-271a357efc36" caption1-position-x="-10" caption1-position-y="48" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="3c377ffe-ae91-4e17-a7c9-32220f04d114" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="3f2adbf8-0b97-43d5-a1ae-268184be060d" caption1-position-x="0" caption1-position-y="59" center-position-x="0" center-position-y="0" color="#969696"/>
-    <association uuid="430a4d5b-a61a-4508-b2e6-61fac5b77d7c" caption1-position-x="8" caption1-position-y="15" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="430a4d5b-a61a-4508-b2e6-61fac5b77d7c" caption1-position-x="-15" caption1-position-y="3" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="4613dc61-234b-49fa-b1c3-6ce4d89956d5" caption1-position-x="9" caption1-position-y="16" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="49e279b7-5b71-45fc-a3e6-a9e288b2671f" caption1-position-x="-2" caption1-position-y="-13" center-position-x="0" center-position-y="-20" color="#2E63AF"/>
     <association uuid="5533204f-2ba7-4234-bb1d-443ab50cf326" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="587192ae-90ec-44c5-b472-3b9d812f4105" caption1-position-x="-15" caption1-position-y="20" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="5a7f046f-c21c-4efe-941c-1523abf5b954" caption1-position-x="-1" caption1-position-y="-16" center-position-x="0" center-position-y="0" color="#969696"/>
-    <association uuid="609f0318-bda5-4915-b630-905e63ef41d1" caption1-position-x="-2" caption1-position-y="-28" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="609f0318-bda5-4915-b630-905e63ef41d1" caption1-position-x="3" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="6586506e-ff2f-429a-92fb-f7ab8a60b872" caption1-position-x="7" caption1-position-y="-20" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="6b94712d-ccdb-45ec-908e-7db0bce88f84" caption1-position-x="0" caption1-position-y="-13" center-position-x="0" center-position-y="-20" color="#969696"/>
     <association uuid="8270392b-f6a9-444a-a4a8-06a077e3ce9b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
@@ -519,7 +524,7 @@
     <entity uuid="f92a0f3c-dc4f-4a31-aa8f-301ab223dd9d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="433" position-y="319" size-x="0" size-x2="104" size-y="0" size-y2="115"/>
     <inheritance-child uuid="430a3617-e2b6-4bc7-bc92-9151f618115f" caption1-position-x="-8" caption1-position-y="43" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="a481ef09-dbb0-4ad1-8edf-7c1cdab756d5" caption1-position-x="-112" caption1-position-y="-2" center-position-x="0" center-position-y="0" color="#969696"/>
-    <module uuid="ec37a18f-1b0f-4598-b1f6-775b913c8fc1" bg-color="#EAE4F1" position-x="61" position-y="72" size-x="41" size-x2="1487" size-y="66" size-y2="436"/>
+    <module uuid="ec37a18f-1b0f-4598-b1f6-775b913c8fc1" bg-color="#EAE4F1" position-x="61" position-y="72" size-x="41" size-x2="1487" size-y="66" size-y2="480"/>
     <project uuid="2ebc54c6-b876-4966-a15c-21008dbf39ff" size-x="0" size-x2="2034" size-y="0" size-y2="1144"/>
   </visual-data>
 </skipper>

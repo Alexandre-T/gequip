@@ -18,7 +18,7 @@
 namespace AppBundle\Bean\Factory;
 
 use AppBundle\Bean\Information;
-use AppBundle\Entity\Family;
+use AppBundle\Entity\InformationInterface;
 
 /**
  * Information bean to give some information about the last update and the creation.
@@ -36,21 +36,21 @@ class InformationFactory
     /**
      * Create Information from a Family Entity.
      *
-     * @param Family $family
+     * @param InformationInterface $entity
      * @return Information
      */
-    public static function createInformation(Family $family):Information
+    public static function createInformation(InformationInterface $entity):Information
     {
         $information = new Information();
 
-        $information->setCreator($family->getCreator()->getUsername());
-        $information->setCreated($family->getCreated());
+        $information->setCreator($entity->getCreator()->getUsername());
+        $information->setCreated($entity->getCreated());
 
-        if ($family->getUpdater()) {
-            $information->setUpdater($family->getUpdater()->getUsername());
+        if ($entity->getUpdater()) {
+            $information->setUpdater($entity->getUpdater()->getUsername());
         }
-        if ($family->getUpdated()) {
-            $information->setUpdated($family->getUpdated());
+        if ($entity->getUpdated()) {
+            $information->setUpdated($entity->getUpdated());
         }
 
         return $information;

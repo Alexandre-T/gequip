@@ -36,7 +36,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="te_status")
  * @Gedmo\Loggable
  */
-class Status
+class Status implements InformationInterface
 {
     /**
      * Status ID.

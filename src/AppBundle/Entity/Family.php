@@ -37,7 +37,7 @@ use \Datetime as Datetime;
  * @Gedmo\Tree(type="nested")
  * @Gedmo\Loggable
  */
-class Family
+class Family implements InformationInterface
 {
     /**
      * ID.

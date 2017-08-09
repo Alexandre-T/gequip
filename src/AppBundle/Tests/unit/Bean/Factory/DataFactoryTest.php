@@ -48,6 +48,22 @@ class DataFactoryTest extends TestCase
     }
 
     /**
+     * Testing Create Status Data.
+     */
+    public function testCreateStatusDataWithOneKey()
+    {
+        self::markTestSkipped("Test to create!");
+    }
+
+    /**
+     * Testing Create Status Data.
+     */
+    public function testCreateStatusDataWithMoreThanOneKey()
+    {
+        self::markTestSkipped("Test to create!");
+    }
+
+    /**
      * Testing Create Family Data.
      */
     public function testCreateFamilyDataWithOneKey()
@@ -152,7 +168,7 @@ class DataFactoryTest extends TestCase
      */
     public function testUnverifiedFamilyWithEmptyArray()
     {
-        self::expectExceptionMessage('Log array must have a parent or a name key. There is no key in this one.');
+        self::expectExceptionMessage('Family log array must have at least one of theses keys: name, parent. All other keys are forbidden.');
         $reflectionClass = new \ReflectionClass(DataFactory::class);
         $method = $reflectionClass->getMethod('unverifiedFamily');
         $method->setAccessible(true);
@@ -164,7 +180,7 @@ class DataFactoryTest extends TestCase
      */
     public function testUnverifiedFamilyWithOneWrongKey()
     {
-        self::expectExceptionMessage('Log array must have a parent or a name key. The key is not valid.');
+        self::expectExceptionMessage('Family log array must have at least one of theses keys: name, parent. All other keys are forbidden.');
         $reflectionClass = new \ReflectionClass(DataFactory::class);
         $method = $reflectionClass->getMethod('unverifiedFamily');
         $method->setAccessible(true);
@@ -176,7 +192,7 @@ class DataFactoryTest extends TestCase
      */
     public function testUnverifiedFamilyWithOneWrongOfTwoKeys()
     {
-        self::expectExceptionMessage('Log array must have a parent or a name key. At least, one of the two keys is not valid.');
+        self::expectExceptionMessage('Family log array must have at least one of theses keys: name, parent. All other keys are forbidden.');
         $reflectionClass = new \ReflectionClass(DataFactory::class);
         $method = $reflectionClass->getMethod('unverifiedFamily');
         $method->setAccessible(true);
@@ -188,7 +204,7 @@ class DataFactoryTest extends TestCase
      */
     public function testUnverifiedFamilyWithOneWrongOfTwoKeys2()
     {
-        self::expectExceptionMessage('Log array must have a parent or a name key. At least, one of the two keys is not valid.');
+        self::expectExceptionMessage('Family log array must have at least one of theses keys: name, parent. All other keys are forbidden.');
         $reflectionClass = new \ReflectionClass(DataFactory::class);
         $method = $reflectionClass->getMethod('unverifiedFamily');
         $method->setAccessible(true);
@@ -200,7 +216,7 @@ class DataFactoryTest extends TestCase
      */
     public function testUnverifiedFamilyWithTwoWrongKeys()
     {
-        self::expectExceptionMessage('Log array must have a parent or a name key. At least, one of the two keys is not valid.');
+        self::expectExceptionMessage('Family log array must have at least one of theses keys: name, parent. All other keys are forbidden.');
         $reflectionClass = new \ReflectionClass(DataFactory::class);
         $method = $reflectionClass->getMethod('unverifiedFamily');
         $method->setAccessible(true);

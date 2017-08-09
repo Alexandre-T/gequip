@@ -20,9 +20,7 @@ namespace AppBundle\Service;
 use AppBundle\Bean\Factory\LogFactory;
 use AppBundle\Entity\Family;
 use AppBundle\Entity\Repository\FamilyRepository;
-use AppBundle\Entity\User;
 use AppBundle\Exception\EntityNotFoundException;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -37,24 +35,17 @@ use Doctrine\ORM\EntityManagerInterface;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class FamilyService
+class FamilyService extends AbstractService
 {
-    /**
-     * Entity Manager.
-     *
-     * @var EntityManager
-     */
-    protected $em;
-
     /**
      * Family repository inherited from Gedmo Tree Repository.
      *
-     * @var FamilyRepository
+     * @var FamilyRepository $repository
      */
     protected $repository;
 
     /**
-     * FamilyService constructor.
+     * Family Service constructor.
      *
      * Constructor initialize entity manager and repository.
      *
@@ -161,34 +152,5 @@ class FamilyService
         }
 
         return LogFactory::createFamilyLogs($logs, $families);
-    }
-
-    /**
-     * Persist a new Family.
-     *
-     * Set the creator and the updater before saving.
-     *
-     * @param Family $family
-     * @param User $user
-     */
-    public function create(Family $family, User $user)
-    {
-        $family->setCreator($user);
-        $this->update($family, $user);
-    }
-
-    /**
-     * Persist an existing Family.
-     *
-     * Set the updater before saving.
-     *
-     * @param Family $family
-     * @param User $user
-     */
-    public function update(Family $family, User $user)
-    {
-        $family->setUpdater($user);
-        $this->em->persist($family);
-        $this->em->flush();
     }
 }
