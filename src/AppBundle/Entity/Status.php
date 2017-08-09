@@ -32,7 +32,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\StatusRepository")
  * @ORM\Table(name="te_status")
  * @Gedmo\Loggable
  */
