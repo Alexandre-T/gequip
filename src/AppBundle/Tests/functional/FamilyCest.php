@@ -68,13 +68,13 @@ class FamilyCest
         $I->wantToTest('An empty name must be detected');
         $I->click('Edit', 'form');
         $I->seeCurrentUrlEquals('/settings/family/new');
-        $I->see('This value should not be blank.','.help-block');
-        $I->fillField('Name','A');
+        $I->see('This value should not be blank.', '.help-block');
+        $I->fillField('Name', 'A');
         $I->click('Edit', 'form');
-        $I->see('This value is too short. It should have 2 characters or more.','.help-block');
-        $I->fillField('Name','AbcdefghijklmnopqrstuvwxyzABCDEFG');
+        $I->see('This value is too short. It should have 2 characters or more.', '.help-block');
+        $I->fillField('Name', 'AbcdefghijklmnopqrstuvwxyzABCDEFG');
         $I->click('Edit', 'form');
-        $I->see('This value is too long. It should have 32 characters or less.','.help-block');
+        $I->see('This value is too long. It should have 32 characters or less.', '.help-block');
 
         $I->fillField('Name', 'Codeception Test New Family');
         $I->dontSee('', 'ol#content-breadcrumb');

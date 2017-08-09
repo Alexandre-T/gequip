@@ -46,10 +46,10 @@ class InformationFactory
         $information->setCreator($family->getCreator()->getUsername());
         $information->setCreated($family->getCreated());
 
-        if ($family->getUpdater()){
+        if ($family->getUpdater()) {
             $information->setUpdater($family->getUpdater()->getUsername());
         }
-        if ($family->getUpdated()){
+        if ($family->getUpdated()) {
             $information->setUpdated($family->getUpdated());
         }
 
