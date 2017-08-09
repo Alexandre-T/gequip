@@ -24,6 +24,13 @@ use \DateTime as DateTime;
 /**
  * Entity Class User.
  *
+ * @category Entity
+ *
+ * @author   Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @license  GNU General Public License, version 3
+ *
+ * @link     http://opensource.org/licenses/GPL-3.0
+ *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\UserRepository")
  * @ORM\Table(name="te_user", options={"comment":"User entity"})
  *
@@ -47,7 +54,7 @@ class User extends BaseUser
      * TODO Markdown could be used.
      *
      * @ORM\Column(type="text", nullable=true, options={"comment":"User presentation (markdown format)"})
-     * 
+     *
      */
     private $presentation;
 

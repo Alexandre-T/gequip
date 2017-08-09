@@ -10,7 +10,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * LoggableListener
+ * LoggableListener.
+ *
+ * This listener is used to complete username when logging updates.
  *
  * @author Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @author Christophe Coevoet <stof@notk.org>

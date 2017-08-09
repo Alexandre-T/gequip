@@ -25,6 +25,13 @@ use \Datetime as Datetime;
 /**
  * Family Class
  *
+ * @category Entity
+ *
+ * @author   Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @license  GNU General Public License, version 3
+ *
+ * @link     http://opensource.org/licenses/GPL-3.0
+ *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FamilyRepository")
  * @ORM\Table(name="te_family", options={"comment":"Families of road equipments"})
  * @Gedmo\Tree(type="nested")
@@ -339,7 +346,7 @@ class Family
     }
 
     /**
-     * Set creator.
+     * Set updater.
      *
      * @param User $updater
      *
@@ -351,5 +358,4 @@ class Family
 
         return $this;
     }
-
 }

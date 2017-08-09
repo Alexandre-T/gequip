@@ -34,6 +34,8 @@ use PHPUnit\Framework\TestCase;
 class FamilyTest extends TestCase
 {
     /**
+     * Instance to test.
+     *
      * @var Family
      */
     private $family;
