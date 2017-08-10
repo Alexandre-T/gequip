@@ -17,6 +17,7 @@
 
 namespace AppBundle\Entity\Repository;
 
+use AppBundle\Entity\Status;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -31,4 +32,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class StatusRepository extends EntityRepository
 {
+    /**
+     * Finds all status in the repository order by name.
+     *
+     * @return Status[] The status.
+     */
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
 }
