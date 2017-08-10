@@ -1,5 +1,7 @@
 {% extends '@App/settings/base.html.twig' %}
 
+{% set direction = pagination.getDirection() %}
+
 {% block title %}{{ 'settings.status.list.title'|trans }} · {{ parent() }}{% endblock title %}
 
 {% block headline %}{{ 'settings.status.list.title'|trans }}{% endblock %}
@@ -8,15 +10,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th id="status-name">Name</th>
-                <th class="text-center" id="status-initial">Initial</th>
-                <th class="text-center" id="status-discarded">Discarded</th>
-                <th class="text-center" id="status-managed">Managed</th>
+                <th class="text-center" id="status-name">
+                    <span class="fa fa-sort-alpha-{{ direction }}"></span>
+                    {{ knp_pagination_sortable(pagination, 'settings.status.field.name' | trans, 'status.name')}}
+                </th>
+                <th class="text-center" id="status-initial">{{ 'settings.status.field.initial' | trans }}</th>
+                <th class="text-center" id="status-discarded">{{ 'settings.status.field.discarded' | trans }}</th>
+                <th class="text-center" id="status-managed">{{ 'settings.status.field.managed' | trans }}</th>
                 <th id="status-actions">Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for status in statuses %}
+        {% for status in pagination %}
             <tr>
                 <td>{{ status.name }}</td>
                 <td class="text-center">
@@ -56,7 +61,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <div class="navigation text-right">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock content_content %}
 
 {% block content_action %}

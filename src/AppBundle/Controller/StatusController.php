@@ -42,20 +42,34 @@ use Symfony\Component\HttpFoundation\Response;
 class StatusController extends Controller
 {
     /**
+     * Limit of status per page for listing.
+     */
+    const LIMIT_PER_PAGE = 25;
+    /**
      * Lists all status entities.
      *
      * @Route("/", name="settings_status_index")
      * @Method("GET")
+     *
+     * @param Request $request
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        //Retrieving all status
+        //Retrieving all services
         $statusService = $this->get('app.status-service');
-        $statuses = $statusService->retrieve();
+        $paginator  = $this->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+            $statusService->getQueryBuilder(), /* queryBuilder NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            self::LIMIT_PER_PAGE,
+            ['defaultSortFieldName' => 'status.name', 'defaultSortDirection' => 'asc']
+        );
 
         //Return the view
         return $this->render('@App/settings/status/index.html.twig', [
-            'statuses' => $statuses,
+            'pagination' => $pagination,
         ]);
     }
 

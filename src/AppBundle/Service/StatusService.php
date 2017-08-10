@@ -58,6 +58,16 @@ class StatusService extends AbstractService
     }
 
     /**
+     * Return the Query builder.
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilder()
+    {
+        return $this->repository->createQueryBuilder('status');
+    }
+
+    /**
      * Retrieve a status by its ID.
      *
      * If status with specified ID does not exist, a EntityNotFoundException is thrown.
