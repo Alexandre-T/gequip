@@ -84,7 +84,7 @@ class Status implements InformationInterface
     /**
      * Boolean answering this question: Is this status the only one initial status?
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":false,"comment":"Is it the initial status"})
+     * @ORM\Column(type="boolean", nullable=false, options={"default":false,"comment":"Is it the initial status"})
      * @Gedmo\Versioned
      */
     private $initial = false;
@@ -94,7 +94,7 @@ class Status implements InformationInterface
      *
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default":false,"comment":"Is it a discarded status"})
+     * @ORM\Column(type="boolean", nullable=false, options={"default":false,"comment":"Is it a discarded status"})
      * @Gedmo\Versioned
      */
     private $discarded = false;
@@ -106,7 +106,7 @@ class Status implements InformationInterface
      *
      * @ORM\Column(
      *     type="boolean",
-     *     nullable=true,
+     *     nullable=false,
      *     options={"default":false,"comment":"is it subject to calendar management"}
      * )
      * @Gedmo\Versioned
