@@ -19,9 +19,11 @@ profile.password.how-to-edit: 'To change your password, enter your current passw
 settings.index.title: 'Settings'
 settings.panel.title: 'Select settings to update'
 settings.actions: 'Actions'
+settings.actions.create: 'Create'
 settings.actions.edit: 'Edit'
 settings.actions.delete: 'Delete'
 settings.actions.back: 'Back to the list'
+settings.actions.back.list: 'Back to the list'
 settings.actions.back.tree: 'Back to the tree'
 settings.actions.back.show: 'Back to the details'
 
@@ -37,6 +39,16 @@ settings.family.deleted _name_: 'Family "name" has been successfully deleted!'
 settings.families.link: 'Family listing'
 settings.families: 'Families'
 
+settings.status.created _name_:  'Status "name" has been successfully created!'
+settings.status.updated _name_: 'Status "name" has been successfully updated!'
+settings.status.deleted _name_: 'Status "name" has been successfully deleted!'
+settings.status.link: 'Status listing'
+settings.status: 'Status'
+settings.status.create: 'Create a new status'
+settings.status.create.title: 'New status creation'
+settings.status.list.title: 'Listing of status'
+
+
 settings.label: 'Label'
 settings.label.name: 'Name'
 settings.label.parent: 'Parent'
@@ -50,6 +62,11 @@ settings.log.date: 'Date'
 settings.log.user: 'Username'
 settings.log.new-value: 'New value'
 
+settings.edit: 'Edit'
+settings.show: 'Show'
+
+
+#Family
 
 setting.family.name: 'Label'
 setting.family.parent: 'Parent'
@@ -60,7 +77,7 @@ setting.family.field.name: 'Name'
 setting.family.field.parent: 'Parent'
 
 
-setting.family.list.title: 'Family tree'
+settings.family.list.title: 'Family tree'
 setting.family.create.title: 'Family creation'
 setting.family.show.title %name%: 'Family information: %name%'
 setting.family.edit.title %name%: 'Editing family: %name%'
@@ -81,6 +98,7 @@ menu.main.home: 'Home'
 menu.main.settings: 'Settings'
 menu.main.usefull-settings: 'Usefull Settings'
 menu.main.families: 'Families'
+menu.main.status: 'Status'
 menu.main.all-settings: 'All settings'
 menu.user.your-profile: 'Your profile'
 menu.user.show-profile: 'Show your profile'
@@ -89,3 +107,7 @@ menu.user.change-password: 'Change your password'
 menu.user.sign-in: 'Sign In'
 menu.user.sign-up: 'Sign Up'
 menu.user.logout: 'Logout'
+
+#Some words
+yes: 'Yes'
+no: 'No'

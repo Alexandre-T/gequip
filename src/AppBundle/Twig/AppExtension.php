@@ -28,6 +28,7 @@ namespace AppBundle\Twig;
  */
 class AppExtension extends \Twig_Extension
 {
+
     /**
      * New filters declaration.
      *
@@ -37,10 +38,12 @@ class AppExtension extends \Twig_Extension
     {
         $parent = parent::getFilters();
         return array_merge($parent, [
-            new \Twig_SimpleFilter('htmlMessage', [
-                $this, 'htmlMessage',
-            ]), ]);
+            new \Twig_SimpleFilter('htmlMessage',
+                [$this, 'htmlMessage'],
+                ['is_safe' => ['html']]
+            )]);
     }
+
     /**
      * To render introduction message, provide an html message.
      * Only non-dangerous tag will be preserved.
