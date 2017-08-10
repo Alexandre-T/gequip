@@ -149,9 +149,6 @@ class FamilyController extends Controller
     public function editAction(Request $request, Family $family)
     {
         $familyService = $this->get('app.family-service');
-        $path = $familyService->retrievePath($family);
-        $logs = $familyService->retrieveLogs($family);
-        $informations = InformationFactory::createInformation($family);
 
         $deleteForm = $this->createDeleteForm($family);
         $editForm = $this->createForm('AppBundle\Form\Type\FamilyType', $family);
@@ -168,6 +165,10 @@ class FamilyController extends Controller
 
             return $this->redirectToRoute('settings_family_show', array('slug' => $family->getSlug()));
         }
+
+        $path = $familyService->retrievePath($family);
+        $logs = $familyService->retrieveLogs($family);
+        $informations = InformationFactory::createInformation($family);
 
         return $this->render('@App/settings/family/edit.html.twig', array(
             'path' => $path,

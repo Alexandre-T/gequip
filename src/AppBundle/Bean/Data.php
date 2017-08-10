@@ -61,6 +61,11 @@ class Data
     private $none = false;
 
     /**
+     * @var bool This data has to be translated
+     */
+    private $translate = false;
+
+    /**
      * Getter of Id.
      *
      * @return int
@@ -167,6 +172,30 @@ class Data
     public function setNoMore(bool $noMore): Data
     {
         $this->noMore = $noMore;
+        return $this;
+    }
+
+    /**
+     * Getter of translate.
+     *
+     * If true, Name has to be translated
+     *
+     * @return bool
+     */
+    public function getTranslate(): bool
+    {
+        return $this->translate;
+    }
+
+    /**
+     * Setter of translator.
+     *
+     * @param bool $translate
+     * @return Data
+     */
+    public function setTranslate(bool $translate): Data
+    {
+        $this->translate = $translate;
         return $this;
     }
 

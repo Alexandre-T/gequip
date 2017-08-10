@@ -4,7 +4,7 @@
 
 {% block content_content %}
     {% block content_breadcrumb %}
-        {% if path is not null %}
+        {% if path is defined and path is not null %}
             <ol class="breadcrumb" id="content-breadcrumb">
                 {%  for node in path %}
                     <li><a href="{{ path( settings_entity_show, {'slug': node.slug}) }}" title="{{ node.name }}">{{ node.name }}</a></li>
@@ -47,6 +47,8 @@
                                             <dd>{{ 'setting.none' | trans }}</dd>
                                         {% elseif row.noMore %}
                                             <dd>{{ 'setting.no-more %entity% %id%' | trans({'id': row.id, 'entity':row.entity}) }}</dd>
+                                        {% elseif row.translate %}
+                                            <dd>{{ row.name | trans }}</dd>
                                         {% else %}
                                             <dd>{{ row.name }}</dd>
                                         {% endif %}

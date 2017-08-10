@@ -19,6 +19,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Status entity.
@@ -75,6 +77,9 @@ class Status implements InformationInterface
      * Status name.
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 16)
      *
      * @ORM\Column(type="string", unique=true, length=16, nullable=false, options={"comment":"Status name"})
      * @Gedmo\Versioned

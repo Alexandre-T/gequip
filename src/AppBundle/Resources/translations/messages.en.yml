@@ -39,15 +39,24 @@ settings.family.deleted _name_: 'Family "name" has been successfully deleted!'
 settings.families.link: 'Family listing'
 settings.families: 'Families'
 
+#Status
+settings.status.field.name: 'Name'
+settings.status.field.initial: 'Initial status'
+settings.status.field.discarded: 'Discarded'
+settings.status.field.managed: 'Calendar managed'
+settings.status.field.presentation: 'Description'
+
 settings.status.created _name_:  'Status "name" has been successfully created!'
 settings.status.updated _name_: 'Status "name" has been successfully updated!'
 settings.status.deleted _name_: 'Status "name" has been successfully deleted!'
+
 settings.status.link: 'Status listing'
 settings.status: 'Status'
 settings.status.create: 'Create a new status'
 settings.status.create.title: 'New status creation'
 settings.status.list.title: 'Listing of status'
-
+settings.status.show.title %name%: 'Status information: %name%'
+settings.status.edit.title %name%: 'Editing status: %name%'
 
 settings.label: 'Label'
 settings.label.name: 'Name'
@@ -75,7 +84,6 @@ setting.family.parent.no-more-existing %id%: 'Parent with Id id does no more exi
 setting.family.root: 'Root'
 setting.family.field.name: 'Name'
 setting.family.field.parent: 'Parent'
-
 
 settings.family.list.title: 'Family tree'
 setting.family.create.title: 'Family creation'
@@ -111,3 +119,4 @@ menu.user.logout: 'Logout'
 #Some words
 yes: 'Yes'
 no: 'No'
+unknown: 'Unknown'

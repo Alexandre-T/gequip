@@ -71,6 +71,11 @@ class Main implements ContainerAwareInterface
                 'route' => 'settings_family_index'
             ));
 
+            $dropdownSettings->addChild('menu.main.status', array(
+                'icon' => 'cube',
+                'route' => 'settings_status_index'
+            ));
+
             //Adding a nice divider
             $dropdownSettings->addChild('divider_1', array('divider' => true))
                 ->setExtra('translation_domain', false);

@@ -45,6 +45,8 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+        calls:
+            - [ setTranslator, ['@translator.default']]
 
     #localizeddate, localizednumber, localizedcurrency
     twig.extension.intl:

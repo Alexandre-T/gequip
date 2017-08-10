@@ -149,21 +149,21 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="initial" description="Is it the initial status" type="boolean" default="false" uuid="5bd4cfab-0413-4dcd-a5f4-4a463fb356e1">
+      <field name="initial" description="Is it the initial status" type="boolean" default="false" required="true" uuid="5bd4cfab-0413-4dcd-a5f4-4a463fb356e1">
         <orm-attributes>
           <attribute name="options">
             <attribute name="comment">Is it the initial status</attribute>
           </attribute>
         </orm-attributes>
       </field>
-      <field name="discarded" description="Is it a discarded status" type="boolean" default="false" uuid="b58b75f2-d9cf-463d-b13b-a4a5968a8d28">
+      <field name="discarded" description="Is it a discarded status" type="boolean" default="false" required="true" uuid="b58b75f2-d9cf-463d-b13b-a4a5968a8d28">
         <orm-attributes>
           <attribute name="options">
             <attribute name="comment">Is it a discarded status</attribute>
           </attribute>
         </orm-attributes>
       </field>
-      <field name="managed" description="is it subject to calendar management" type="boolean" default="false" uuid="27543116-f23f-44f5-b2df-4f06450d5c1c">
+      <field name="managed" description="is it subject to calendar management" type="boolean" default="false" required="true" uuid="27543116-f23f-44f5-b2df-4f06450d5c1c">
         <orm-attributes>
           <attribute name="options">
             <attribute name="comment">is it subject to calendar management</attribute>
