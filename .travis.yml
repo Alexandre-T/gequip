@@ -46,9 +46,6 @@ before_script:
   - php bin/console doctrine:fixtures:load --fixtures ./src/AppBundle/DataFixtures -n --env=test
   # updates zxt_log_entries to set username to Dawny
   - php bin/console doctrine:query:sql "UPDATE ext_log_entries SET username='Dawny' where username is null"
-  #deploy assetic in tests because of codeception tests
-  - php bin/console assets:install
-  - php bin/console assetic:dump
   # Directory used by codecoverage
   - mkdir -p build/logs
 
