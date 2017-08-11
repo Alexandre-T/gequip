@@ -80,6 +80,19 @@ class Main implements ContainerAwareInterface
             $dropdownSettings->addChild('divider_1', array('divider' => true))
                 ->setExtra('translation_domain', false);
 
+            $dropdownSettings->addChild('menu.main.usefull-resources', array(
+                'dropdown-header' => true
+            ));
+
+            $dropdownSettings->addChild('menu.main.services', array(
+                'icon' => 'building-o',
+                'route' => 'settings_service_index'
+            ));
+
+            //Adding a nice divider
+            $dropdownSettings->addChild('divider_1', array('divider' => true))
+                ->setExtra('translation_domain', false);
+
             $dropdownSettings->addChild('menu.main.all-settings', array(
                 'icon' => 'cog',
                 'route' => 'settings'

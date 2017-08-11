@@ -26,7 +26,7 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class StatusService.
  *
- * This service return some data from the status.
+ * This service manage some general entity.
  *
  * @category Service
  *

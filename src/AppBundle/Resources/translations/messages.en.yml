@@ -15,9 +15,14 @@ profile.password.title: 'Change your password'
 profile.password.information: 'Information'
 profile.password.how-to-edit: 'To change your password, enter your current password in the first field, then enter your new password and confirm it in the third field.'
 
-#Settings
+# --------------------------------------------------------------------------
+# Settings
+# --------------------------------------------------------------------------
 settings.index.title: 'Settings'
-settings.panel.title: 'Select settings to update'
+settings.panel.technic: 'Select the entity to update'
+settings.panel.human: 'Select the resource to update'
+
+# Actions
 settings.actions: 'Actions'
 settings.actions.create: 'Create'
 settings.actions.edit: 'Edit'
@@ -27,18 +32,52 @@ settings.actions.back.list: 'Back to the list'
 settings.actions.back.tree: 'Back to the tree'
 settings.actions.back.show: 'Back to the details'
 
+# Delete messages
 settings.delete.confirm.title: 'Confirmation'
 settings.delete.confirm.core: 'Please confirm that you want to delete these data'
 settings.delete.confirm.cancel: 'No, don''t delete it'
 settings.delete.confirm.delete: 'Yes, delete it'
 settings.delete.confirm.close: 'Close'
 
+# Family
+settings.family.create: 'Create a new family'
 settings.family.created _name_: 'Family "name" has been successfully created!'
 settings.family.updated _name_: 'Family "name" has been successfully updated!'
 settings.family.deleted _name_: 'Family "name" has been successfully deleted!'
 settings.families.link: 'Family listing'
 settings.families.help: 'Your equipments and their models are classified by family. The families are sorted like a tree. Here, you can customize them.'
 settings.families: 'Families'
+setting.family.name: 'Label'
+setting.family.parent: 'Parent'
+setting.family.parent.none: 'None'
+setting.family.parent.no-more-existing %id%: 'Parent with Id id does no more exist.'
+setting.family.root: 'Root'
+setting.family.field.name: 'Name'
+setting.family.field.parent: 'Parent'
+settings.family.list.title: 'Family tree'
+setting.family.create.title: 'Family creation'
+setting.family.show.title %name%: 'Family information: %name%'
+setting.family.edit.title %name%: 'Editing family: %name%'
+
+# Service
+settings.service.create: 'Create a new service'
+settings.service.created _name_: 'Service "name" has been successfully created!'
+settings.service.updated _name_: 'Service "name" has been successfully updated!'
+settings.service.deleted _name_: 'Service "name" has been successfully deleted!'
+settings.services.link: 'Service listing'
+settings.services.help: 'Each equipment is attributed to a service. The services are sorted like a tree to give you the opportunity to attribute an equipment to a sub-service. Here, you can customize your service and their sub-service.'
+settings.services: 'Your services'
+settings.service.name: 'Label'
+settings.service.parent: 'Parent'
+settings.service.parent.none: 'None'
+settings.service.parent.no-more-existing %id%: 'Parent with Id id does no more exist.'
+settings.service.root: 'Root'
+settings.service.field.name: 'Name'
+settings.service.field.parent: 'Parent'
+settings.service.list.title: 'Service tree'
+settings.service.create.title: 'Service creation'
+settings.service.show.title %name%: 'Service information: %name%'
+settings.service.edit.title %name%: 'Editing service: %name%'
 
 #Status
 settings.status.field.name: 'Name'
@@ -59,10 +98,12 @@ settings.status.list.title: 'Listing of status'
 settings.status.show.title %name%: 'Status information: %name%'
 settings.status.edit.title %name%: 'Editing status: %name%'
 
+# General labels
 settings.label: 'Label'
 settings.label.name: 'Name'
 settings.label.parent: 'Parent'
 
+# Logs
 settings.log.version: 'Version'
 settings.log.action: 'Action'
 settings.log.action.create: 'Creation'
@@ -72,24 +113,11 @@ settings.log.date: 'Date'
 settings.log.user: 'Username'
 settings.log.new-value: 'New value'
 
+# General word for settings
 settings.edit: 'Edit'
 settings.show: 'Show'
 
-
-#Family
-
-setting.family.name: 'Label'
-setting.family.parent: 'Parent'
-setting.family.parent.none: 'None'
-setting.family.parent.no-more-existing %id%: 'Parent with Id id does no more exist.'
-setting.family.root: 'Root'
-setting.family.field.name: 'Name'
-setting.family.field.parent: 'Parent'
-
-settings.family.list.title: 'Family tree'
-setting.family.create.title: 'Family creation'
-setting.family.show.title %name%: 'Family information: %name%'
-setting.family.edit.title %name%: 'Editing family: %name%'
+# Information @todo replace setting by settings
 setting.information: 'Information'
 setting.created.by: 'Created by:'
 setting.created.at: 'Created at:'
@@ -99,15 +127,15 @@ setting.global-information: 'Global information'
 setting.log: 'Last updates'
 setting.none: 'None'
 setting.no-more %entity% %id%: "The %entity% with Id '%id%' no more exists."
-#settings - Family
-settings.family.create: 'Create a new family'
 
 #Menu translation
 menu.main.home: 'Home'
 menu.main.settings: 'Settings'
-menu.main.usefull-settings: 'Usefull Settings'
+menu.main.usefull-settings: 'Usefull settings'
 menu.main.families: 'Families'
 menu.main.status: 'Status'
+menu.main.usefull-resources: 'Usefull resources'
+menu.main.services: 'Your services'
 menu.main.all-settings: 'All settings'
 menu.user.your-profile: 'Your profile'
 menu.user.show-profile: 'Show your profile'

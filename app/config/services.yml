@@ -19,6 +19,10 @@ services:
         class: AppBundle\Service\FamilyService
         public: true
         arguments: ['@doctrine.orm.entity_manager']
+    app.service-service:
+        class: AppBundle\Service\ServiceService
+        public: true
+        arguments: ['@doctrine.orm.entity_manager']
     app.status-service:
         class: AppBundle\Service\StatusService
         public: true

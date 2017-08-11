@@ -6,7 +6,7 @@
 
 {% block content_row %}
 <div class="panel panel-default">
-    <div class="panel-heading"><h2 class="panel-title">{{ 'settings.panel.title' | trans }}</div>
+    <div class="panel-heading"><h2 class="panel-title">{{ 'settings.panel.technic' | trans }}</div>
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-4 text-center">
@@ -29,6 +29,24 @@
                 </div>
                 <a class="lead" href="{{ path('settings_status_index') }}" title="{{ 'settings.status.link'| trans }}">
                     {{ 'settings.status'| trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h2 class="panel-title">{{ 'settings.panel.human' | trans }}</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <div>
+                    <span class="fa-stack fa-5x">
+                        <i class="fa fa-square-o fa-stack-2x"></i>
+                        <i class="fa fa-building-o fa-stack-1x"></i>
+                    </span>
+                </div>
+                <a class="lead" href="{{ path('settings_service_index') }}" title="{{ 'settings.services.link'| trans }}">
+                    {{ 'settings.services'| trans }}
                 </a>
             </div>
         </div>

@@ -27,7 +27,7 @@ namespace AppBundle;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class FamilyCest
+class ServiceCest
 {
     /**
      * Before each test!
@@ -42,8 +42,8 @@ class FamilyCest
         $I->fillField('Password', 'password');
         $I->click('Log in');
         //$I->am('ROLE_ADMIN');
-        $I->seeLink('Families');
-        $I->click('Families');
+        $I->seeLink('Your services');
+        $I->click('Your services');
     }
 
     /**
@@ -53,45 +53,45 @@ class FamilyCest
      */
     public function completeScenarioTest(FunctionalTester $I)
     {
-        $I->wantToTest('The complete scenario for functional family');
-        $I->seeInTitle('Family tree');
+        $I->wantToTest('The complete scenario for functional service');
+        $I->seeInTitle('Service tree');
         $I->dontSee('', 'ol#content-breadcrumb');
 
         //Listing
-        $I->seeLink(' Create a new family');
-        $I->click(' Create a new family');
+        $I->seeLink(' Create a new service');
+        $I->click(' Create a new service');
 
         //Creation form
-        $I->seeCurrentUrlEquals('/settings/family/new');
+        $I->seeCurrentUrlEquals('/settings/service/new');
         $I->seeResponseCodeIs(200);
 
         $I->wantToTest('An empty name must be detected');
         $I->click('Create', 'form');
-        $I->seeCurrentUrlEquals('/settings/family/new');
+        $I->seeCurrentUrlEquals('/settings/service/new');
         $I->see('This value should not be blank.', '.help-block');
-        $I->fillField('Name', 'A');
-        $I->click('Create', 'form');
-        $I->see('This value is too short. It should have 2 characters or more.', '.help-block');
+//        $I->fillField('Name', 'A');
+//        $I->click('Create', 'form');
+//        $I->see('This value is too short. It should have 2 characters or more.', '.help-block');
         $I->fillField('Name', 'AbcdefghijklmnopqrstuvwxyzABCDEFG');
         $I->click('Create', 'form');
         $I->see('This value is too long. It should have 32 characters or less.', '.help-block');
 
-        $I->fillField('Name', 'Codeception Test New Family');
-        $I->selectOption('Parent ', 'Équipements dynamiques');
+        $I->fillField('Name', 'New Service');
+        $I->selectOption('Parent ', 'DIR Est');
         $I->dontSee('', 'ol#content-breadcrumb');
         $I->click('Create', 'form');
 
         //Show
-        $I->seeCurrentUrlEquals('/settings/family/show/codeception-test-new-family');
-        $I->see('Family "Codeception Test New Family" has been successfully created!', '.alert');
+        $I->seeCurrentUrlEquals('/settings/service/show/new-service');
+        $I->see('Service "New Service" has been successfully created!', '.alert');
 
-        $I->seeLink('Équipements dynamiques');
-        $I->seeLink('Codeception Test New Family');
+        $I->seeLink('DIR Est');
+        $I->seeLink('New Service');
 
-        $I->see('Codeception Test New Family', 'dd.lead');
+        $I->see('New Service', 'dd.lead');
         $I->see('Root', '.panel-primary');
         $I->see('Parent', '.panel-primary');
-        $I->see('Équipements dynamiques', '.panel-primary');
+        $I->see('DIR Est', '.panel-primary');
 
         $I->see('Admin1', '#settings-creator-information');
         $I->see('Created by', '#settings-creator-information');
@@ -99,26 +99,26 @@ class FamilyCest
         $I->see('Updated by', '#settings-creator-information');
         $I->see('Updated at', '#settings-creator-information');
 
-        //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
+        //$I->see('Admin1','#settings-service-logs'); <=== I didn't work on functional tests!!!! CRAZY
         $I->see('Parent', '#settings-logs dl');
-        $I->see('Équipements dynamiques', '#settings-logs dd');
+        $I->see('DIR Est', '#settings-logs dd');
         $I->see('Name', '#settings-logs dl');
-        $I->see('Codeception Test New Family', '#settings-logs dd');
+        $I->see('New Service', '#settings-logs dd');
 
         $I->click(' Edit', '#settings-actions');
 
-        $I->canSeeCurrentUrlMatches('/\/settings\/family\/(?P<digit>\d+)\/edit/');
+        $I->canSeeCurrentUrlMatches('/\/settings\/service\/(?P<digit>\d+)\/edit/');
 
-        $I->fillField('Name', 'Codeception Test Edit Family');
+        $I->fillField('Name', 'Edited service');
         //$I->selectOption('Parent', 'Caméras'); //@TODO Fix this to test it!
         $I->click('Edit', 'form');
 
-        $I->seeCurrentUrlEquals('/settings/family/show/codeception-test-edit-family');
-        $I->see('Family "Codeception Test Edit Family" has been successfully updated!', '.alert');
-        //$I->see('Admin1','#settings-family-logs'); <=== I didn't work on functional tests!!!! CRAZY
-        $I->see('Équipements dynamiques', '#settings-logs dd');
-        $I->see('Codeception Test New Family', '#settings-logs dd');
-        $I->see('Codeception Test Edit Family', '#settings-logs dd');
+        $I->seeCurrentUrlEquals('/settings/service/show/edited-service');
+        $I->see('Service "Edited service" has been successfully updated!', '.alert');
+        //$I->see('Admin1','#settings-service-logs'); <=== I didn't work on functional tests!!!! CRAZY
+        $I->see('DIR Est', '#settings-logs dd');
+        $I->see('New Service', '#settings-logs dd');
+        $I->see('Edited service', '#settings-logs dd');
 
         $I->see('Created by', '#settings-creator-information');
         $I->see('Created at', '#settings-creator-information');
@@ -127,6 +127,6 @@ class FamilyCest
 
         //@TODO Test the Delete button
         //$I->click(' Delete', 'form');
-        //$I->seeCurrentUrlEquals('/settings/family');
+        //$I->seeCurrentUrlEquals('/settings/service');
     }
 }

@@ -1,0 +1,39 @@
+{% extends '@App/settings/base.html.twig' %}
+
+{% set settings_entity_show = 'settings_service_show' %}
+
+{% block title %}{{ 'settings.service.edit.title %name%'|trans({'%name%': service.name})}} · {{ parent() }}{% endblock title %}
+
+{% block headline %}{% endblock %}
+
+{% block content_settings %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">{{ 'settings.service.edit.title %name%'|trans({'%name%': service.name})}}</h1>
+        </div>
+        <div class="panel-body">
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary" type="submit" value="{{ 'settings.actions.edit' | trans }}" />
+                </div>
+            </div>
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+{% endblock content_settings %}
+
+{% block content_action %}
+    <h3>{{ 'settings.actions' | trans }}</h3>
+    <div class="text-center">
+        <div class="btn-group-vertical">
+            <a class="btn-mini btn btn-default btn-mini" href="{{ path('settings_service_index') }}">
+                <span class="fa fa-list"></span>&nbsp;{{ 'settings.actions.back.tree' | trans }}
+            </a>
+            <a class="btn-mini btn btn-default btn-mini" href="{{ path('settings_service_show',{'slug': service.slug}) }}">
+                <span class="fa fa-eye"></span>&nbsp;{{ 'settings.actions.back.show' | trans }}
+            </a>
+        </div>
+    </div>
+{% endblock content_action %}

@@ -62,6 +62,31 @@ class LogFactory
      * Create Log bean from a Abstract Log Entry (Gedmo).
      *
      * @param array $logEntries of AbstractLogEntry $logEntry
+     * @param array $services Array of Family Entity
+     * @return array
+     */
+    public static function createServicesLogs(array $logEntries, array $services = null):array
+    {
+        $logs = [];
+
+        foreach ($logEntries as $logEntry) {
+            /** @var AbstractLogEntry $logEntry */
+            $logBean = new Log();
+            $logBean->setAction('settings.log.action.'.$logEntry->getAction());
+            $logBean->setLogged($logEntry->getLoggedAt());
+            $logBean->setUsername($logEntry->getUsername());
+            $logBean->setVersion($logEntry->getVersion());
+            $logBean->setData(DataFactory::createServiceData($logEntry->getData(), $services));
+            $logs[] = $logBean;
+        }
+
+        return $logs;
+    }
+
+    /**
+     * Create Log bean from a Abstract Log Entry (Gedmo).
+     *
+     * @param array $logEntries of AbstractLogEntry $logEntry
      * @return array
      */
     public static function createStatusLogs(array $logEntries):array

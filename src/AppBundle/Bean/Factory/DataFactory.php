@@ -95,6 +95,19 @@ class DataFactory
     }
 
     /**
+     * Create Data from a serialized data service.
+     *
+     * @param array $rowdata
+     * @param array $services
+     * @return array of Data
+     * @throws InvalidLogException
+     */
+    public static function createServiceData(array $rowdata, array $services = []):array
+    {
+        return self::createFamilyData($rowdata, $services);
+    }
+
+    /**
      * Create Data from a serialized data.
      *
      * @param array $rowdata

@@ -1,0 +1,33 @@
+{% extends '@App/settings/base.html.twig' %}
+
+{% block title %}{{ 'settings.service.list.title'|trans }} · {{ parent() }}{% endblock title %}
+
+{% block headline %}{{ 'settings.service.list.title'|trans }}{% endblock %}
+
+{% block content_content %}
+    <div id="contenu_html">{{ service_tree | htmlMessage }}</div>
+{% endblock content_content %}
+{% block content_sidebar %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ 'settings.actions' | trans }}</h2>
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-default btn-mini" href="{{ path('settings_service_new') }}">
+                <span class="fa fa-file-o"></span>&nbsp;{{ 'settings.service.create' | trans }}
+            </a>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                <span class="fa fa-question-circle-o"></span>
+                {{ 'help' | trans }}
+            </h2>
+        </div>
+        <div class="panel-body">
+            <div class="alert-block">{{ 'settings.services.help' | trans }}</div>
+        </div>
+    </div>
+{% endblock content_sidebar %}
