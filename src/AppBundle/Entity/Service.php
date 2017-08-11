@@ -32,7 +32,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  *
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\FamilyRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ServiceRepository")
  * @ORM\Table(name="te_service", options={"comment":"Service of the enterprise"})
  * @Gedmo\Tree(type="nested")
  * @Gedmo\Loggable

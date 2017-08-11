@@ -20,7 +20,7 @@ namespace AppBundle\Entity\Repository;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 /**
- * Class FamilyRepository.
+ * Class ServiceRepository.
  *
  * @category Repository
  *
@@ -29,6 +29,6 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  */
-class FamilyRepository extends NestedTreeRepository
+class ServiceRepository extends NestedTreeRepository
 {
 }
