@@ -65,7 +65,8 @@ class FamilyType extends AbstractType
                         ->orderBy('f.left', 'ASC');
                 },
                 'label' => 'setting.family.field.parent',
-                'choice_label' => function ($family) {
+                'required' => false,
+                'choice_label' => function (Family $family) {
                     /** @var Family $family */
                     return (str_repeat(' ', $family->getLevel() * self::SPACES) . $family->getName());
                 },
