@@ -193,7 +193,7 @@ class StatusController extends Controller
             $em->remove($status);
             $em->flush();
 
-            //Flash message
+            //Flash message.
             $session = $this->get('session');
             $trans = $this->get('translator.default');
             $message = $trans->trans('settings.status.deleted _name_', ['name' => $status->getName()]);

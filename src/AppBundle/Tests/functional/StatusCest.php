@@ -82,9 +82,6 @@ class StatusCest
         $I->canSeeCurrentUrlMatches('/\/settings\/status\/(?P<digit>\d+)/');
         $I->see('Status "New Status" has been successfully created!', '.alert');
 
-//        $I->seeLink('Équipements dynamiques');
-//        $I->seeLink('New Status');
-
         $I->see('New Status', 'dd.lead');
         $I->see('No', '.panel-primary dd');
 
@@ -120,7 +117,7 @@ class StatusCest
         $I->see('Updated by', '#settings-creator-information');
         $I->see('Updated at', '#settings-creator-information');
 
-        $I->click (' Back to the list');
+        $I->click(' Back to the list');
         $I->seeCurrentUrlEquals('/settings/status/');
         $I->see('Edited Status', 'table.table td');
 

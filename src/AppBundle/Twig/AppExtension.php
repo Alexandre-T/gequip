@@ -15,6 +15,7 @@
  * @link      http://opensource.org/licenses/GPL-3.0
  */
 namespace AppBundle\Twig;
+
 use Symfony\Component\Translation\Translator;
 
 /**
@@ -48,11 +49,13 @@ class AppExtension extends \Twig_Extension
     {
         $parent = parent::getFilters();
         return array_merge($parent, [
-            new \Twig_SimpleFilter('htmlMessage',
+            new \Twig_SimpleFilter(
+                'htmlMessage',
                 [$this, 'htmlMessage'],
                 ['is_safe' => ['html']]
             ),
-            new \Twig_SimpleFilter('label',
+            new \Twig_SimpleFilter(
+                'label',
                 [$this, 'label'],
                 ['is_safe' => ['html']]
             ),
@@ -82,22 +85,21 @@ class AppExtension extends \Twig_Extension
      */
     public function label($message)
     {
-        if (true === $message){
+        if (true === $message) {
             $label = 'label-success';
             $content = $this->translator->trans('yes');
-        }elseif(false === $message){
+        } elseif (false === $message) {
             $label = 'label-danger';
             $content = $this->translator->trans('no');
-        }elseif(empty($message)){
+        } elseif (empty($message)) {
             $label = 'label-default';
             $content = '<em>'.$this->translator->trans('unknown').'</em>';
-        }else{
+        } else {
             $label = 'label-default';
             $content = $this->htmlMessage($message);
         }
 
         return "<span class=\"label $label\">$content</span>";
-
     }
     /**
      * Return name of extension.

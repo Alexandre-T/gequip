@@ -48,11 +48,11 @@ class StatusType extends AbstractType
     {
         $builder
             //@TODO add an help-block for each checkbox
-            ->add('name',null, ['label' => 'settings.status.field.name'])
-            ->add('initial',null, ['label' => 'settings.status.field.initial'])
-            ->add('discarded',null, ['label' => 'settings.status.field.discarded'])
-            ->add('managed',null, ['label' => 'settings.status.field.managed'])
-            ->add('presentation',null, ['label' => 'settings.status.field.presentation']);
+            ->add('name', null, ['label' => 'settings.status.field.name'])
+            ->add('initial', null, ['label' => 'settings.status.field.initial'])
+            ->add('discarded', null, ['label' => 'settings.status.field.discarded'])
+            ->add('managed', null, ['label' => 'settings.status.field.managed'])
+            ->add('presentation', null, ['label' => 'settings.status.field.presentation']);
     }
 
     /**
@@ -79,6 +79,4 @@ class StatusType extends AbstractType
     {
         return 'appbundle_status';
     }
-
-
 }

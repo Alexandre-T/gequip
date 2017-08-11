@@ -111,10 +111,10 @@ class DataFactory
         foreach ($rowdata as $column => $value) {
             $data = new Data();
             $data->setLabel("settings.status.field.$column");
-            if (in_array($column, ['initial', 'managed', 'discarded'])){
+            if (in_array($column, ['initial', 'managed', 'discarded'])) {
                 $data->setName($value?'yes':'no');
                 $data->setTranslate(true);
-            }elseif (empty($value)) {
+            } elseif (empty($value)) {
                 $data->setNone(true);
             } else {
                 $data->setName($value);
