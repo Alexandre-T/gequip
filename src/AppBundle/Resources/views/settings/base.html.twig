@@ -19,7 +19,7 @@
         {% if logs is defined and logs | length > 0 %}
             <div class="panel panel-default" id="settings-logs">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ 'setting.log' | trans }}</h3>
+                    <h3 class="panel-title">{{ 'settings.log' | trans }}</h3>
                 </div>
                 <table class="table">
                     <thead>
@@ -44,9 +44,9 @@
                                     {% for row in log.data %}
                                         <dt>{{ row.label | trans }}</dt>
                                         {% if row.none %}
-                                            <dd>{{ 'setting.none' | trans }}</dd>
+                                            <dd>{{ 'settings.none' | trans }}</dd>
                                         {% elseif row.noMore %}
-                                            <dd>{{ 'setting.no-more %entity% %id%' | trans({'id': row.id, 'entity':row.entity}) }}</dd>
+                                            <dd>{{ 'settings.no-more %entity% %id%' | trans({'id': row.id, 'entity':row.entity}) }}</dd>
                                         {% elseif row.translate %}
                                             <dd>{{ row.name | trans }}</dd>
                                         {% else %}
@@ -71,24 +71,24 @@
         {% if informations is defined %}
             <div class="panel panel-default" id="settings-creator-information">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ 'setting.information' | trans }}</h3>
+                    <h3 class="panel-title">{{ 'settings.information' | trans }}</h3>
                 </div>
                 <div class="panel-body">
                     <dl class="dl-horizontal">
                         {% if informations.creator %}
-                            <dt>{{ 'setting.created.by' | trans}}</dt>
+                            <dt>{{ 'settings.created.by' | trans}}</dt>
                             <dd>{{ informations.creator }}</dd>
                         {% endif %}
                         {% if informations.created %}
-                            <dt>{{ 'setting.created.at' | trans}}</dt>
+                            <dt>{{ 'settings.created.at' | trans}}</dt>
                             <dd>{{ informations.created | localizeddate('short', 'short') }}</dd>
                         {% endif %}
                         {% if informations.updater %}
-                            <dt>{{ 'setting.updated.by' | trans}}</dt>
+                            <dt>{{ 'settings.updated.by' | trans}}</dt>
                             <dd>{{ informations.updater }}</dd>
                         {% endif %}
                         {% if informations.updated %}
-                            <dt>{{ 'setting.updated.at' | trans}}</dt>
+                            <dt>{{ 'settings.updated.at' | trans}}</dt>
                             <dd>{{ informations.updated | localizeddate('short', 'short') }}</dd>
                         {% endif %}
                     </dl>

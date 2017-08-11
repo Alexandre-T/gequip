@@ -2,25 +2,25 @@
 
 {% set settings_entity_show = 'settings_family_show' %}
 
-{% block title %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}} · {{ parent() }}{% endblock title %}
+{% block title %}{{ 'settings.family.show.title %name%'|trans({'%name%': family.name})}} · {{ parent() }}{% endblock title %}
 
-{% block headline %}{{ 'setting.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock %}
+{% block headline %}{{ 'settings.family.show.title %name%'|trans({'%name%': family.name})}}{% endblock %}
 
 {% block content_settings %}
 
     <div class="panel panel-primary" id="settings-family-global-information">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ 'setting.global-information' | trans }}</h3>
+            <h3 class="panel-title">{{ 'settings.global-information' | trans }}</h3>
         </div>
         <div class="panel-body">
             <dl class="dl-horizontal">
-                <dt class="lead">{{ 'setting.family.name'| trans }}</dt>
+                <dt class="lead">{{ 'settings.family.name'| trans }}</dt>
                 <dd class="lead">{{ family.name }}</dd>
-                <dt>{{ 'setting.family.root'| trans }}</dt>
+                <dt>{{ 'settings.family.root'| trans }}</dt>
                 <dd>{{ family.root.name }}</dd>
-                <dt>{{ 'setting.family.parent'| trans }}</dt>
+                <dt>{{ 'settings.family.parent'| trans }}</dt>
                     {% if family.parent is null %}
-                        <dd><em>{{ 'setting.family.parent.none' | trans }}</em></dd>
+                        <dd><em>{{ 'settings.family.parent.none' | trans }}</em></dd>
                     {% else %}
                         <dd>{{ family.parent.name }}</dd>
                     {% endif %}

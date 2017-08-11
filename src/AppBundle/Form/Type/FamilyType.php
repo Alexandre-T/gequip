@@ -64,7 +64,7 @@ class FamilyType extends AbstractType
                     return $er->createQueryBuilder('f')
                         ->orderBy('f.left', 'ASC');
                 },
-                'label' => 'setting.family.field.parent',
+                'label' => 'settings.family.field.parent',
                 'required' => false,
                 'choice_label' => function (Family $family) {
                     /** @var Family $family */
@@ -72,7 +72,7 @@ class FamilyType extends AbstractType
                 },
             ])
             ->add('name', TextType::class, [
-                'label' => 'setting.family.field.name',
+                'label' => 'settings.family.field.name',
             ]);
     }
 
