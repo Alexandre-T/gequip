@@ -37,9 +37,7 @@ settings.family.created _name_: 'Family "name" has been successfully created!'
 settings.family.updated _name_: 'Family "name" has been successfully updated!'
 settings.family.deleted _name_: 'Family "name" has been successfully deleted!'
 settings.families.link: 'Family listing'
-settings.families.help:
-  Your equipments and their models are classified by family. The families are sorted like a tree.
-  Here, you can customize them.
+settings.families.help: 'Your equipments and their models are classified by family. The families are sorted like a tree. Here, you can customize them.'
 settings.families: 'Families'
 
 #Status
