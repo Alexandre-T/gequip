@@ -551,6 +551,9 @@
           </attribute>
         </orm-attributes>
       </field>
+      <orm-attributes>
+        <attribute name="table">te_criticity</attribute>
+      </orm-attributes>
     </entity>
     <association from="\AppBundle\Entity\Criticity" to="\AppBundle\Entity\User" caption="Creator" inverse-alias="creator" many-owner="true" many-inverse="false" parent-required="true" uuid="9b529fb1-c46d-4172-b7f6-aa341bd8e5df">
       <association-field from="creator" to="id"/>
@@ -652,7 +655,7 @@
         </orm-attributes>
       </field>
       <orm-attributes>
-        <attribute name="table">te_family</attribute>
+        <attribute name="table">te_service</attribute>
         <attribute name="repository-class">AppBundle\Entity\Repository\FamilyRepository</attribute>
         <attribute name="Gedmo">
           <attribute name="Timestampable">
@@ -710,7 +713,7 @@
           </attribute>
         </attribute>
         <attribute name="options">
-          <attribute name="comment">Families of road equipments</attribute>
+          <attribute name="comment">Service of the enterprise</attribute>
         </attribute>
       </orm-attributes>
     </entity>
