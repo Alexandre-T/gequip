@@ -18,6 +18,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 
@@ -31,8 +32,9 @@ use \DateTime;
  *
  * @link     http://opensource.org/licenses/GPL-3.0
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\CriticityRepository")
  * @ORM\Table(name="te_criticity", options={"comment":"Cricity of equipment"})
+ * @Gedmo\Loggable
  */
 class Criticity implements InformationInterface
 {
@@ -56,6 +58,7 @@ class Criticity implements InformationInterface
      * @Assert\Length(max=16)
      *
      * @ORM\Column(type="string", length=16, nullable=false, options={"unsigned":true,"comment":"Name of the criticity"})
+     * @Gedmo\Versioned
      */
     private $name;
 
@@ -67,6 +70,7 @@ class Criticity implements InformationInterface
      * @Assert\Length(max=8)
      *
      * @ORM\Column(type="string", length=8, nullable=false, options={"comment":"Intervention period"})
+     * @Gedmo\Versioned
      */
     private $intervention;
 
@@ -78,6 +82,7 @@ class Criticity implements InformationInterface
      * @Assert\Length(max=8)
      *
      * @ORM\Column(type="string", length=8, nullable=false, options={"comment":"Recovery period"})
+     * @Gedmo\Versioned
      */
     private $recovery;
 
@@ -87,6 +92,7 @@ class Criticity implements InformationInterface
      * @var Datetime
      *
      * @ORM\Column(type="datetime", nullable=false, options={"comment":"Creation datetime"})
+     * @Gedmo\Timestampable(on="create")
      */
     private $created;
 
@@ -96,6 +102,7 @@ class Criticity implements InformationInterface
      * @var Datetime
      *
      * @ORM\Column(type="datetime", nullable=false, options={"comment":"Update datetime"})
+     * @Gedmo\Timestampable(on="update")
      */
     private $updated;
 
@@ -107,6 +114,7 @@ class Criticity implements InformationInterface
      * @Assert\Length(max=8)
      *
      * @ORM\Column(type="string", length=8, nullable=true, options={"comment":"Average working time target (cible MTBF)"})
+     * @Gedmo\Versioned
      */
     private $working;
 
