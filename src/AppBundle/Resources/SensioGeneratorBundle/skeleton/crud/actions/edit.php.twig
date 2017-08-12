@@ -46,7 +46,8 @@
 {% endblock method_body %}
 
 {% block method_return %}
-        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/edit.html.twig', [
+        return $this->render('@App/settings/{{ entity|lower|replace({'\\': '/'}) }}/edit.html.twig', [
+            'isDeletable' => true //TODO replace true by a function
             'logs' => $logs,
             'information' => $information,
             '{{ entity_singularized }}' => ${{ entity_singularized }},
