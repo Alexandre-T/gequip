@@ -1,0 +1,46 @@
+{% block extends %}
+{{ "{% extends '@App/settings/base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% set settings_entity_show = 'settings_status_show' %}" }}
+
+{{ "{% block title %}" }}
+{{ "{{ 'settings." ~ entity_singularized ~ ".show.title %name%'|trans({'%name%': " ~  entity_singularized ~ ".name})}} · {{ parent() }}" }}
+{{ "{% endblock title %}" }}
+
+{{ "{% block headline %}" }}
+{{ "{{ 'settings." ~ entity_singularized ~ ".show.title %name%'|trans({'%name%': " ~ entity_singularized ~ ".name})}}" }}
+{{ "{% endblock headline %}" }}
+
+{{ "{% block content_settings %}" }}
+    <div class="panel panel-primary" id="settings-global-information">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ "{{ 'settings.global-information' | trans }}" }}</h3>
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt class="lead">{{ "{{ 'settings." ~ entity_singularized ~ ".field.name'| trans }}" }}</dt>
+                <dd class="lead">{{ "{{ " ~ entity_singularized ~ ".name }}" }}</dd>
+                {% for field, metadata in fields -%}
+                {% if field not in {1: 'id', 2:'created', 3:'creator', 4:'updated', 5:'updater', 6:'name'} -%}
+                <dt>{{ "{{ 'settings." ~ entity_singularized ~ ".field." ~ field|replace({'_': '-'}) ~ "'| trans }}" }}</dt>
+                {% if metadata.type in ['datetime', 'date', 'time'] -%}
+                <dd>{{ "{{ " ~ entity_singularized ~ "." ~ field|replace({'_': ''}) ~ " | localizeddate('medium', 'medium') }}" }}</dd>
+                {% elseif metadata.type in ['array'] -%}
+                <dd>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</dd>
+                {% elseif metadata.type in ['boolean'] -%}
+                <dd>{{ "{{ " ~ entity_singularized ~ "." ~ field|replace({'_': ''}) ~ " | label }}" }}</dd>
+                {% else -%}
+                <dd>{{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}</dd>
+                {% endif -%}
+                {% endif -%}
+                {% endfor -%}
+            </dl>
+        </div>
+    </div>
+{{ "{% endblock content_settings %}" }}
+
+{% set hide_show, hide_edit, hide_delete = true, false, false %}
+{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+{% endblock body %}

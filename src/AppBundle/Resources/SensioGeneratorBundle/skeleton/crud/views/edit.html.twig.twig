@@ -1,0 +1,32 @@
+{% block extends %}
+{{ "{% extends '@App/settings/base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% set settings_entity_show = 'settings_" ~ entity_singularized ~ "_show' %}" }}
+
+{{ "{% block title %}{{ 'settings." ~ entity_singularized ~ ".edit.title %name%'|trans({'%name%': " ~ entity_singularized ~ ".name})}} · {{ parent() }}{% endblock title %}" }}
+
+{{ "{% block headline %}{% endblock %}" }}
+
+{{ "{% block content_settings %}" }}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">{{ "{{ 'settings." ~ entity_singularized ~ ".edit.title %name%'|trans({'%name%': " ~ entity_singularized ~ ".name})}}" }}</h1>
+        </div>
+        <div class="panel-body">
+            {{ "{{ form_start(edit_form) }}" }}
+            {{ "{{ form_widget(edit_form) }}" }}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary" type="submit" value="{{ "{{ 'settings.actions.edit' | trans }}"}}" />
+                </div>
+            </div>
+            {{ "{{ form_end(edit_form) }}" }}
+        </div>
+    </div>
+{{ "{% endblock content_settings%}" }}
+
+{% set hide_show, hide_edit, hide_delete = false, true, false %}
+{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+{% endblock body %}

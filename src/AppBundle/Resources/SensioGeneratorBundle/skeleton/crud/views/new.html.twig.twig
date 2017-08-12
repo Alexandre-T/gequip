@@ -1,0 +1,32 @@
+{% block extends %}
+{{ "{% extends '@App/settings/base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block title %}{{ 'settings.status.create.title'|trans }} · {{ parent() }}{% endblock title %}" }}
+
+{{ "{% block headline %}{% endblock %}" }}
+
+{{ "{% block content_content %}" }}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">{{ "{{ 'settings." ~ entity_singularized ~ ".create.title'|trans }}" }}</h1>
+        </div>
+        <div class="panel-body">
+            {{ "{{ form_start(form) }}" }}
+            {{ "{{ form_widget(form) }}" }}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary" type="submit" value="{{ "{{ 'settings.actions.create' | trans }}" }}" />
+                </div>
+            </div>
+            {{ "{{ form_end(form) }}" }}
+        </div>
+    </div>
+
+{{ "{% endblock content_content %}" }}
+
+{% set hide_show, hide_edit, hide_delete = true, true, true %}
+{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+{% endblock body %}

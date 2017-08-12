@@ -1,0 +1,43 @@
+{{ "{% block content_action %}" }}
+<h3>{{ "{{ 'settings.actions' | trans }}" }}</h3>
+{% if ('delete' in actions) and (not hide_delete) %}
+{{ "{% if isDeletable %}" }}
+    {{ "{{ form_start(delete_form) }}" }}
+    {{ "{{ form_widget(delete_form) }}" }}
+{{ "{% endif %}" }}
+{% endif %}
+<div class="text-center" id="settings-actions">
+    <div class="btn-group-vertical">
+        <a class="btn-mini btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_index') }}" }}">
+            {{ "{# @TODO change fa-cube by the icon of the settings #}" }}
+            <span class="fa fa-cube"></span>&nbsp;{{ "{{ 'settings.actions.back.list' | trans }}" }}
+        </a>
+{% if ('show' in actions) and (not hide_show) %}
+        <a class="btn-mini btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
+            <span class="fa fa-eye"></span>&nbsp;{{ "{{ 'settings.actions.show' | trans }}" }}
+        </a>
+{% endif %}
+{% if ('edit' in actions) and (not hide_edit) %}
+        <a class="btn-mini btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
+            <span class="fa fa-pencil"></span>&nbsp;{{ "{{ 'settings.actions.edit' | trans }}" }}
+        </a>
+{% endif %}
+{% if ('delete' in actions) and (not hide_delete) %}
+    {{ "{% if isDeletable %}" }}
+        <a class="btn btn-danger btn-mini confirm-delete" data-toggle="modal" data-target="#confirm-delete" data-form="form" href="#">
+            <span class="fa fa-trash-o"></span>&nbsp;{{ "{{ 'settings.actions.delete' | trans }}" }}
+        </a>
+    {{ "{% else %}" }}
+        <span class="btn btn-danger disabled">
+            <span class="fa fa-trash-o"></span>&nbsp;{{ "{{ 'settings.actions.delete' | trans }}" }}
+        </span>
+    {{ "{% endif %}" }}
+{% endif  %}
+    </div>
+</div>
+{% if ('delete' in actions) and (not hide_delete) %}
+    {{ "{% if isDeletable %}" }}
+        {{ "{{ form_end(delete_form) }}" }}
+    {{ "{% endif %}" }}
+{% endif %}
+{{ "{% endblock content_action %}" }}

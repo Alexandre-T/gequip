@@ -1,0 +1,41 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Finds and displays a {{ entity_singularized }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{{ '{' ~ identifier ~ '}' }}", name="{{ route_name_prefix }}_show")
+     * @Method("GET")
+{% endif %}
+     *
+     * @param {{ entity_class }} ${{ entity_singularized }}
+     * @return Response
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function showAction({{ entity_class }} ${{ entity_singularized }})
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        ${{ entity_singularized }}Service = $this->get('app.{{ entity_singularized }}-service');
+{% if 'delete' in actions %}
+        $deleteForm = $this->createDeleteForm(${{ entity_singularized }});
+{% endif %}
+        $information = InformationFactory::createInformation(${{ entity_singularized }});
+        $logs = ${{ entity_singularized }}Service->retrieveLogs(${{ entity_singularized }});
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->render('@App/settings/{{ entity|lower|replace({'\\': '/'}) }}/show.html.twig', [
+            'isDeletable' => true,
+            'logs' => $logs,
+            'information' => $information,
+            '{{ entity_singularized }}' => ${{ entity_singularized }},
+{% if 'delete' in actions %}
+            'delete_form' => $deleteForm->createView(),
+{% endif %}
+        ]);
+{% endblock method_return %}
+    }

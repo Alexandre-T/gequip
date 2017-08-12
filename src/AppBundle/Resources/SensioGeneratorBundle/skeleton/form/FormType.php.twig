@@ -1,0 +1,102 @@
+<?php
+/**
+ * This file is part of the GEquip Application.
+ *
+ * PHP version 7.1
+ *
+ * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ *
+ * @category Controller
+ *
+ * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @copyright 2017 Alexandre Tranchant
+ * @license   GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ */
+namespace {{ namespace }}\Form{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
+
+{% block use_statements %}
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * {{ entity_class }} form builder.
+ *
+ * @category Form
+ *
+ * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com
+ * @license GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ *
+ */
+class {{ form_class }} extends AbstractType
+{% endblock class_definition %}
+{
+{% block class_body %}
+    {%- if fields|length > 0 %}
+    /**
+     * Builds the form.
+     *
+     * This method is called for each type in the hierarchy starting from the
+     * top most type. Type extensions can further modify the form.
+     *
+     * @see FormTypeExtensionInterface::buildForm()
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            //@TODO add an help-block for each checkbox
+            {% for field in fields -%}
+            {% if not (field in {1:'creator', 2:'updater', 3:'created', 4:'updated'}) -%}
+            ->add('{{ field }}', null, ['label' => 'settings.{{ entity_class | lower }}.field.{{ field }}'])
+            {% endif -%}
+            {% endfor -%};
+    }
+    {% endif %}
+
+    /**
+     * Configures the options for this type.
+     *
+     * @param OptionsResolver $resolver The resolver for the options
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => '{{ namespace }}\Entity{{ entity_namespace ? '\\' ~ entity_namespace : '' }}\{{ entity_class }}'
+        ));
+    }
+
+    /**
+     * Returns the prefix of the template block name for this type.
+     *
+     * The block prefix defaults to the underscored short class name with
+     * the "Type" suffix removed (e.g. "UserProfileType" => "user_profile").
+     *
+     * @return string The prefix of the template block name
+     */
+    public function getBlockPrefix()
+    {
+        return '{{ form_type_name }}';
+    }
+
+{# BC with Symfony 2.7 #}
+{%- if get_name_required %}
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+{% endif %}
+
+{% endblock class_body %}
+}

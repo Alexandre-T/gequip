@@ -1,0 +1,39 @@
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity_singularized }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}_index")
+     * @Method("GET")
+{% endif %}
+     *
+     * @param Request $request
+     * @return Response
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction(Request $request)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        //Retrieving all services
+        ${{ entity_singularized }}Service = $this->get('app.{{ entity_singularized }}-service');
+        $paginator  = $this->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+             ${{ entity_singularized }}Service->getQueryBuilder(), /* queryBuilder NOT result */
+             $request->query->getInt('page', 1)/*page number*/,
+             self::LIMIT_PER_PAGE,
+             ['defaultSortFieldName' => '{{ entity_singularized }}.name', 'defaultSortDirection' => 'asc']
+        );
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->render('@App/settings/{{ entity|lower|replace({'\\': '/'}) }}/index.html.twig', [
+            'pagination' => $pagination,
+        ]);
+{% endblock method_return %}
+    }
+

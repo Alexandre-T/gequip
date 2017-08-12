@@ -1,0 +1,57 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Displays a form to edit an existing {{ entity_singularized }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{{ '{' ~ identifier ~ '}' }}/edit", name="{{ route_name_prefix }}_edit")
+     * @Method({"GET", "POST"})
+{% endif %}
+     *
+     * @param Request $request The request
+     * @param {{ entity_class }} ${{ entity_singularized }} The {{ entity_singularized }} entity
+     * @return RedirectResponse|Response
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function editAction(Request $request, {{ entity_class }} ${{ entity_singularized }})
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        ${{ entity_singularized }}Service = $this->get('app.{{ entity_singularized }}-service');
+        $deleteForm = $this->createDeleteForm(${{ entity_singularized }});
+{% if use_form_type_instance %}
+        $editForm = $this->createForm(new {{ entity_singularized|capitalize }}Type(), ${{ entity_singularized }});
+{% else %}
+        $editForm = $this->createForm('{{ namespace }}\Form\{{ entity }}Type', ${{ entity_singularized }});
+{% endif %}
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            ${{ entity_singularized }}Service->update(${{ entity_singularized }}, $this->getUser());
+
+            //Flash message
+            $session = $this->get('session');
+            $trans = $this->get('translator.default');
+            $message = $trans->trans('settings.{{ entity_singularized }}.updated _name_', ['name' => ${{ entity_singularized }}->getName()]);
+            $session->getFlashBag()->add('success', $message);
+
+            return $this->redirectToRoute('{{ route_name_prefix }}_edit', array('{{ identifier }}' => ${{ entity_singularized }}->get{{ identifier|capitalize }}()));
+        }
+
+        $logs = ${{ entity_singularized }}Service->retrieveLogs(${{ entity_singularized }});
+        $information = InformationFactory::createInformation(${{ entity_singularized }});
+{% endblock method_body %}
+
+{% block method_return %}
+        return $this->render('{{ entity|lower|replace({'\\': '/'}) }}/edit.html.twig', [
+            'logs' => $logs,
+            'information' => $information,
+            '{{ entity_singularized }}' => ${{ entity_singularized }},
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ]);
+{% endblock method_return %}
+    }

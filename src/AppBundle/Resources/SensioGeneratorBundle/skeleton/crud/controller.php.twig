@@ -1,0 +1,89 @@
+<?php
+/**
+ * This file is part of the GEquipe Application.
+ *
+ * PHP version 7.1
+ *
+ * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ *
+ * @category Entity
+ *
+ * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @copyright 2017 Alexandre Tranchant
+ * @license   GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ */
+
+namespace {{ namespace }}\Controller{{ entity_namespace ? '\\' ~ entity_namespace : '' }};
+
+use AppBundle\Bean\Factory\InformationFactory;
+{% block use_statements %}
+use {{ namespace }}\Entity\{{ entity }};
+{% if ('new' in actions or 'edit' in actions) and use_form_type_instance %}
+use {{ namespace }}\Form\{{ entity }}Type;
+{% endif %}
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+{% if 'annotation' == format -%}
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+{% endif %}
+{% if 'delete' in actions %}
+use Symfony\Component\Form\Form;
+{% endif %}
+{% if ('new' in actions or 'edit' in actions or 'delete' in actions)%}
+use Symfony\Component\HttpFoundation\RedirectResponse;
+{% endif %}
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+{% endblock use_statements %}
+
+/**
+{% block phpdoc_class_header %}
+ * {{ entity_singularized|capitalize }} controller.
+{% endblock phpdoc_class_header %}
+ *
+ * @category Controller
+ *
+ * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
+ * @license GNU General Public License, version 3
+ *
+ * @link http://opensource.org/licenses/GPL-3.0
+ *
+{% block phpdoc_class_annotations %}
+{% if 'annotation' == format %}
+ * @Route("{{ route_prefix|default('/') }}")
+{% endif %}
+{% endblock phpdoc_class_annotations %}
+ */
+{% block class_definition %}
+class {{ entity_class }}Controller extends Controller
+{% endblock class_definition %}
+{
+    /**
+     * Limit of {{ entity_singularized }} per page for listing.
+     */
+    const LIMIT_PER_PAGE = 25;
+{% block class_body %}
+    {%- if 'index' in actions %}
+        {%- include 'crud/actions/index.php.twig' %}
+    {%- endif %}
+
+    {%- if 'new' in actions %}
+        {%- include 'crud/actions/new.php.twig' %}
+    {%- endif %}
+
+    {%- if 'show' in actions %}
+        {%- include 'crud/actions/show.php.twig' %}
+    {%- endif %}
+
+    {%- if 'edit' in actions %}
+        {%- include 'crud/actions/edit.php.twig' %}
+    {%- endif %}
+
+    {%- if 'delete' in actions %}
+        {%- include 'crud/actions/delete.php.twig' %}
+    {%- endif %}
+{% endblock class_body %}
+}
