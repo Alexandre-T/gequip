@@ -106,4 +106,28 @@ class LogFactory
 
         return $logs;
     }
+
+    /**
+     * Create Log bean from a Abstract Log Entry (Gedmo) to provide CriticityLog.
+     *
+     * @param array $logEntries of AbstractLogEntry $logEntry
+     * @return array
+     */
+    public static function createCriticityLogs(array $logEntries):array
+    {
+        $logs = [];
+
+        foreach ($logEntries as $logEntry) {
+            /** @var AbstractLogEntry $logEntry */
+            $logBean = new Log();
+            $logBean->setAction('settings.log.action.'.$logEntry->getAction());
+            $logBean->setLogged($logEntry->getLoggedAt());
+            $logBean->setUsername($logEntry->getUsername());
+            $logBean->setVersion($logEntry->getVersion());
+            $logBean->setData(DataFactory::createCriticityData($logEntry->getData()));
+            $logs[] = $logBean;
+        }
+
+        return $logs;
+    }
 }

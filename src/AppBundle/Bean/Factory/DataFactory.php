@@ -34,6 +34,10 @@ use AppBundle\Exception\InvalidLogException;
  */
 class DataFactory
 {
+    /**
+     * Valid columns of family entity.
+     */
+    const VALID_CRITICITY = ['name', 'intervention', 'recovery', 'working'];
 
     /**
      * Valid columns of family entity.
@@ -139,6 +143,37 @@ class DataFactory
     }
 
     /**
+     * Create Data from a serialized data.
+     *
+     * @param array $rowdata
+     * @return array of Data
+     * @throws InvalidLogException
+     */
+    public static function createCriticityData(array $rowdata):array
+    {
+        self::unverifiedCriticity($rowdata);
+
+        //Initialization
+        $resultat = [];
+
+        foreach ($rowdata as $column => $value) {
+            $data = new Data();
+            $data->setLabel("settings.criticity.field.$column");
+            if (in_array($column, ['initial', 'managed', 'discarded'])) {
+                $data->setName($value?'yes':'no');
+                $data->setTranslate(true);
+            } elseif (empty($value)) {
+                $data->setNone(true);
+            } else {
+                $data->setName($value);
+            }
+            $resultat[] = $data;
+        }
+
+        return $resultat;
+    }
+
+    /**
      * This function throw an Invalid Log Exception when parameter does not contain valid keys.
      *
      * Valid keys are only : 'parent' and/or 'name'
@@ -171,6 +206,24 @@ class DataFactory
             $validKeyString = implode(', ', self::VALID_STATUS);
             //@TODO Translate this message
             throw new InvalidLogException("Status log array must have at least one of these keys: $validKeyString. All other keys are forbidden.");
+        }
+    }
+
+    /**
+     * This function throw an Invalid Log Exception when parameter does not contain valid keys.
+     *
+     * Valid keys are only : 'presentation', 'name', '', '', '', ''
+     * Array must contain one or two of these keys
+     *
+     * @param array $rowdata
+     * @throws InvalidLogException
+     */
+    private static function unverifiedCriticity(array $rowdata)
+    {
+        if (!static::unverifiedLog($rowdata, self::VALID_CRITICITY)) {
+            $validKeyString = implode(', ', self::VALID_CRITICITY);
+            //@TODO Translate this message
+            throw new InvalidLogException("Criticity log array must have at least one of these keys: $validKeyString. All other keys are forbidden.");
         }
     }
 

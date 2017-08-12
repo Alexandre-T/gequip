@@ -15,6 +15,10 @@ services:
         public: false
 
     #Service for entities
+    app.criticity-service:
+        class: AppBundle\Service\CriticityService
+        public: true
+        arguments: ['@doctrine.orm.entity_manager']
     app.family-service:
         class: AppBundle\Service\FamilyService
         public: true
