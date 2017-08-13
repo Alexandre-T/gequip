@@ -52,6 +52,7 @@
           </attribute>
         </orm-attributes>
       </field>
+      <field name="axe_id" type="integer" uuid="f285e723-8937-4091-8f71-07dd07802147"/>
       <orm-attributes>
         <attribute name="Gedmo">
           <attribute name="Timestampable">
@@ -95,6 +96,14 @@
       <association-field from="service_id" to="id"/>
       <orm-attributes>
         <attribute name="on-delete">RESTRICT</attribute>
+      </orm-attributes>
+    </association>
+    <association from="\AppBundle\Entity\Equipement" to="\AppBundle\Entity\Axe" caption="Axe Equipement" owner-alias="equipements" inverse-alias="axe" many-owner="true" many-inverse="false" uuid="7788526f-74e9-40f9-9f40-ecf0e1b998e0">
+      <association-field from="axe_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\AppBundle\Entity\Personne" local-name="Personne" namespace="\AppBundle\Entity" local-namespace="Entity" uuid="aec9b1c8-c14d-4392-9af7-79af329dd3f0">
@@ -456,6 +465,29 @@
         <attribute name="options">
           <attribute name="comment">Cricity of equipment</attribute>
         </attribute>
+        <attribute name="repository-class">AppBundle\Entity\Repository\CriticityRepository</attribute>
+        <attribute name="Gedmo">
+          <attribute name="Timestampable">
+            <attribute name="Fields">
+              <attribute name="Field">
+                <attribute name="Name">created</attribute>
+                <attribute name="On">create</attribute>
+              </attribute>
+              <attribute name="Field">
+                <attribute name="Name">updated</attribute>
+                <attribute name="On">update</attribute>
+              </attribute>
+            </attribute>
+          </attribute>
+          <attribute name="Loggable">
+            <attribute name="Fields">
+              <attribute name="Field">intervention</attribute>
+              <attribute name="Field">name</attribute>
+              <attribute name="Field">recovery</attribute>
+              <attribute name="Field">working</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </entity>
     <association from="\AppBundle\Entity\Criticity" to="\AppBundle\Entity\User" caption="Creator" inverse-alias="creator" many-owner="true" many-inverse="false" parent-required="true" uuid="9b529fb1-c46d-4172-b7f6-aa341bd8e5df">
@@ -715,6 +747,90 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <entity name="\AppBundle\Entity\Axe" local-name="Axe" namespace="\AppBundle\Entity" local-namespace="Entity" description="Axe of equipment" uuid="d93c1dfb-ae80-4b3b-8d53-2552cfda68f6">
+      <field name="id" description="Identifiant of axe" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="0a95bda5-1397-4d74-aa31-8b516e98b55c">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Identifiant of axe</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="creator" description="Creator of axe" type="integer" required="true" uuid="4a34fded-e600-4b6b-b0ea-3169fba9cec9">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Creator of axe</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="updater" description="Updater of axe" type="integer" required="true" uuid="5b256ecc-101a-4327-a5b7-a53243286710">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Updater of axe</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" description="Name of the axe" type="string" size="16" required="true" unsigned="true" uuid="78fbce14-8794-43f3-87e8-599e8cf2419a">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Name of the axe</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="code" description="Code of the axe " type="string" size="8" required="true" uuid="e3be4b13-e077-4529-b733-1e14fb2acb30">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Code of the axe </attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="created" description="Creation datetime" type="datetime" required="true" uuid="2dafb003-440e-4035-97f1-a36328df477f">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Creation datetime</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="updated" description="Update datetime" type="datetime" required="true" uuid="bbda4be6-273f-4f9b-8102-90486b14969d">
+        <orm-attributes>
+          <attribute name="options">
+            <attribute name="comment">Update datetime</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="table">te_criticity</attribute>
+        <attribute name="options">
+          <attribute name="comment">Cricity of equipment</attribute>
+        </attribute>
+        <attribute name="repository-class">AppBundle\Entity\Repository\CriticityRepository</attribute>
+        <attribute name="Gedmo">
+          <attribute name="Timestampable">
+            <attribute name="Fields">
+              <attribute name="Field">
+                <attribute name="Name">created</attribute>
+                <attribute name="On">create</attribute>
+              </attribute>
+              <attribute name="Field">
+                <attribute name="Name">updated</attribute>
+                <attribute name="On">update</attribute>
+              </attribute>
+            </attribute>
+          </attribute>
+          <attribute name="Loggable">
+            <attribute name="Fields">
+              <attribute name="Field">code</attribute>
+              <attribute name="Field">name</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\AppBundle\Entity\Axe" to="\AppBundle\Entity\User" caption="Creator" inverse-alias="creator" many-owner="true" many-inverse="false" parent-required="true" uuid="f7c163e1-c4a6-4fcb-8bf3-907c4bdf36d6">
+      <association-field from="creator" to="id"/>
+    </association>
+    <association from="\AppBundle\Entity\Axe" to="\AppBundle\Entity\User" caption="Updater" inverse-alias="updater" many-owner="true" many-inverse="false" parent-required="true" uuid="c833fa90-87f2-4340-9df0-311c03992ba3">
+      <association-field from="updater" to="id"/>
+    </association>
     <orm-attributes>
       <attribute name="filename-format">subdirectories-by-namespace</attribute>
     </orm-attributes>
@@ -734,36 +850,40 @@
     <association uuid="63fda9b2-c218-4f4e-aa8a-c298c0414902" caption1-position-x="3" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="6586506e-ff2f-429a-92fb-f7ab8a60b872" caption1-position-x="7" caption1-position-y="-20" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="76464acf-bace-4470-84f1-f811db5dd9aa" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-20" color="#969696"/>
+    <association uuid="7788526f-74e9-40f9-9f40-ecf0e1b998e0" caption1-position-x="19" caption1-position-y="18" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="8270392b-f6a9-444a-a4a8-06a077e3ce9b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="9b529fb1-c46d-4172-b7f6-aa341bd8e5df" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="9ef82809-0b7b-468d-8ab9-1cf27d828afb" color="#969696"/>
     <association uuid="ac376302-0aad-45b9-9a96-324058dca833" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="b8b96816-c926-4244-9356-b85c31e8e25e" caption1-position-x="45" caption1-position-y="12" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="c5be84bb-bd20-47ab-a4f7-c1edfcd2f4d6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-20" color="#969696"/>
+    <association uuid="c833fa90-87f2-4340-9df0-311c03992ba3" caption1-position-x="6" caption1-position-y="-13" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="d24de1ab-73d8-4481-a2f4-7a8aa5d8659d" caption1-position-x="6" caption1-position-y="-13" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="de693bf6-1c23-43d7-88fb-996c83516f70" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="e38a0900-9986-4673-bdac-8f542b7f69ce" caption1-position-x="-22" caption1-position-y="34" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="f7c163e1-c4a6-4fcb-8bf3-907c4bdf36d6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="ff6a2202-829e-4369-b291-df7cb3e77f97" caption1-position-x="70" caption1-position-y="-13" center-position-x="0" center-position-y="0" color="#969696"/>
-    <entity uuid="0ec777b0-f1e5-4a25-9d78-e238e8c058f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="501" position-y="109" size-x="0" size-x2="117" size-y="0" size-y2="143"/>
-    <entity uuid="1d16aca7-1efa-4903-b69b-1d81ed44ec34" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1142" position-y="52" size-x="0" size-x2="112" size-y="0" size-y2="73"/>
+    <entity uuid="0ec777b0-f1e5-4a25-9d78-e238e8c058f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="455" position-y="167" size-x="0" size-x2="117" size-y="0" size-y2="143"/>
+    <entity uuid="1d16aca7-1efa-4903-b69b-1d81ed44ec34" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1168" position-y="109" size-x="0" size-x2="112" size-y="0" size-y2="73"/>
     <entity uuid="1e049294-c805-4a23-b397-8d5113e1a7fd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="299" position-y="-46" size-x="0" size-x2="126" size-y="0" size-y2="87"/>
-    <entity uuid="21c1019e-83fd-42a8-adda-e522fb70c7c1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="14" position-y="366" size-x="0" size-x2="70" size-y="0" size-y2="31"/>
+    <entity uuid="21c1019e-83fd-42a8-adda-e522fb70c7c1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-27" position-y="381" size-x="0" size-x2="88" size-y="0" size-y2="59"/>
     <entity uuid="64245f22-5633-40b2-8031-83a7aa683941" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-16" position-y="6" size-x="0" size-x2="101" size-y="0" size-y2="45"/>
-    <entity uuid="754a0f8e-0446-410e-93ce-9efabe9cfb64" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="109" position-y="115" size-x="0" size-x2="103" size-y="0" size-y2="171"/>
-    <entity uuid="75616c76-8523-47cb-8354-b9f729406197" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1077" position-y="195" size-x="0" size-x2="114" size-y="0" size-y2="129"/>
+    <entity uuid="754a0f8e-0446-410e-93ce-9efabe9cfb64" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="77" position-y="133" size-x="0" size-x2="103" size-y="0" size-y2="171"/>
+    <entity uuid="75616c76-8523-47cb-8354-b9f729406197" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1031" position-y="252" size-x="0" size-x2="114" size-y="0" size-y2="129"/>
     <entity uuid="7a5caf82-4ea2-42e7-bd62-bffac0085397" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="646" position-y="-5" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="867745b6-aa29-4838-a6cf-dfaae87b79cf" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1084" position-y="-49" size-x="0" size-x2="113" size-y="0" size-y2="73"/>
-    <entity uuid="8bb4bd1c-0e99-4bc5-a5ef-7e4583f1292c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="748" position-y="330" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <entity uuid="8bb4bd1c-0e99-4bc5-a5ef-7e4583f1292c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="852" position-y="402" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
     <entity uuid="92086c5b-e004-44c0-a395-bb86ce454e95" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1379" position-y="161" size-x="0" size-x2="96" size-y="0" size-y2="45"/>
     <entity uuid="aec9b1c8-c14d-4392-9af7-79af329dd3f0" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="868" position-y="64" size-x="0" size-x2="80" size-y="0" size-y2="31"/>
     <entity uuid="bc0307cc-2f2a-4b85-a12d-f25429dd1f1f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="557" position-y="443" size-x="0" size-x2="106" size-y="0" size-y2="157"/>
     <entity uuid="c4a73c06-0d84-463c-a24d-7996a26a5e6b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="747" position-y="152" size-x="0" size-x2="108" size-y="0" size-y2="59"/>
+    <entity uuid="d93c1dfb-ae80-4b3b-8d53-2552cfda68f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="95" position-y="569" size-x="0" size-x2="103" size-y="0" size-y2="115"/>
     <entity uuid="f92a0f3c-dc4f-4a31-aa8f-301ab223dd9d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="268" position-y="337" size-x="0" size-x2="105" size-y="0" size-y2="129"/>
     <inheritance-child uuid="279c3af0-6291-49d3-8e93-f68bcab9724f" caption1-position-x="-2" caption1-position-y="1" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="3f3b1af8-83ea-44ce-9c4e-07178c811b9c" caption1-position-x="-2" caption1-position-y="125" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="430a3617-e2b6-4bc7-bc92-9151f618115f" caption1-position-x="-8" caption1-position-y="43" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="a481ef09-dbb0-4ad1-8edf-7c1cdab756d5" caption1-position-x="-112" caption1-position-y="-2" center-position-x="0" center-position-y="0" color="#969696"/>
-    <module uuid="ec37a18f-1b0f-4598-b1f6-775b913c8fc1" bg-color="#EAE4F1" position-x="61" position-y="72" size-x="41" size-x2="1638" size-y="66" size-y2="661"/>
+    <module uuid="ec37a18f-1b0f-4598-b1f6-775b913c8fc1" bg-color="#EAE4F1" position-x="61" position-y="72" size-x="41" size-x2="1652" size-y="66" size-y2="850"/>
     <project uuid="2ebc54c6-b876-4966-a15c-21008dbf39ff" size-x="0" size-x2="2034" size-y="0" size-y2="1144"/>
   </visual-data>
 </skipper>
