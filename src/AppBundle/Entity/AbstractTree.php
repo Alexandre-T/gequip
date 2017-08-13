@@ -21,7 +21,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use DateTime;
 
-
 /**
  * Abstract tree Class
  *

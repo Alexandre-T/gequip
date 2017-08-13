@@ -34,7 +34,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="te_family", options={"comment":"Families of road equipments"})
  * @Gedmo\Tree(type="nested")
  * @Gedmo\Loggable
- * 
+ *
  */
 class Family extends AbstractTree implements InformationInterface
 {
@@ -47,7 +47,7 @@ class Family extends AbstractTree implements InformationInterface
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Family", inversedBy="children")
      * @ORM\JoinColumn(name="parent", referencedColumnName="id", onDelete="CASCADE")
      * @Gedmo\TreeParent
-     * 
+     *
      * @Gedmo\Versioned
      */
     private $parent;

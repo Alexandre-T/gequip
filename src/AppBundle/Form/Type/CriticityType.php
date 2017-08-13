@@ -79,6 +79,4 @@ class CriticityType extends AbstractType
     {
         return 'appbundle_criticity';
     }
-
-
 }

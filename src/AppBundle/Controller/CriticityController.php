@@ -28,7 +28,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
  * Criticity controller.
  *
@@ -100,7 +99,6 @@ class CriticityController extends Controller
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('settings_criticity_show', array('id' => $criticity->getId()));
-
         }
 
         return $this->render('@App/settings/criticity/new.html.twig', [
@@ -161,7 +159,7 @@ class CriticityController extends Controller
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('settings_criticity_show', array('id' => $criticity->getId()));
-            }
+        }
 
         $logs = $criticityService->retrieveLogs($criticity);
         $information = InformationFactory::createInformation($criticity);

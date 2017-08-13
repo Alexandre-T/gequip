@@ -56,7 +56,7 @@ class Service extends AbstractTree implements InformationInterface
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Service", inversedBy="children")
      * @ORM\JoinColumn(name="parent", referencedColumnName="id", onDelete="CASCADE")
      * @Gedmo\TreeParent
-     * 
+     *
      * @Gedmo\Versioned
      */
     private $parent;
