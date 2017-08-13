@@ -53,8 +53,18 @@ class CriticityService extends AbstractService
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        parent::__construct($entityManager);
         $this->repository = $this->em->getRepository('AppBundle:Criticity');
+    }
+
+    /**
+     * Return the repository
+     *
+     * @return CriticityRepository|\Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 
     /**

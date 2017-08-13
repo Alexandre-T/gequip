@@ -98,6 +98,24 @@ settings.status.list.title: 'Listing of status'
 settings.status.show.title %name%: 'Status information: %name%'
 settings.status.edit.title %name%: 'Editing status: %name%'
 
+#Criticity
+settings.criticity.field.name: 'Name'
+settings.criticity.field.intervention: 'Intervention max time'
+settings.criticity.field.recovery: 'Recovery max time'
+settings.criticity.field.working: 'Average working time'
+
+settings.criticity.created _name_:  'Criticity "name" has been successfully created!'
+settings.criticity.updated _name_: 'Criticity "name" has been successfully updated!'
+settings.criticity.deleted _name_: 'Criticity "name" has been successfully deleted!'
+
+settings.criticity.link: 'Criticity listing'
+settings.criticity: 'Criticity'
+settings.criticity.create: 'Create a new criticity'
+settings.criticity.create.title: 'New criticity creation'
+settings.criticity.list.title: 'Listing of criticities'
+settings.criticity.show.title %name%: 'Criticity information: %name%'
+settings.criticity.edit.title %name%: 'Editing criticity: %name%'
+
 # General labels
 settings.label: 'Label'
 settings.label.name: 'Name'
@@ -117,6 +135,12 @@ settings.log.new-value: 'New value'
 settings.edit: 'Edit'
 settings.show: 'Show'
 
+# Actions
+settings.actions.back.list : 'Listing'
+settings.actions.edit : 'Edit'
+settings.actions.show : 'Show'
+settings.actions.delete : 'Delete'
+
 # Information
 settings.information: 'Information'
 settings.created.by: 'Created by:'
@@ -132,6 +156,7 @@ settings.no-more %entity% %id%: "The %entity% with Id '%id%' no more exists."
 menu.main.home: 'Home'
 menu.main.settings: 'Settings'
 menu.main.usefull-settings: 'Usefull settings'
+menu.main.crititicies: 'Criticities'
 menu.main.families: 'Families'
 menu.main.status: 'Status'
 menu.main.usefull-resources: 'Usefull resources'

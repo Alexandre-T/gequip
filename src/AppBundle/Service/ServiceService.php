@@ -48,7 +48,7 @@ class ServiceService extends AbstractService
     protected $repository;
 
     /**
-     * Service Service constructor.
+     * Service constructor of service entities.
      *
      * Constructor initialize entity manager and repository.
      *
@@ -56,8 +56,18 @@ class ServiceService extends AbstractService
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        parent::__construct($entityManager);
         $this->repository = $this->em->getRepository('AppBundle:Service');
+    }
+
+    /**
+     * Return the repository
+     *
+     * @return ServiceRepository|\Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 
     /**

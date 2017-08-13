@@ -21,7 +21,6 @@ use AppBundle\Entity\InformationInterface;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * Class StatusService.
@@ -45,19 +44,21 @@ abstract class AbstractService
     protected $em;
 
     /**
-     * Entity Repository.
-     *
-     * @var EntityRepository
-     */
-    protected $repository;
-
-    /**
      * Constructor must be designed in classes.
      *
      * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->em = $entityManager;
+    }
+
+    /**
+     * Inherited class must return Repository
+     *
      * @return mixed
      */
-    abstract public function __construct(EntityManagerInterface $entityManager);
+    abstract public function getRepository();
 
     /**
      * Persist a new Status.
@@ -78,10 +79,10 @@ abstract class AbstractService
      *
      * This method has to be overrided.
      *
-     * @param InformationInterface $entity
+     * @param $entity
      * @return bool true if entity is deletable
      */
-    public function isDeletable(InformationInterface $entity):bool
+    public function isDeletable($entity):bool
     {
         return true;
     }
@@ -93,7 +94,7 @@ abstract class AbstractService
      */
     public function retrieve()
     {
-        return $this->repository->findAll();
+        return $this->getRepository()->findAll();
     }
 
     /**

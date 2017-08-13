@@ -53,8 +53,18 @@ class FamilyService extends AbstractService
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        parent::__construct($entityManager);
         $this->repository = $this->em->getRepository('AppBundle:Family');
+    }
+
+    /**
+     * Return the repository
+     *
+     * @return FamilyRepository|\Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 
     /**

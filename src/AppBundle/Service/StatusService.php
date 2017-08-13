@@ -53,8 +53,18 @@ class StatusService extends AbstractService
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        parent::__construct($entityManager);
         $this->repository = $this->em->getRepository('AppBundle:Status');
+    }
+
+    /**
+     * Return the repository
+     *
+     * @return StatusRepository|\Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 
     /**

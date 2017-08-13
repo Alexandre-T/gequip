@@ -65,9 +65,18 @@ class Criticity implements InformationInterface
     /**
      * Intervention period.
      *
+     * Assert a Regexp
+     *
+     * @see https://stackoverflow.com/questions/32044846/regex-for-iso-8601-durations
+     * @see https://stackoverflow.com/questions/13301142/php-how-to-convert-string-duration-to-iso-8601-duration-format-ie-30-minute
+     *
      * @var string (Period string)
      *
      * @Assert\Length(max=8)
+     * @Assert\Regex(
+     *     pattern = "/^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$/",
+     *     message = "validator.period.format"
+     * )
      *
      * @ORM\Column(type="string", length=8, nullable=false, options={"comment":"Intervention period"})
      * @Gedmo\Versioned
@@ -77,9 +86,18 @@ class Criticity implements InformationInterface
     /**
      * Recovery period.
      *
+     * Assert a Regexp
+     *
+     * @see https://stackoverflow.com/questions/32044846/regex-for-iso-8601-durations
+     * @see https://stackoverflow.com/questions/13301142/php-how-to-convert-string-duration-to-iso-8601-duration-format-ie-30-minute
+     *
      * @var string (Period string)
      *
      * @Assert\Length(max=8)
+     * @Assert\Regex(
+     *     pattern = "/^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$/",
+     *     message = "validator.period.format"
+     * )
      *
      * @ORM\Column(type="string", length=8, nullable=false, options={"comment":"Recovery period"})
      * @Gedmo\Versioned
@@ -109,9 +127,18 @@ class Criticity implements InformationInterface
     /**
      * Recovery period.
      *
+     * Assert a Regexp
+     *
+     * @see https://stackoverflow.com/questions/32044846/regex-for-iso-8601-durations
+     * @see https://stackoverflow.com/questions/13301142/php-how-to-convert-string-duration-to-iso-8601-duration-format-ie-30-minute
+     *
      * @var string (Period string)
      *
      * @Assert\Length(max=8)
+     * @Assert\Regex(
+     *     pattern = "/^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$/",
+     *     message = "validator.period.format"
+     * )
      *
      * @ORM\Column(type="string", length=8, nullable=true, options={"comment":"Average working time target (cible MTBF)"})
      * @Gedmo\Versioned

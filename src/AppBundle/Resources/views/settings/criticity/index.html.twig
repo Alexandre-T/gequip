@@ -1,0 +1,75 @@
+{% extends '@App/settings/base.html.twig' %}
+
+{% block title %}{{ 'settings.criticity.list.title'|trans }} · {{ parent() }}{% endblock title %}
+
+{% block headline %}{{ 'settings.criticity.list.title'|trans }}{% endblock %}
+
+{% set direction = pagination.getDirection() %}
+
+{% block content_content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center" id="criticity-name">
+                {% if pagination.isSorted('criticity.name') %}
+                    <span class="fa fa-sort-alpha-{{ direction }}"></span>
+                {% endif %}
+                {{ knp_pagination_sortable(pagination, 'settings.criticity.field.name' | trans, 'criticity.name')}}
+            </th>
+            <th class="text-center" id="criticity-intervention">
+                {% if pagination.isSorted('criticity.intervention') %}
+                    <span class="fa fa-sort-numeric-{{ direction }}"></span>
+                {% endif %}
+                {{ knp_pagination_sortable(pagination, 'settings.criticity.field.intervention' | trans, 'criticity.intervention')}}
+            </th>
+            <th class="text-center" id="criticity-recovery">
+                {% if pagination.isSorted('criticity.recovery') %}
+                    <span class="fa fa-sort-numeric-{{ direction }}"></span>
+                {% endif %}
+                {{ knp_pagination_sortable(pagination, 'settings.criticity.field.recovery' | trans, 'criticity.recovery')}}
+            </th>
+            <th class="text-center" id="criticity-working">
+                {% if pagination.isSorted('criticity.working') %}
+                    <span class="fa fa-sort-numeric-{{ direction }}"></span>
+                {% endif %}
+                {{ knp_pagination_sortable(pagination, 'settings.criticity.field.working' | trans, 'criticity.working')}}
+            </th>
+            <th id="criticity-actions">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for criticity in pagination %}
+            <tr>
+                <td headers="criticity-name">{{ criticity.name }}</td>
+                <td headers="criticity-intervention">{{ criticity.intervention }}</td>
+                <td headers="criticity-recovery">{{ criticity.recovery }}</td>
+                <td headers="criticity-working">{{ criticity.working }}</td>
+                <td headers="criticity-actions">
+                    <div class="btn-group-xs btn-group">
+                        <a class="btn btn-default" href="{{ path('settings_criticity_show', { 'id': criticity.id }) }}">
+                            <span class="fa fa-eye"></span>
+                            <span class="sr-only">{{ 'settings.show' | trans }}</span>
+                        </a>
+                        <a class="btn btn-default" href="{{ path('settings_criticity_edit', { 'id': criticity.id }) }}">
+                            <span class="fa fa-edit"></span>
+                            <span class="sr-only">{{ 'settings.edit' | trans }}</span>
+                        </a>
+                        </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation text-right">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock content_content %}
+
+{% block content_action %}
+<div class="text-center">
+        <a class="btn btn-default" href="{{ path('settings_criticity_new') }}">
+            <span class="fa fa-thermometer-half"></span>
+            {{ 'settings.criticity.create' | trans }}
+        </a>
+    </div>
+{% endblock content_action %}

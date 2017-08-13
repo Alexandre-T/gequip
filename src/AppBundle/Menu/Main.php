@@ -66,6 +66,11 @@ class Main implements ContainerAwareInterface
                 'dropdown-header' => true
             ));
 
+            $dropdownSettings->addChild('menu.main.crititicies', array(
+                'icon' => 'thermometer-half',
+                'route' => 'settings_criticity_index'
+            ));
+
             $dropdownSettings->addChild('menu.main.families', array(
                 'icon' => 'list',
                 'route' => 'settings_family_index'
