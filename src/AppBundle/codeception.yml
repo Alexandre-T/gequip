@@ -6,7 +6,6 @@ paths:
     #envs: Tests/_env
     log: ../../var/logs
     data: ../../var/data
-    support: Test/_supports
 settings:
     bootstrap: _bootstrap.php
 actor_suffix: Tester
