@@ -77,6 +77,4 @@ class AxeType extends AbstractType
     {
         return 'appbundle_axe';
     }
-
-
 }

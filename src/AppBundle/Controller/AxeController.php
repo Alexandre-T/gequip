@@ -28,7 +28,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
  * Axe controller.
  *
@@ -100,7 +99,6 @@ class AxeController extends Controller
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('settings_axe_show', array('id' => $axe->getId()));
-
         }
 
         return $this->render('@App/settings/axe/new.html.twig', [
@@ -161,7 +159,7 @@ class AxeController extends Controller
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('settings_axe_show', array('id' => $axe->getId()));
-            }
+        }
 
         $logs = $axeService->retrieveLogs($axe);
         $information = InformationFactory::createInformation($axe);
