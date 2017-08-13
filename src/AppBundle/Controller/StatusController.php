@@ -120,14 +120,14 @@ class StatusController extends Controller
     {
         $statusService = $this->get('app.status-service');
         $deleteForm = $this->createDeleteForm($status);
-        $informations = InformationFactory::createInformation($status);
+        $information = InformationFactory::createInformation($status);
         $logs = $statusService->retrieveLogs($status);
 
         return $this->render('@App/settings/status/show.html.twig', array(
             'isDeletable' => true,
             'logs' => $logs,
             'status' => $status,
-            'informations' => $informations,
+            'information' => $information,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -162,11 +162,11 @@ class StatusController extends Controller
         }
 
         $logs = $statusService->retrieveLogs($status);
-        $informations = InformationFactory::createInformation($status);
+        $information = InformationFactory::createInformation($status);
 
         return $this->render('@App/settings/status/edit.html.twig', array(
             'logs' => $logs,
-            'informations' => $informations,
+            'information' => $information,
             'status' => $status,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

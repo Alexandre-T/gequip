@@ -119,7 +119,7 @@ class ServiceController extends Controller
     {
         $serviceService = $this->get('app.service-service');
         $service = $serviceService->getBySlug($slug);
-        $informations = InformationFactory::createInformation($service);
+        $information = InformationFactory::createInformation($service);
         $path = $serviceService->retrievePath($service);
         $logs = $serviceService->retrieveLogs($service);
         $deleteForm = $this->createDeleteForm($service);
@@ -130,7 +130,7 @@ class ServiceController extends Controller
             'isDeletable' => true,
             'logs' => $logs,
             'service' => $service,
-            'informations' => $informations,
+            'information' => $information,
             'path' => $path,
             'delete_form' => $deleteForm->createView(),
         ]);
@@ -168,12 +168,12 @@ class ServiceController extends Controller
 
         $path = $serviceService->retrievePath($service);
         $logs = $serviceService->retrieveLogs($service);
-        $informations = InformationFactory::createInformation($service);
+        $information = InformationFactory::createInformation($service);
 
         return $this->render('@App/settings/service/edit.html.twig', array(
             'path' => $path,
             'logs' => $logs,
-            'informations' => $informations,
+            'information' => $information,
             'service' => $service,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -119,7 +119,7 @@ class FamilyController extends Controller
     {
         $familyService = $this->get('app.family-service');
         $family = $familyService->getBySlug($slug);
-        $informations = InformationFactory::createInformation($family);
+        $information = InformationFactory::createInformation($family);
         $path = $familyService->retrievePath($family);
         $logs = $familyService->retrieveLogs($family);
         $deleteForm = $this->createDeleteForm($family);
@@ -130,7 +130,7 @@ class FamilyController extends Controller
             'isDeletable' => true,
             'logs' => $logs,
             'family' => $family,
-            'informations' => $informations,
+            'information' => $information,
             'path' => $path,
             'delete_form' => $deleteForm->createView(),
         ]);
@@ -168,12 +168,12 @@ class FamilyController extends Controller
 
         $path = $familyService->retrievePath($family);
         $logs = $familyService->retrieveLogs($family);
-        $informations = InformationFactory::createInformation($family);
+        $information = InformationFactory::createInformation($family);
 
         return $this->render('@App/settings/family/edit.html.twig', array(
             'path' => $path,
             'logs' => $logs,
-            'informations' => $informations,
+            'information' => $information,
             'family' => $family,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

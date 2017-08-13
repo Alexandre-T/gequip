@@ -68,28 +68,28 @@
     {% block content_action %}{% endblock content_action %}
     <hr>
     {% block content_information %}
-        {% if informations is defined %}
+        {% if information is defined %}
             <div class="panel panel-default" id="settings-creator-information">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ 'settings.information' | trans }}</h3>
                 </div>
                 <div class="panel-body">
                     <dl class="dl-horizontal">
-                        {% if informations.creator %}
+                        {% if information.creator %}
                             <dt>{{ 'settings.created.by' | trans}}</dt>
-                            <dd>{{ informations.creator }}</dd>
+                            <dd>{{ information.creator }}</dd>
                         {% endif %}
-                        {% if informations.created %}
+                        {% if information.created %}
                             <dt>{{ 'settings.created.at' | trans}}</dt>
-                            <dd>{{ informations.created | localizeddate('short', 'short') }}</dd>
+                            <dd>{{ information.created | localizeddate('short', 'short') }}</dd>
                         {% endif %}
-                        {% if informations.updater %}
+                        {% if information.updater %}
                             <dt>{{ 'settings.updated.by' | trans}}</dt>
-                            <dd>{{ informations.updater }}</dd>
+                            <dd>{{ information.updater }}</dd>
                         {% endif %}
-                        {% if informations.updated %}
+                        {% if information.updated %}
                             <dt>{{ 'settings.updated.at' | trans}}</dt>
-                            <dd>{{ informations.updated | localizeddate('short', 'short') }}</dd>
+                            <dd>{{ information.updated | localizeddate('short', 'short') }}</dd>
                         {% endif %}
                     </dl>
                 </div>
