@@ -107,9 +107,12 @@ class Service extends AbstractTree implements InformationInterface
      * Set the parent of this service.
      *
      * @param mixed $parent
+     * @return Service
      */
-    public function setParent($parent)
+    public function setParent($parent):Service
     {
         $this->parent = $parent;
+
+        return $this;
     }
 }
