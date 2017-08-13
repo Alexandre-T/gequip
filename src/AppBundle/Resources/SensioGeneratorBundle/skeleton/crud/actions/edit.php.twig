@@ -38,7 +38,11 @@
             $message = $trans->trans('settings.{{ entity_singularized }}.updated _name_', ['name' => ${{ entity_singularized }}->getName()]);
             $session->getFlashBag()->add('success', $message);
 
+            {% if 'show' in actions -%}
+            return $this->redirectToRoute('{{ route_name_prefix }}_show', array('{{ identifier }}' => ${{ entity_singularized }}->get{{ identifier|capitalize }}()));
+            {% else %}
             return $this->redirectToRoute('{{ route_name_prefix }}_edit', array('{{ identifier }}' => ${{ entity_singularized }}->get{{ identifier|capitalize }}()));
+            {% endif -%}
         }
 
         $logs = ${{ entity_singularized }}Service->retrieveLogs(${{ entity_singularized }});
@@ -47,7 +51,7 @@
 
 {% block method_return %}
         return $this->render('@App/settings/{{ entity|lower|replace({'\\': '/'}) }}/edit.html.twig', [
-            'isDeletable' => true //TODO replace true by a function
+            'isDeletable' => ${{ entity_singularized }}Service->isDeletable(${{ entity_singularized }}),
             'logs' => $logs,
             'information' => $information,
             '{{ entity_singularized }}' => ${{ entity_singularized }},

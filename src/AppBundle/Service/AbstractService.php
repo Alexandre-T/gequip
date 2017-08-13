@@ -72,6 +72,20 @@ abstract class AbstractService
         $entity->setCreator($user);
         $this->update($entity, $user);
     }
+
+    /**
+     * Is this entity deletable?
+     *
+     * This method has to be overrided.
+     *
+     * @param InformationInterface $entity
+     * @return bool true if entity is deletable
+     */
+    public function isDeletable(InformationInterface $entity):bool
+    {
+        return true;
+    }
+
     /**
      * Retrieve array of entities.
      *
