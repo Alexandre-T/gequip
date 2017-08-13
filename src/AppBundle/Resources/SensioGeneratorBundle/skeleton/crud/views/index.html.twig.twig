@@ -15,55 +15,57 @@
         <tr>
             {% for field, metadata in fields -%}
             {% if field not in {1: 'id', 2:'created', 3:'creator', 4:'updated', 5:'updater'} -%}
-            <th class="text-center" id="status-name">
+            <th class="text-center" id="{{ entity_singularized ~ '-' ~ field|replace({'_': ''})}}">
                 {{ "{% if pagination.isSorted('" ~ entity_singularized ~ "." ~ field ~ "') %}" }}
-                    {{ "{# TODO Changer le alpha en fonction du type #}" }}
+                    {{ "{# TODO Changer le alpha en fonction du type (numeric) #}" }}
                     <span class="fa fa-sort-alpha-{{ "{{ direction }}" }}"></span>
                 {{ "{% endif %}" }}
                 {{ "{{ knp_pagination_sortable(pagination, 'settings." ~ entity_singularized ~ ".field." ~ field ~ "' | trans, '" ~ entity_singularized ~ "." ~ field ~ "')}}" }}
             </th>
             {% endif -%}
             {% endfor -%}
-            <th id="status-actions">Actions</th>
+            <th id="{{ entity_singularized }}-actions">Actions</th>
         </tr>
         </thead>
         <tbody>
         {{ "{% for " ~ entity_singularized ~ " in pagination %}" }}
             <tr>
                 {% for field, metadata in fields -%}
-                    {% if field not in {1: 'id', 2:'created', 3:'creator', 4:'updated', 5:'updater'} -%}
-                    {% if metadata.type in ['datetime'] -%}
-                        <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
-                    {% elseif metadata.type in ['date'] -%}
-                        <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}</td>
-                    {% elseif metadata.type in ['time'] -%}
-                        <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}</td>
-                    {% elseif metadata.type in ['array'] -%}
-                        <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}</td>
-                    {% elseif metadata.type in ['boolean'] -%}
-                        <td>{{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}Yes{% else %}No{% endif %}' }}</td>
-                    {% else -%}
-                        <td>{{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
-                    {% endif -%}
-                    {% endif -%}
-                    {% if loop.last -%}
-                    <td>
-                        <div class="btn-group-xs btn-group">
-                            {% if 'show' in actions -%}
-                                <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
-                                <span class="fa fa-eye"></span>
-                                <span class="sr-only">{{ "{{ 'settings.show' | trans }}" }}</span>
-                            </a>
-                            {% endif -%}
-                            {%- if 'edit' in actions -%}
-                                <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
-                                <span class="fa fa-edit"></span>
-                                <span class="sr-only">{{ "{{ 'settings.edit' | trans }}" }}</span>
-                            </a>
-                            {% endif -%}
-                        </div>
-                    </td>
+                {% if field not in {1: 'id', 2:'created', 3:'creator', 4:'updated', 5:'updater'} -%}
+                <td headers="{{ entity_singularized ~ '-' ~ field|replace({'_': ''})}}">
+                {%- if metadata.type in ['datetime'] -%}
+                    {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}
+                {%- elseif metadata.type in ['date'] -%}
+                    {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}
+                {%- elseif metadata.type in ['time'] -%}
+                    {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}
+                {%- elseif metadata.type in ['array'] -%}
+                    {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}
+                {%- elseif metadata.type in ['boolean'] -%}
+                    {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}Yes{% else %}No{% endif %}' }}
+                {%- else -%}
+                    {{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}
+                {%- endif -%}
+                </td>
                 {% endif -%}
+                {% if loop.last -%}
+                <td headers="criticity-actions">
+                    <div class="btn-group-xs btn-group">
+                        {% if 'show' in actions -%}
+                            <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
+                            <span class="fa fa-eye"></span>
+                            <span class="sr-only">{{ "{{ 'settings.show' | trans }}" }}</span>
+                        </a>
+                        {% endif -%}
+                        {%- if 'edit' in actions -%}
+                            <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
+                            <span class="fa fa-edit"></span>
+                            <span class="sr-only">{{ "{{ 'settings.edit' | trans }}" }}</span>
+                        </a>
+                        {% endif -%}
+                    </div>
+                </td>
+            {% endif -%}
             {% endfor -%}
         </tr>
         {{ "{% endfor %}" }}
@@ -79,7 +81,7 @@
     <div class="text-center">
         <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}">
             <span class="fa fa-cube"></span>
-            {{ "{{ 'settings.status.create' | trans }}" }}
+            {{ "{{ 'settings." ~ entity_singularized ~".create' | trans }}" }}
         </a>
     </div>
 {% endif %}
