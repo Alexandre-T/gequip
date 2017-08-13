@@ -50,7 +50,8 @@
         "twbs/bootstrap": "~3.3",
         "twig/twig": "^1.0||^2.0",
         "symfony/translation": "^3.3",
-        "twig/extensions": "^1.5"
+        "twig/extensions": "^1.5",
+        "symfony/event-dispatcher": "^3.3"
     },
     "require-dev": {
         "codeception/codeception": "*",
