@@ -39,6 +39,22 @@ settings.delete.confirm.cancel: 'No, don''t delete it'
 settings.delete.confirm.delete: 'Yes, delete it'
 settings.delete.confirm.close: 'Close'
 
+#Axe
+settings.axe.field.name: 'Name'
+settings.axe.field.code: 'Code'
+
+settings.axe.created _name_:  'Axe "name" has been successfully created!'
+settings.axe.updated _name_: 'Axe "name" has been successfully updated!'
+settings.axe.deleted _name_: 'Axe "name" has been successfully deleted!'
+
+settings.axe.link: 'Axe listing'
+settings.axe: 'Axe'
+settings.axe.create: 'Create a new axe'
+settings.axe.create.title: 'New axe creation'
+settings.axe.list.title: 'Listing of axes'
+settings.axe.show.title %name%: 'Axe information: %name%'
+settings.axe.edit.title %name%: 'Editing axe: %name%'
+
 # Family
 settings.family.create: 'Create a new family'
 settings.family.created _name_: 'Family "name" has been successfully created!'
@@ -156,6 +172,7 @@ settings.no-more %entity% %id%: "The %entity% with Id '%id%' no more exists."
 menu.main.home: 'Home'
 menu.main.settings: 'Settings'
 menu.main.usefull-settings: 'Usefull settings'
+menu.main.axe: 'Axes'
 menu.main.crititicies: 'Criticities'
 menu.main.families: 'Families'
 menu.main.status: 'Status'

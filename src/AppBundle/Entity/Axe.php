@@ -19,6 +19,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 
 /**
@@ -32,10 +33,10 @@ use \DateTime;
  * @link     http://opensource.org/licenses/GPL-3.0
  *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\AxeRepository")
- * @ORM\Table(name="te_criticity", options={"comment":"Cricity of equipment"})
+ * @ORM\Table(name="te_axe", options={"comment":"Axe of equipment"})
  * @Gedmo\Loggable
  */
-class Axe
+class Axe implements InformationInterface
 {
     /**
      * ID of the axe.
@@ -53,6 +54,9 @@ class Axe
      *
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=16)
+     *
      * @ORM\Column(type="string", length=16, nullable=false, options={"unsigned":true,"comment":"Name of the axe"})
      * @Gedmo\Versioned
      */
@@ -62,6 +66,9 @@ class Axe
      * Code of the axe.
      *
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=8)
      *
      * @ORM\Column(type="string", length=8, nullable=false, options={"comment":"Code of the axe "})
      * @Gedmo\Versioned

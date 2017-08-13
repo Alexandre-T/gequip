@@ -35,7 +35,12 @@ use AppBundle\Exception\InvalidLogException;
 class DataFactory
 {
     /**
-     * Valid columns of family entity.
+     * Valid columns of axe entity.
+     */
+    const VALID_AXE = ['name', 'code'];
+
+    /**
+     * Valid columns of criticity entity.
      */
     const VALID_CRITICITY = ['name', 'intervention', 'recovery', 'working'];
 
@@ -49,6 +54,34 @@ class DataFactory
      */
     const VALID_STATUS = ['name', 'presentation', 'initial', 'discarded', 'managed'];
 
+    /**
+     * Create Data from a serialized data.
+     *
+     * @param array $rowdata
+     * @return array of Data
+     * @throws InvalidLogException
+     */
+    public static function createAxeData(array $rowdata):array
+    {
+        self::unverifiedAxe($rowdata);
+
+        //Initialization
+        $resultat = [];
+
+        foreach ($rowdata as $column => $value) {
+            $data = new Data();
+            $data->setLabel("settings.axe.field.$column");
+            if (empty($value)) {
+                $data->setNone(true);
+            } else {
+                $data->setName($value);
+            }
+            $resultat[] = $data;
+        }
+
+        return $resultat;
+    }
+    
     /**
      * Create Data from a serialized data?
      *
@@ -176,6 +209,24 @@ class DataFactory
     /**
      * This function throw an Invalid Log Exception when parameter does not contain valid keys.
      *
+     * Valid keys are only : 'code' and/or 'name'
+     * Array must contain one or two of these keys
+     *
+     * @param array $rowdata
+     * @throws InvalidLogException
+     */
+    private static function unverifiedAxe(array $rowdata)
+    {
+        if (!static::unverifiedLog($rowdata, self::VALID_AXE)) {
+            $validKeyString = implode(', ', self::VALID_AXE);
+            //@TODO Translate this message
+            throw new InvalidLogException("Axe log array must have at least one of theses keys: $validKeyString. All other keys are forbidden.");
+        }
+    }
+
+    /**
+     * This function throw an Invalid Log Exception when parameter does not contain valid keys.
+     *
      * Valid keys are only : 'parent' and/or 'name'
      * Array must contain one or two of these keys
      *
@@ -194,8 +245,8 @@ class DataFactory
     /**
      * This function throw an Invalid Log Exception when parameter does not contain valid keys.
      *
-     * Valid keys are only : 'presentation', 'name', '', '', '', ''
-     * Array must contain one or two of these keys
+     * Valid keys are only : 'presentation', 'name', 'initial', 'discarded', 'managed'
+     * Array must contain one to 5 of these keys
      *
      * @param array $rowdata
      * @throws InvalidLogException
@@ -212,8 +263,8 @@ class DataFactory
     /**
      * This function throw an Invalid Log Exception when parameter does not contain valid keys.
      *
-     * Valid keys are only : 'presentation', 'name', '', '', '', ''
-     * Array must contain one or two of these keys
+     * Valid keys are only : 'intervention', 'name', 'recovery', 'working'
+     * Array must contain one to four of these keys
      *
      * @param array $rowdata
      * @throws InvalidLogException

@@ -1,0 +1,61 @@
+{% extends '@App/settings/base.html.twig' %}
+
+{% block title %}{{ 'settings.axe.list.title'|trans }} · {{ parent() }}{% endblock title %}
+
+{% block headline %}{{ 'settings.axe.list.title'|trans }}{% endblock %}
+
+{% set direction = pagination.getDirection() %}
+
+{% block content_content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center" id="axe-name">
+                {% if pagination.isSorted('axe.name') %}
+                    <span class="fa fa-sort-alpha-{{ direction }}"></span>
+                {% endif %}
+                {{ knp_pagination_sortable(pagination, 'settings.axe.field.name' | trans, 'axe.name')}}
+            </th>
+            <th class="text-center" id="axe-code">
+                {% if pagination.isSorted('axe.code') %}
+                    <span class="fa fa-sort-alpha-{{ direction }}"></span>
+                {% endif %}
+                {{ knp_pagination_sortable(pagination, 'settings.axe.field.code' | trans, 'axe.code')}}
+            </th>
+            <th id="axe-actions">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for axe in pagination %}
+            <tr>
+                <td headers="axe-name">{{ axe.name }}</td>
+                <td headers="axe-code">{{ axe.code }}</td>
+                <td headers="axe-actions">
+                    <div class="btn-group-xs btn-group">
+                        <a class="btn btn-default" href="{{ path('settings_axe_show', { 'id': axe.id }) }}">
+                            <span class="fa fa-eye"></span>
+                            <span class="sr-only">{{ 'settings.show' | trans }}</span>
+                        </a>
+                        <a class="btn btn-default" href="{{ path('settings_axe_edit', { 'id': axe.id }) }}">
+                            <span class="fa fa-edit"></span>
+                            <span class="sr-only">{{ 'settings.edit' | trans }}</span>
+                        </a>
+                        </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation text-right">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock content_content %}
+
+{% block content_action %}
+<div class="text-center">
+        <a class="btn btn-default" href="{{ path('settings_axe_new') }}">
+            <span class="fa fa-road"></span>
+            {{ 'settings.axe.create' | trans }}
+        </a>
+    </div>
+{% endblock content_action %}

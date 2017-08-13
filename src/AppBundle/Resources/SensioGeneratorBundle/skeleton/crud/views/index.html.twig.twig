@@ -49,7 +49,7 @@
                 </td>
                 {% endif -%}
                 {% if loop.last -%}
-                <td headers="criticity-actions">
+                <td headers="{{ entitity_singularized }}-actions">
                     <div class="btn-group-xs btn-group">
                         {% if 'show' in actions -%}
                             <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { '"~ identifier ~"': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">

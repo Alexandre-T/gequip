@@ -36,7 +36,29 @@ class LogFactory
     /**
      * Create Log bean from a Abstract Log Entry (Gedmo).
      *
-     * @param array $logEntries of AbstractLogEntry $logEntry
+     * @param AbstractLogEntry[] $logEntries of AbstractLogEntry $logEntry
+     * @return array
+     */
+    public static function createAxeLogs(array $logEntries):array
+    {
+        $logs = [];
+
+        foreach ($logEntries as $logEntry) {
+            $logBean = new Log();
+            $logBean->setAction('settings.log.action.'.$logEntry->getAction());
+            $logBean->setLogged($logEntry->getLoggedAt());
+            $logBean->setUsername($logEntry->getUsername());
+            $logBean->setVersion($logEntry->getVersion());
+            $logBean->setData(DataFactory::createAxeData($logEntry->getData()));
+            $logs[] = $logBean;
+        }
+
+        return $logs;
+    }
+    /**
+     * Create Log bean from a Abstract Log Entry (Gedmo).
+     *
+     * @param AbstractLogEntry[] $logEntries of AbstractLogEntry $logEntry
      * @param array $families Array of Family Entity
      * @return array
      */
@@ -45,7 +67,6 @@ class LogFactory
         $logs = [];
 
         foreach ($logEntries as $logEntry) {
-            /** @var AbstractLogEntry $logEntry */
             $logBean = new Log();
             $logBean->setAction('settings.log.action.'.$logEntry->getAction());
             $logBean->setLogged($logEntry->getLoggedAt());
@@ -61,8 +82,8 @@ class LogFactory
     /**
      * Create Log bean from a Abstract Log Entry (Gedmo).
      *
-     * @param array $logEntries of AbstractLogEntry $logEntry
-     * @param array $services Array of Family Entity
+     * @param AbstractLogEntry[] $logEntries of AbstractLogEntry $logEntry
+     * @param array $services Array of Service Entity
      * @return array
      */
     public static function createServicesLogs(array $logEntries, array $services = null):array
@@ -70,7 +91,6 @@ class LogFactory
         $logs = [];
 
         foreach ($logEntries as $logEntry) {
-            /** @var AbstractLogEntry $logEntry */
             $logBean = new Log();
             $logBean->setAction('settings.log.action.'.$logEntry->getAction());
             $logBean->setLogged($logEntry->getLoggedAt());
@@ -86,7 +106,7 @@ class LogFactory
     /**
      * Create Log bean from a Abstract Log Entry (Gedmo).
      *
-     * @param array $logEntries of AbstractLogEntry $logEntry
+     * @param AbstractLogEntry[] $logEntries of AbstractLogEntry $logEntry
      * @return array
      */
     public static function createStatusLogs(array $logEntries):array
@@ -94,7 +114,6 @@ class LogFactory
         $logs = [];
 
         foreach ($logEntries as $logEntry) {
-            /** @var AbstractLogEntry $logEntry */
             $logBean = new Log();
             $logBean->setAction('settings.log.action.'.$logEntry->getAction());
             $logBean->setLogged($logEntry->getLoggedAt());
@@ -110,7 +129,7 @@ class LogFactory
     /**
      * Create Log bean from a Abstract Log Entry (Gedmo) to provide CriticityLog.
      *
-     * @param array $logEntries of AbstractLogEntry $logEntry
+     * @param AbstractLogEntry[] $logEntries of AbstractLogEntry $logEntry
      * @return array
      */
     public static function createCriticityLogs(array $logEntries):array
@@ -118,7 +137,6 @@ class LogFactory
         $logs = [];
 
         foreach ($logEntries as $logEntry) {
-            /** @var AbstractLogEntry $logEntry */
             $logBean = new Log();
             $logBean->setAction('settings.log.action.'.$logEntry->getAction());
             $logBean->setLogged($logEntry->getLoggedAt());

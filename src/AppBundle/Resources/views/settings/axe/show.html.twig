@@ -1,0 +1,57 @@
+{% extends '@App/settings/base.html.twig' %}
+
+{% set settings_entity_show = 'settings_status_show' %}
+
+{% block title %}
+{{ 'settings.axe.show.title %name%'|trans({'%name%': axe.name})}} · {{ parent() }}
+{% endblock title %}
+
+{% block headline %}
+{{ 'settings.axe.show.title %name%'|trans({'%name%': axe.name})}}
+{% endblock headline %}
+
+{% block content_settings %}
+    <div class="panel panel-primary" id="settings-global-information">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'settings.global-information' | trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt class="lead">{{ 'settings.axe.field.name'| trans }}</dt>
+                <dd class="lead">{{ axe.name }}</dd>
+                <dt>{{ 'settings.axe.field.code'| trans }}</dt>
+                <dd>{{ axe.code }}</dd>
+                </dl>
+        </div>
+    </div>
+{% endblock content_settings %}
+
+{% block content_action %}
+<h3>{{ 'settings.actions' | trans }}</h3>
+{% if isDeletable %}
+    {{ form_start(delete_form) }}
+    {{ form_widget(delete_form) }}
+{% endif %}
+<div class="text-center" id="settings-actions">
+    <div class="btn-group-vertical">
+        <a class="btn-mini btn btn-default" href="{{ path('settings_axe_index') }}">
+            <span class="fa fa-road"></span>&nbsp;{{ 'settings.actions.back.list' | trans }}
+        </a>
+        <a class="btn-mini btn btn-default" href="{{ path('settings_axe_edit', { 'id': axe.id }) }}">
+            <span class="fa fa-pencil"></span>&nbsp;{{ 'settings.actions.edit' | trans }}
+        </a>
+    {% if isDeletable %}
+        <a class="btn btn-danger btn-mini confirm-delete" data-toggle="modal" data-target="#confirm-delete" data-form="form" href="#">
+            <span class="fa fa-trash-o"></span>&nbsp;{{ 'settings.actions.delete' | trans }}
+        </a>
+    {% else %}
+        <span class="btn btn-danger disabled">
+            <span class="fa fa-trash-o"></span>&nbsp;{{ 'settings.actions.delete' | trans }}
+        </span>
+    {% endif %}
+    </div>
+</div>
+    {% if isDeletable %}
+        {{ form_end(delete_form) }}
+    {% endif %}
+{% endblock content_action %}
