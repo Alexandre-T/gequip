@@ -769,14 +769,14 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="name" description="Name of the axe" type="string" size="16" required="true" unsigned="true" uuid="78fbce14-8794-43f3-87e8-599e8cf2419a">
+      <field name="name" description="Name of the axe" type="string" size="16" required="true" unique="true" uuid="78fbce14-8794-43f3-87e8-599e8cf2419a">
         <orm-attributes>
           <attribute name="options">
             <attribute name="comment">Name of the axe</attribute>
           </attribute>
         </orm-attributes>
       </field>
-      <field name="code" description="Code of the axe " type="string" size="8" required="true" uuid="e3be4b13-e077-4529-b733-1e14fb2acb30">
+      <field name="code" description="Code of the axe " type="string" size="8" required="true" unique="true" uuid="e3be4b13-e077-4529-b733-1e14fb2acb30">
         <orm-attributes>
           <attribute name="options">
             <attribute name="comment">Code of the axe </attribute>
@@ -798,11 +798,11 @@
         </orm-attributes>
       </field>
       <orm-attributes>
-        <attribute name="table">te_criticity</attribute>
+        <attribute name="table">te_axe</attribute>
         <attribute name="options">
-          <attribute name="comment">Cricity of equipment</attribute>
+          <attribute name="comment">Axe of equipment</attribute>
         </attribute>
-        <attribute name="repository-class">AppBundle\Entity\Repository\CriticityRepository</attribute>
+        <attribute name="repository-class">AppBundle\Entity\Repository\AxeRepository</attribute>
         <attribute name="Gedmo">
           <attribute name="Timestampable">
             <attribute name="Fields">

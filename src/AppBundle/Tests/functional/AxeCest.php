@@ -85,7 +85,7 @@ class AxeCest
 
         //Show
         $id = $I->grabFromCurrentUrl('~(\d+)~');
-        var_dump($id);
+
         $I->canSeeCurrentUrlMatches('/\/settings\/axe\/(?P<digit>\d+)/');
         $I->see('Axe "New Axe" has been successfully created!', '.alert');
 
@@ -128,6 +128,27 @@ class AxeCest
         $I->wantToTest("Delete route is not open for a GET Request");
         $I->amOnRoute('settings_axe_delete', array('id' => $id));
         $I->seeCurrentUrlEquals("/settings/axe/$id");
+
+        $I->wantToTest('I cannot create a new axe with the same name');
+        $I->amOnRoute('settings_axe_new');
+        $I->seeCurrentUrlEquals('/settings/axe/new');
+        $I->fillField('Name', 'Edited Axe');
+        $I->fillField('Code', 'Alpha');
+        $I->click('Create', 'form');
+        $I->seeCurrentUrlEquals('/settings/axe/new');
+        $I->see('This value is already used.', '.help-block');
+        $I->seeNumberOfElements('.has-error .help-block', 2);
+        $I->fillField('Name', 'Unique');
+        $I->fillField('Code', 'Alpha');
+        $I->click('Create', 'form');
+        $I->seeCurrentUrlEquals('/settings/axe/new');
+        $I->see('This value is already used.', '.help-block');
+        $I->fillField('Name', 'Edited Axe');
+        $I->fillField('Code', 'Unique');
+        $I->click('Create', 'form');
+        $I->seeCurrentUrlEquals('/settings/axe/new');
+        $I->see('This value is already used.', '.help-block');
+
         //@TODO Test the Delete button
     }
 }

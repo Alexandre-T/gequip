@@ -20,6 +20,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use \DateTime;
 
 /**
@@ -35,6 +36,8 @@ use \DateTime;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\AxeRepository")
  * @ORM\Table(name="te_axe", options={"comment":"Axe of equipment"})
  * @Gedmo\Loggable
+ * @UniqueEntity("code")
+ * @UniqueEntity("name")
  */
 class Axe implements InformationInterface
 {
@@ -57,7 +60,7 @@ class Axe implements InformationInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=16)
      *
-     * @ORM\Column(type="string", length=16, nullable=false, options={"unsigned":true,"comment":"Name of the axe"})
+     * @ORM\Column(type="string", unique=true, length=16, nullable=false, options={"comment":"Name of the axe"})
      * @Gedmo\Versioned
      */
     private $name;
@@ -70,7 +73,7 @@ class Axe implements InformationInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=8)
      *
-     * @ORM\Column(type="string", length=8, nullable=false, options={"comment":"Code of the axe "})
+     * @ORM\Column(type="string", unique=true, length=8, nullable=false, options={"comment":"Code of the axe "})
      * @Gedmo\Versioned
      */
     private $code;
