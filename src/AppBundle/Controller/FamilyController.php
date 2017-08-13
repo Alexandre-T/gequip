@@ -19,6 +19,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Bean\Factory\InformationFactory;
 use AppBundle\Entity\Family;
+use AppBundle\Form\Type\FamilyType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -84,7 +85,7 @@ class FamilyController extends Controller
     public function newAction(Request $request)
     {
         $family = new Family();
-        $form = $this->createForm('AppBundle\Form\Type\FamilyType', $family);
+        $form = $this->createForm(FamilyType::class, $family);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -151,7 +152,7 @@ class FamilyController extends Controller
         $familyService = $this->get('app.family-service');
 
         $deleteForm = $this->createDeleteForm($family);
-        $editForm = $this->createForm('AppBundle\Form\Type\FamilyType', $family);
+        $editForm = $this->createForm(FamilyType::class, $family);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

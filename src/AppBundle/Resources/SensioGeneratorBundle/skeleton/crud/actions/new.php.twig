@@ -22,7 +22,7 @@
 {% if use_form_type_instance %}
         $form = $this->createForm(new {{ entity_singularized|capitalize }}Type(), ${{ entity_singularized }});
 {% else %}
-        $form = $this->createForm('{{ namespace }}\Form\{{ entity }}Type', ${{ entity_singularized }});
+        $form = $this->createForm({{ entity }}Type::class, ${{ entity_singularized }});
 {% endif %}
         $form->handleRequest($request);
 

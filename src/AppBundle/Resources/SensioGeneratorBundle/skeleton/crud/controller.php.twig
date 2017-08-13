@@ -20,8 +20,8 @@ namespace {{ namespace }}\Controller{{ entity_namespace ? '\\' ~ entity_namespac
 use AppBundle\Bean\Factory\InformationFactory;
 {% block use_statements %}
 use {{ namespace }}\Entity\{{ entity }};
-{% if ('new' in actions or 'edit' in actions) and use_form_type_instance %}
-use {{ namespace }}\Form\{{ entity }}Type;
+{% if ('new' in actions or 'edit' in actions) %}
+use {{ namespace }}\Form\Type\{{ entity }}Type;
 {% endif %}
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 {% if 'annotation' == format -%}

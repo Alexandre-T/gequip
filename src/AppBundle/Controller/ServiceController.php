@@ -19,6 +19,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Bean\Factory\InformationFactory;
 use AppBundle\Entity\Service;
+use AppBundle\Form\Type\ServiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -84,7 +85,7 @@ class ServiceController extends Controller
     public function newAction(Request $request)
     {
         $service = new Service();
-        $form = $this->createForm('AppBundle\Form\Type\ServiceType', $service);
+        $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -151,7 +152,7 @@ class ServiceController extends Controller
         $serviceService = $this->get('app.service-service');
 
         $deleteForm = $this->createDeleteForm($service);
-        $editForm = $this->createForm('AppBundle\Form\Type\ServiceType', $service);
+        $editForm = $this->createForm(ServiceType::class, $service);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

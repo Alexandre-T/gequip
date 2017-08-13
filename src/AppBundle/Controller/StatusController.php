@@ -19,6 +19,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Bean\Factory\InformationFactory;
 use AppBundle\Entity\Status;
+use AppBundle\Form\Type\StatusType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -85,7 +86,7 @@ class StatusController extends Controller
     public function newAction(Request $request)
     {
         $status = new Status();
-        $form = $this->createForm('AppBundle\Form\Type\StatusType', $status);
+        $form = $this->createForm(StatusType::class, $status);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -146,7 +147,7 @@ class StatusController extends Controller
     {
         $statusService = $this->get('app.status-service');
         $deleteForm = $this->createDeleteForm($status);
-        $editForm = $this->createForm('AppBundle\Form\Type\StatusType', $status);
+        $editForm = $this->createForm(StatusType::class, $status);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -19,6 +19,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Bean\Factory\InformationFactory;
 use AppBundle\Entity\Criticity;
+use AppBundle\Form\Type\CriticityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -85,7 +86,7 @@ class CriticityController extends Controller
     public function newAction(Request $request)
     {
         $criticity = new Criticity();
-        $form = $this->createForm('AppBundle\Form\CriticityType', $criticity);
+        $form = $this->createForm(CriticityType::class, $criticity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -147,7 +148,7 @@ class CriticityController extends Controller
     {
         $criticityService = $this->get('app.criticity-service');
         $deleteForm = $this->createDeleteForm($criticity);
-        $editForm = $this->createForm('AppBundle\Form\CriticityType', $criticity);
+        $editForm = $this->createForm(CriticityType::class, $criticity);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
