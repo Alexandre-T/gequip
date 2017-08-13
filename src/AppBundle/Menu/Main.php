@@ -47,7 +47,7 @@ class Main implements ContainerAwareInterface
         $menu = $factory->createItem('root');
 
         $menu->addChild('menu.main.home', array(
-            'icon' => 'home',
+            'icon' => 'fw fa-home',
             'route' => 'homepage'
         ));
 
@@ -56,7 +56,7 @@ class Main implements ContainerAwareInterface
 
         if ($auth_checker->isGranted('ROLE_ADMIN')) {
             $dropdownSettings = $menu->addChild('menu.main.settings', array(
-                'icon' =>'cogs',
+                'icon' => 'fw fa-cogs',
                 'pull-right' => true,
                 'dropdown' => true,
                 'caret' => true,
@@ -67,22 +67,22 @@ class Main implements ContainerAwareInterface
             ));
 
             $dropdownSettings->addChild('menu.main.axe', array(
-                'icon' => 'road',
+                'icon' => 'fw fa-road',
                 'route' => 'settings_axe_index'
             ));
 
             $dropdownSettings->addChild('menu.main.crititicies', array(
-                'icon' => 'thermometer-half',
+                'icon' => 'fw fa-thermometer-half',
                 'route' => 'settings_criticity_index'
             ));
 
             $dropdownSettings->addChild('menu.main.families', array(
-                'icon' => 'list',
+                'icon' => 'fw fa-list',
                 'route' => 'settings_family_index'
             ));
 
             $dropdownSettings->addChild('menu.main.status', array(
-                'icon' => 'cube',
+                'icon' => 'fw fa-cube',
                 'route' => 'settings_status_index'
             ));
 
@@ -95,16 +95,16 @@ class Main implements ContainerAwareInterface
             ));
 
             $dropdownSettings->addChild('menu.main.services', array(
-                'icon' => 'building-o',
+                'icon' => 'fw fa-building-o',
                 'route' => 'settings_service_index'
             ));
 
             //Adding a nice divider
-            $dropdownSettings->addChild('divider_1', array('divider' => true))
+            $dropdownSettings->addChild('divider_2', array('divider' => true))
                 ->setExtra('translation_domain', false);
 
             $dropdownSettings->addChild('menu.main.all-settings', array(
-                'icon' => 'cog',
+                'icon' => 'fw fa-cog',
                 'route' => 'settings'
             ));
         }
@@ -158,15 +158,15 @@ class Main implements ContainerAwareInterface
                 'dropdown-header' => true
             ));
             $dropdownUser->addChild('menu.user.show-profile', array(
-                'icon' => 'eye',
+                'icon' => 'fw fa-eye',
                 'route' => 'fos_user_profile_show'
             ));
             $dropdownUser->addChild('menu.user.edit-profile', array(
-                'icon' => 'pencil',
+                'icon' => 'fw fa-pencil',
                 'route' => 'fos_user_profile_edit'
             ));
             $dropdownUser->addChild('menu.user.change-password', array(
-                'icon' => 'pencil',
+                'icon' => 'fw fa-pencil',
                 'route' => 'fos_user_change_password'
             ));
             //Adding a nice divider
@@ -175,16 +175,16 @@ class Main implements ContainerAwareInterface
 
             //Adding LOGOUT
             $dropdownUser->addChild('menu.user.logout', array(
-                'icon' => 'sign-out',
+                'icon' => 'fw fa-sign-out',
                 'route' => 'fos_user_security_logout'
             ));
         } elseif ($isAnonymous) {
             $menu->addChild('menu.user.sign-in', array(
-                'icon' => 'sign-in',
+                'icon' => 'fw fa-sign-in',
                 'route' => 'fos_user_security_login'
             ));
             $menu->addChild('menu.user.sign-up', array(
-                'icon' => 'pencil-square-o',
+                'icon' => 'fw fa-pencil-square-o',
                 'route' => 'fos_user_registration_register'
             ));
         }
@@ -221,7 +221,7 @@ class Main implements ContainerAwareInterface
                     'caret' => true,
                 ));
                 $dropdownAdmin->addChild('menu.user.confirm-your-credentials', array(
-                    'icon' => 'sign-up',
+                    'icon' => 'fw fa-sign-up',
                     'route' => 'fos_user_security_login'
                 ));
             }
