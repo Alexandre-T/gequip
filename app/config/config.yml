@@ -60,11 +60,27 @@ doctrine:
         password: '%database_password%'
         charset: UTF8
         server_version: 5.6
-
+        # These types are allowed for MySQL and PostgreSQL
+        types:
+            geometry:   CrEOF\Spatial\DBAL\Types\GeometryType
+            point:      CrEOF\Spatial\DBAL\Types\Geometry\PointType
+            polygon:    CrEOF\Spatial\DBAL\Types\Geometry\PolygonType
+            linestring: CrEOF\Spatial\DBAL\Types\Geometry\LineStringType
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            numeric_functions:
+                # These functions are only allowed for MySQL
+                # todo use a conditional import for MySQL and PostgreSQL
+                st_contains:     CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STContains
+                contains:        CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Contains
+                st_area:         CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Area
+                st_geomfromtext: CrEOF\Spatial\ORM\Query\AST\Functions\MySql\GeomFromText
+                st_intersects:   CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STIntersects
+                st_buffer:       CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STBuffer
+                point:           CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Point
         mappings:
             gedmo_tree:
                 type: annotation

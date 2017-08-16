@@ -57,7 +57,7 @@ class Criticity implements InformationInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=16)
      *
-     * @ORM\Column(type="string", length=16, nullable=false, options={"unsigned":true,"comment":"Name of the criticity"})
+     * @ORM\Column(type="string", length=16, nullable=false)
      * @Gedmo\Versioned
      */
     private $name;

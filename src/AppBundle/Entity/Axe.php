@@ -17,6 +17,7 @@
 
 namespace AppBundle\Entity;
 
+use CrEOF\Spatial\DBAL\Types\GeometryType;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -99,6 +100,15 @@ class Axe implements InformationInterface
     private $updated;
 
     /**
+     * Geometry point.
+     *
+     * @var GeometryType
+     *
+     * @ORM\Column(type="geometry",nullable=true)
+     */
+    private $geometry;
+
+    /**
      * Creator of this axe.
      *
      * @var User
@@ -179,6 +189,16 @@ class Axe implements InformationInterface
     }
 
     /**
+     * Return the geometry.
+     *
+     * @return GeometryType
+     */
+    public function getGeometry()
+    {
+        return $this->geometry;
+    }
+
+    /**
      * Return the last updater of the Axe.
      *
      * @return User
@@ -221,6 +241,18 @@ class Axe implements InformationInterface
     public function setCreator(User $creator): Axe
     {
         $this->creator = $creator;
+        return $this;
+    }
+
+    /**
+     * Setter of the geometry of this axe.
+     *
+     * @param GeometryType $geometry
+     * @return Axe
+     */
+    public function setGeometry(GeometryType $geometry): Axe
+    {
+        $this->geometry = $geometry;
         return $this;
     }
 

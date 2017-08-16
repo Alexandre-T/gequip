@@ -48,29 +48,32 @@ class LoadAxeData extends AbstractFixture implements FixtureInterface, OrderedFi
         /** @var User $dawny */
         $dawny = $this->getReference('user-dawny');
 
-        $a31 = new Axe();
-        $a31->setName('Autoroute A31');
-        $a31->setCreator($dawny);
-        $a31->setUpdater($dawny);
-        $a31->setCode('A31');
+        $rocade = new Axe();
+        $rocade->setName('Rocade');
+        $rocade->setCreator($dawny);
+        $rocade->setUpdater($dawny);
+        $rocade->setCode('A630');
 
-        $a330 = new Axe();
-        $a330->setName('Autoroute A330');
-        $a330->setCreator($dawny);
-        $a330->setUpdater($dawny);
-        $a330->setCode('A330');
+        $a63 = new Axe();
+        $a63->setName('Autoroute A63');
+        $a63->setCreator($dawny);
+        $a63->setUpdater($dawny);
+        $a63->setCode('A63');
 
-        $a33 = new Axe();
-        $a33->setName('Autoroute A33');
-        $a33->setCreator($dawny);
-        $a33->setUpdater($dawny);
-        $a33->setCode('A33');
+        $a62 = new Axe();
+        $a62->setName('Autoroute A62');
+        $a62->setCreator($dawny);
+        $a62->setUpdater($dawny);
+        $a62->setCode('A62');
 
-
-        $manager->persist($a31);
-        $manager->persist($a330);
-        $manager->persist($a33);
+        $manager->persist($rocade);
+        $manager->persist($a63);
+        $manager->persist($a62);
         $manager->flush();
+
+        $this->addReference('axe-rocade', $rocade);
+        $this->addReference('axe-a62', $a62);
+        $this->addReference('axe-a63', $a63);
     }
 
     /**

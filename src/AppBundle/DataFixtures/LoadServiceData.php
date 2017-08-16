@@ -49,32 +49,32 @@ class LoadServiceData extends AbstractFixture implements FixtureInterface, Order
         $dawny = $this->getReference('user-dawny');
 
         $direction = new Service();
-        $direction->setName('DIR Est');
+        $direction->setName('DIR Atlantique');
         $direction->setCreator($dawny);
         $direction->setUpdater($dawny);
 
-        $divisionMetz = new Service();
-        $divisionMetz->setName('D.E. de Metz');
-        $divisionMetz->setParent($direction);
-        $divisionMetz->setCreator($dawny);
-        $divisionMetz->setUpdater($dawny);
+        $cigt = new Service();
+        $cigt->setName('CIGT Lormont');
+        $cigt->setParent($direction);
+        $cigt->setCreator($dawny);
+        $cigt->setUpdater($dawny);
 
-        $divisionStrasbourg = new Service();
-        $divisionStrasbourg->setName('D.E. de Strasbourg');
-        $divisionStrasbourg->setParent($direction);
-        $divisionStrasbourg->setCreator($dawny);
-        $divisionStrasbourg->setUpdater($dawny);
+        $districtGironde = new Service();
+        $districtGironde->setName('District de Gironde');
+        $districtGironde->setParent($direction);
+        $districtGironde->setCreator($dawny);
+        $districtGironde->setUpdater($dawny);
 
-        $divisionBesancon = new Service();
-        $divisionBesancon->setName('D.E. de Besançon');
-        $divisionBesancon->setParent($direction);
-        $divisionBesancon->setCreator($dawny);
-        $divisionBesancon->setUpdater($dawny);
+        $ceiVillenave = new Service();
+        $ceiVillenave->setName('CEI de Villenave');
+        $ceiVillenave->setParent($districtGironde);
+        $ceiVillenave->setCreator($dawny);
+        $ceiVillenave->setUpdater($dawny);
 
         $manager->persist($direction);
-        $manager->persist($divisionMetz);
-        $manager->persist($divisionStrasbourg);
-        $manager->persist($divisionBesancon);
+        $manager->persist($cigt);
+        $manager->persist($districtGironde);
+        $manager->persist($ceiVillenave);
         $manager->flush();
     }
 

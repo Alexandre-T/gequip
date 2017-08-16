@@ -4,8 +4,9 @@
     <entity name="\AppBundle\Entity\Modele" local-name="Modele" namespace="\AppBundle\Entity" local-namespace="Entity" description="Mod&#xE8;le d'&#xE9;quipement routier" uuid="1e049294-c805-4a23-b397-8d5113e1a7fd">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="663ac640-3830-4556-bf9b-646b21a21c0c"/>
       <field name="createur" type="integer" required="true" uuid="a8f57198-760d-41ec-a505-98ac73ca55d0"/>
-      <field name="famille_id" type="integer" required="true" uuid="184a9df4-1cc9-4a38-911b-9d01b3439ae7"/>
+      <field name="criticity_id" type="integer" uuid="134808dc-1615-450c-88a8-e69aaff23035"/>
       <field name="constructeur_id" type="integer" uuid="ca815281-37ca-48df-9947-f9562fb21f47"/>
+      <field name="famille_id" type="integer" required="true" uuid="184a9df4-1cc9-4a38-911b-9d01b3439ae7"/>
       <field name="fournisseur_id" type="integer" uuid="2c47db52-47c5-4199-9916-0553cc3c121a"/>
       <field name="name" type="string" size="255" required="true" unsigned="true" uuid="8009a1fc-dce0-4285-93c4-783f45275f62"/>
       <orm-attributes>
@@ -36,11 +37,25 @@
         </attribute>
       </orm-attributes>
     </association>
+    <association from="\AppBundle\Entity\Modele" to="\AppBundle\Entity\Criticity" caption="Criticity Modele" inverse-alias="criticity" many-owner="true" many-inverse="false" uuid="8691c0f5-ad59-4895-bef3-c0bc3973370c">
+      <association-field from="criticity_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
     <entity name="\AppBundle\Entity\Equipement" local-name="Equipement" namespace="\AppBundle\Entity" local-namespace="Entity" description="&#xE9;quipement routier" uuid="f92a0f3c-dc4f-4a31-aa8f-301ab223dd9d">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="8b402ba7-7638-4ba3-a3d6-5dbca138597b"/>
+      <field name="axe_id" type="integer" uuid="f285e723-8937-4091-8f71-07dd07802147"/>
       <field name="modele_id" type="integer" required="true" uuid="59a410ea-d1f1-4add-b594-e15143e65184"/>
       <field name="createur" type="integer" required="true" uuid="3cde27d4-193f-4a7e-abf0-8f0e5cf38f46"/>
-      <field name="etat_id" type="integer" required="true" uuid="bad7986c-4d25-41de-ab76-9ef89ada73f9"/>
+      <field name="criticity_id" type="integer" uuid="8203a380-7f9f-40ff-b550-4977a455d2c9"/>
+      <field name="etat_id" type="integer" required="true" uuid="bad7986c-4d25-41de-ab76-9ef89ada73f9">
+        <orm-attributes>
+          <attribute name="column">etat_id</attribute>
+        </orm-attributes>
+      </field>
       <field name="name" type="string" size="255" unsigned="true" uuid="a09e3029-ab2c-4291-87d8-0f5fc87cefd8"/>
       <field name="created" type="datetime" required="true" uuid="fc563ff1-f6e5-4b77-92cb-11aadb50f0b2"/>
       <field name="updated" type="datetime" uuid="da93bc29-e086-45fc-8fd9-c99bdc6c9342"/>
@@ -52,7 +67,6 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="axe_id" type="integer" uuid="f285e723-8937-4091-8f71-07dd07802147"/>
       <orm-attributes>
         <attribute name="Gedmo">
           <attribute name="Timestampable">
@@ -100,6 +114,14 @@
     </association>
     <association from="\AppBundle\Entity\Equipement" to="\AppBundle\Entity\Axe" caption="Axe Equipement" owner-alias="equipements" inverse-alias="axe" many-owner="true" many-inverse="false" uuid="7788526f-74e9-40f9-9f40-ecf0e1b998e0">
       <association-field from="axe_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\AppBundle\Entity\Equipement" to="\AppBundle\Entity\Criticity" caption="Criticity Equipement" owner-alias="equipements" inverse-alias="criticity" many-owner="true" many-inverse="false" uuid="fa1d01bb-3aaf-4554-80c4-cca896cc700c">
+      <association-field from="criticity_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning">
           <attribute name="fetch">EAGER</attribute>
@@ -797,6 +819,7 @@
           </attribute>
         </orm-attributes>
       </field>
+      <field name="geometry" type="geometry" uuid="ca1cb642-82a2-4531-90fd-c8b3a8bea8e9"/>
       <orm-attributes>
         <attribute name="table">te_axe</attribute>
         <attribute name="options">
@@ -831,6 +854,53 @@
     <association from="\AppBundle\Entity\Axe" to="\AppBundle\Entity\User" caption="Updater" inverse-alias="updater" many-owner="true" many-inverse="false" parent-required="true" uuid="c833fa90-87f2-4340-9df0-311c03992ba3">
       <association-field from="updater" to="id"/>
     </association>
+    <entity name="\AppBundle\Entity\Intervention" local-name="Intervention" namespace="\AppBundle\Entity" local-namespace="Entity" description="Intervention on equipment" uuid="54f53717-d358-4dc9-8bc5-b8121bebd9b7">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="8f5c02a3-7f97-4bc1-bc29-6f62c3c25507"/>
+      <field name="creator" type="integer" required="true" uuid="e55b9d94-a930-4bb2-84b4-1cc06bb00d5b"/>
+      <field name="updater" type="integer" required="true" uuid="7d1cf100-5b19-4f54-8b60-2f7f72d65ea5"/>
+      <field name="equipement" type="integer" uuid="9b9a54d8-f45d-47b6-8fce-55319b44b956"/>
+      <field name="prestataire" description="Intervenant (society)" type="integer" uuid="76ae3578-312e-456b-964d-6101e08a18d7"/>
+      <field name="intervenant" description="Intervenant (physical)" type="integer" unsigned="true" uuid="280661fc-10cb-4fc2-aa80-f0cd6f77157f"/>
+      <field name="created" type="datetime" required="true" uuid="0afef3f6-588f-4805-8ead-eb857ffe49b3"/>
+      <field name="updated" type="datetime" required="true" uuid="198da0d1-e13d-4f6e-a74e-91c69de31acb"/>
+      <field name="realisation" description="Date of effective intervention" type="date" required="true" uuid="690730ec-6192-4fcb-9ab2-5ea4f7741af9"/>
+      <field name="planification" description="Date of the planified intervention" type="date" uuid="4292e9f7-8770-4cfe-a42c-ceb2d10e716a"/>
+    </entity>
+    <association from="\AppBundle\Entity\Intervention" to="\AppBundle\Entity\Morale" caption="Morale Intervention" owner-alias="interventions" inverse-alias="prestataire" many-owner="true" many-inverse="false" uuid="87f9430e-69dd-49c0-ae5d-52f209cf2b99">
+      <association-field from="prestataire" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\AppBundle\Entity\Intervention" to="\AppBundle\Entity\Physique" caption="Physique Intervention" owner-alias="interventions" inverse-alias="intervenant" many-owner="true" many-inverse="false" uuid="3985f90e-90e6-4baa-9c35-5493c19fbc7b">
+      <association-field from="intervenant" to="id"/>
+    </association>
+    <association from="\AppBundle\Entity\Intervention" to="\AppBundle\Entity\User" caption="Creator" inverse-alias="creator" many-owner="true" many-inverse="false" parent-required="true" uuid="d478b1e9-6904-45be-b0c1-171ddbe4284c">
+      <association-field from="creator" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\AppBundle\Entity\Intervention" to="\AppBundle\Entity\User" caption="Updater" inverse-alias="updater" many-owner="true" many-inverse="false" parent-required="true" uuid="3f7c5654-4bca-42a6-9b11-68991200e125">
+      <association-field from="updater" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\AppBundle\Entity\Intervention" to="\AppBundle\Entity\Equipement" caption="Equipement Intervention" owner-alias="interventions" inverse-alias="equipement" many-owner="true" many-inverse="false" uuid="d081a08d-8a7b-433b-86da-df472848ae78">
+      <association-field from="equipement" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
     <orm-attributes>
       <attribute name="filename-format">subdirectories-by-namespace</attribute>
     </orm-attributes>
@@ -840,8 +910,10 @@
     <association uuid="1573708e-2df4-45fc-b396-6c4a5ca49dc2" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-20" color="#969696"/>
     <association uuid="1f4dc07a-a9ef-4420-aeca-2cb66ddb40af" caption1-position-x="-37" caption1-position-y="2" center-position-x="9" center-position-y="1" color="#969696"/>
     <association uuid="31ddf312-f3f6-4f9e-93fb-271a357efc36" caption1-position-x="-10" caption1-position-y="48" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
+    <association uuid="3985f90e-90e6-4baa-9c35-5493c19fbc7b" caption1-position-x="32" caption1-position-y="27" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="3c377ffe-ae91-4e17-a7c9-32220f04d114" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="3f2adbf8-0b97-43d5-a1ae-268184be060d" caption1-position-x="0" caption1-position-y="59" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
+    <association uuid="3f7c5654-4bca-42a6-9b11-68991200e125" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="430a4d5b-a61a-4508-b2e6-61fac5b77d7c" caption1-position-x="-15" caption1-position-y="3" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="4613dc61-234b-49fa-b1c3-6ce4d89956d5" caption1-position-x="9" caption1-position-y="16" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="5533204f-2ba7-4234-bb1d-443ab50cf326" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
@@ -852,38 +924,44 @@
     <association uuid="76464acf-bace-4470-84f1-f811db5dd9aa" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-20" color="#969696"/>
     <association uuid="7788526f-74e9-40f9-9f40-ecf0e1b998e0" caption1-position-x="19" caption1-position-y="18" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="8270392b-f6a9-444a-a4a8-06a077e3ce9b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="8691c0f5-ad59-4895-bef3-c0bc3973370c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="87f9430e-69dd-49c0-ae5d-52f209cf2b99" caption1-position-x="-65" caption1-position-y="70" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="9b529fb1-c46d-4172-b7f6-aa341bd8e5df" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="9ef82809-0b7b-468d-8ab9-1cf27d828afb" color="#969696"/>
     <association uuid="ac376302-0aad-45b9-9a96-324058dca833" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="b8b96816-c926-4244-9356-b85c31e8e25e" caption1-position-x="45" caption1-position-y="12" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="c5be84bb-bd20-47ab-a4f7-c1edfcd2f4d6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-20" color="#969696"/>
     <association uuid="c833fa90-87f2-4340-9df0-311c03992ba3" caption1-position-x="6" caption1-position-y="-13" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
+    <association uuid="d081a08d-8a7b-433b-86da-df472848ae78" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="d24de1ab-73d8-4481-a2f4-7a8aa5d8659d" caption1-position-x="6" caption1-position-y="-13" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
+    <association uuid="d478b1e9-6904-45be-b0c1-171ddbe4284c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
     <association uuid="de693bf6-1c23-43d7-88fb-996c83516f70" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
-    <association uuid="e38a0900-9986-4673-bdac-8f542b7f69ce" caption1-position-x="-22" caption1-position-y="34" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="e38a0900-9986-4673-bdac-8f542b7f69ce" caption1-position-x="23" caption1-position-y="-28" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="f7c163e1-c4a6-4fcb-8bf3-907c4bdf36d6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696" split="1"/>
+    <association uuid="fa1d01bb-3aaf-4554-80c4-cca896cc700c" caption1-position-x="82" caption1-position-y="-4" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="ff6a2202-829e-4369-b291-df7cb3e77f97" caption1-position-x="70" caption1-position-y="-13" center-position-x="0" center-position-y="0" color="#969696"/>
-    <entity uuid="0ec777b0-f1e5-4a25-9d78-e238e8c058f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="455" position-y="167" size-x="0" size-x2="117" size-y="0" size-y2="143"/>
+    <entity uuid="0ec777b0-f1e5-4a25-9d78-e238e8c058f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="128" position-y="124" size-x="0" size-x2="117" size-y="0" size-y2="143"/>
     <entity uuid="1d16aca7-1efa-4903-b69b-1d81ed44ec34" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1168" position-y="109" size-x="0" size-x2="112" size-y="0" size-y2="73"/>
     <entity uuid="1e049294-c805-4a23-b397-8d5113e1a7fd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="299" position-y="-46" size-x="0" size-x2="126" size-y="0" size-y2="87"/>
     <entity uuid="21c1019e-83fd-42a8-adda-e522fb70c7c1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-27" position-y="381" size-x="0" size-x2="88" size-y="0" size-y2="59"/>
-    <entity uuid="64245f22-5633-40b2-8031-83a7aa683941" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-16" position-y="6" size-x="0" size-x2="101" size-y="0" size-y2="45"/>
-    <entity uuid="754a0f8e-0446-410e-93ce-9efabe9cfb64" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="77" position-y="133" size-x="0" size-x2="103" size-y="0" size-y2="171"/>
+    <entity uuid="54f53717-d358-4dc9-8bc5-b8121bebd9b7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="567" position-y="305" size-x="0" size-x2="110" size-y="0" size-y2="157"/>
+    <entity uuid="64245f22-5633-40b2-8031-83a7aa683941" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-99" position-y="-13" size-x="0" size-x2="88" size-y="0" size-y2="59"/>
+    <entity uuid="754a0f8e-0446-410e-93ce-9efabe9cfb64" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-155" position-y="131" size-x="0" size-x2="103" size-y="0" size-y2="171"/>
     <entity uuid="75616c76-8523-47cb-8354-b9f729406197" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1031" position-y="252" size-x="0" size-x2="114" size-y="0" size-y2="129"/>
     <entity uuid="7a5caf82-4ea2-42e7-bd62-bffac0085397" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="646" position-y="-5" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="867745b6-aa29-4838-a6cf-dfaae87b79cf" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1084" position-y="-49" size-x="0" size-x2="113" size-y="0" size-y2="73"/>
-    <entity uuid="8bb4bd1c-0e99-4bc5-a5ef-7e4583f1292c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="852" position-y="402" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <entity uuid="8bb4bd1c-0e99-4bc5-a5ef-7e4583f1292c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="951" position-y="748" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
     <entity uuid="92086c5b-e004-44c0-a395-bb86ce454e95" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="1379" position-y="161" size-x="0" size-x2="96" size-y="0" size-y2="45"/>
     <entity uuid="aec9b1c8-c14d-4392-9af7-79af329dd3f0" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="868" position-y="64" size-x="0" size-x2="80" size-y="0" size-y2="31"/>
-    <entity uuid="bc0307cc-2f2a-4b85-a12d-f25429dd1f1f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="557" position-y="443" size-x="0" size-x2="106" size-y="0" size-y2="157"/>
+    <entity uuid="bc0307cc-2f2a-4b85-a12d-f25429dd1f1f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="303" position-y="609" size-x="0" size-x2="106" size-y="0" size-y2="157"/>
     <entity uuid="c4a73c06-0d84-463c-a24d-7996a26a5e6b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="747" position-y="152" size-x="0" size-x2="108" size-y="0" size-y2="59"/>
-    <entity uuid="d93c1dfb-ae80-4b3b-8d53-2552cfda68f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="95" position-y="569" size-x="0" size-x2="103" size-y="0" size-y2="115"/>
-    <entity uuid="f92a0f3c-dc4f-4a31-aa8f-301ab223dd9d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="268" position-y="337" size-x="0" size-x2="105" size-y="0" size-y2="129"/>
+    <entity uuid="d93c1dfb-ae80-4b3b-8d53-2552cfda68f6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="84" position-y="569" size-x="0" size-x2="103" size-y="0" size-y2="129"/>
+    <entity uuid="f92a0f3c-dc4f-4a31-aa8f-301ab223dd9d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="269" position-y="324" size-x="0" size-x2="106" size-y="0" size-y2="171"/>
     <inheritance-child uuid="279c3af0-6291-49d3-8e93-f68bcab9724f" caption1-position-x="-2" caption1-position-y="1" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="3f3b1af8-83ea-44ce-9c4e-07178c811b9c" caption1-position-x="-2" caption1-position-y="125" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="430a3617-e2b6-4bc7-bc92-9151f618115f" caption1-position-x="-8" caption1-position-y="43" center-position-x="0" center-position-y="0" color="#969696"/>
     <inheritance-child uuid="a481ef09-dbb0-4ad1-8edf-7c1cdab756d5" caption1-position-x="-112" caption1-position-y="-2" center-position-x="0" center-position-y="0" color="#969696"/>
-    <module uuid="ec37a18f-1b0f-4598-b1f6-775b913c8fc1" bg-color="#EAE4F1" position-x="61" position-y="72" size-x="41" size-x2="1652" size-y="66" size-y2="850"/>
-    <project uuid="2ebc54c6-b876-4966-a15c-21008dbf39ff" size-x="0" size-x2="2034" size-y="0" size-y2="1144"/>
+    <module uuid="ec37a18f-1b0f-4598-b1f6-775b913c8fc1" bg-color="#EAE4F1" position-x="61" position-y="72" size-x="175" size-x2="1652" size-y="66" size-y2="850"/>
+    <project uuid="2ebc54c6-b876-4966-a15c-21008dbf39ff" size-x="164" size-x2="2034" size-y="44" size-y2="1144"/>
   </visual-data>
 </skipper>
