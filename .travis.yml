@@ -5,8 +5,8 @@ language: php
 sudo: false
 
 # Start PostgreSql service
-services:
-    - postgresql
+# services:
+#    - postgresql
 
 # Cache composer packages so "composer install" is faster
 cache:
