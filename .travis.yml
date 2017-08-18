@@ -31,7 +31,7 @@ matrix:
 
 # Define an environment variable
 env:
-  - SYMFONY_VERSION="3.3.*" DB=mysql
+  - SYMFONY_VERSION="3.3.*" DB=postgresql
 
 # Update composer
 before-install:
@@ -42,7 +42,9 @@ before_script:
   # Database creation
   - psql -c 'create database symfony;' -U postgres
   # Postgis extension creation
-  - psql -d symfony -U postgres -c "create extension postgis"
+  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d symfony
+  - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d symfony
+  # excution de composer
   - composer install
   # Database migration to current version
   - php bin/console doctrine:migrations:migrate  --no-interaction
@@ -54,6 +56,9 @@ before_script:
   - mkdir -p build/logs
 
 script:
+  # Tests de versions
+  - psql --version
+  - psql -d symfony -c 'SELECT PostGIS_version();' -U postgres
   # Phpunit and codecoveralls
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then travis_wait 40 php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml; fi
   - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then php vendor/phpunit/phpunit/phpunit; fi
