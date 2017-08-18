@@ -39,11 +39,11 @@ before-install:
 
 before_script:
   - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - composer install
   # Database creation
   - psql -c 'create database symfony;' -U postgres
   # Postgis extension creation
   - psql -d symfony -U postgres -c "create extension postgis"
+  - composer install
   # Database migration to current version
   - php bin/console doctrine:migrations:migrate  --no-interaction
   # loading data for phpunit and codecept tests
