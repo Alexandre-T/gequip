@@ -4,9 +4,9 @@ language: php
 # Allows use container-based infrastructure
 sudo: false
 
-# Start mysql service
+# Start PostgreSql service
 services:
-    - mysql
+    - postgresql
 
 # Cache composer packages so "composer install" is faster
 cache:
@@ -40,9 +40,13 @@ before-install:
 before_script:
   - cp app/config/parameters.yml.travis app/config/parameters.yml
   - composer install
-  - mysql -e 'create database symfony;'
+  # Database creation
+  - psql -c 'create database symfony;' -U postgres
+  # Postgis extension creation
+  - psql -d symfony -U postgres -c "create extension postgis"
+  # Database migration to current version
   - php bin/console doctrine:migrations:migrate  --no-interaction
-  # loading data for phpunit and codeconcept tests
+  # loading data for phpunit and codecept tests
   - php bin/console doctrine:fixtures:load --fixtures ./src/AppBundle/DataFixtures -n --env=test
   # updates zxt_log_entries to set username to Dawny
   - php bin/console doctrine:query:sql "UPDATE ext_log_entries SET username='Dawny' where username is null"

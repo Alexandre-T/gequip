@@ -52,15 +52,16 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        driver: '%database_driver%'
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
-        server_version: 5.6
+        # server_version: 5.6
         # These types are allowed for MySQL and PostgreSQL
+        # Only geometry is currently used.
         types:
             geometry:   CrEOF\Spatial\DBAL\Types\GeometryType
             point:      CrEOF\Spatial\DBAL\Types\Geometry\PointType
@@ -72,15 +73,15 @@ doctrine:
         auto_mapping: true
         dql:
             numeric_functions:
-                # These functions are only allowed for MySQL
-                # todo use a conditional import for MySQL and PostgreSQL
-                st_contains:     CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STContains
-                contains:        CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Contains
-                st_area:         CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Area
-                st_geomfromtext: CrEOF\Spatial\ORM\Query\AST\Functions\MySql\GeomFromText
-                st_intersects:   CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STIntersects
-                st_buffer:       CrEOF\Spatial\ORM\Query\AST\Functions\MySql\STBuffer
-                point:           CrEOF\Spatial\ORM\Query\AST\Functions\MySql\Point
+                # These functions are only allowed for PostgreSQL
+                # No one is currently used
+                st_contains:     CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\STContains
+                contains:        CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\Contains
+                st_area:         CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\Area
+                st_geomfromtext: CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\GeomFromText
+                st_intersects:   CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\STIntersects
+                st_buffer:       CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\STBuffer
+                point:           CrEOF\Spatial\ORM\Query\AST\Functions\PostgreSql\Point
         mappings:
             gedmo_tree:
                 type: annotation
