@@ -36,7 +36,7 @@ before_script:
   # Database creation
   - psql -c 'create database symfony;' -U postgres
   # Postgis extension creation
-  # - psql -c 'alter extension postgis update to "2.3.0";' -U postgres -d symfony
+  - psql -c 'alter extension postgis update to "2.3.3";' -U postgres -d symfony
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d symfony
   # - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d symfony
   # excution de composer
