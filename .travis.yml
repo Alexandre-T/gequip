@@ -41,7 +41,7 @@ before_script:
   # Database creation
   - psql -c 'create database symfony;' -U postgres
   # Postgis extension creation
-  - psql -U postgres -c "create extension postgis"
+  - psql -U postgres -c "create extension postgis" -d symfony
   # - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d symfony
   # excution de composer
   - composer install
@@ -62,6 +62,8 @@ script:
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then travis_wait 40 php vendor/phpunit/phpunit/phpunit --coverage-clover build/logs/clover.xml; fi
   - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then php vendor/phpunit/phpunit/phpunit; fi
   - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php vendor/bin/coveralls -v; fi
+
+after_success:
   # Server must be started for codeconcept tests.
   - php bin/console server:start
   - php vendor/bin/codecept run -c src/AppBundle/codeception.yml
