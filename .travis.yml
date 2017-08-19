@@ -30,13 +30,13 @@ before-install:
 
 before_script:
   # Testing to reinstall it
-  - sudo apt-get purge postgresql-9.*-postgis-2.1 -y -q
-  - sudo apt-get install postgresql-9.6-postgis-2.3 -y -q
+  - sudo apt-get install postgresql-9.6-postgis-2.3 postgis -y -q
   # Parameters are copied
   - cp app/config/parameters.yml.travis app/config/parameters.yml
   # Database creation
   - psql -c 'create database symfony;' -U postgres
   # Postgis extension creation
+  # - psql -c 'alter extension postgis update to "2.3.0";' -U postgres -d symfony
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d symfony
   # - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d symfony
   # excution de composer
